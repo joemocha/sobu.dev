@@ -1,4 +1,5 @@
 :root {
+  color-scheme: light;
   /* Editorial (default) */
   --bg: #f5f1ea;
   --bg-alt: #ece6db;
@@ -76,8 +77,9 @@
 
 /* Theme: dark */
 [data-theme="dark"] {
-  --bg: #0c0c0e;
-  --bg-alt: #15151a;
+  color-scheme: dark;
+  --bg: #000000;
+  --bg-alt: #0c0c0e;
   --ink: #f2eee6;
   --ink-soft: #c7c2b6;
   --ink-muted: #7a7568;
@@ -88,6 +90,53 @@
   --harness-ink: #d4cfc2;
   --harness-dim: #555042;
   --harness-accent: #ff7a3d;
+}
+
+/* User-forced light mode: clean white, not editorial cream. */
+:root[data-color-mode="light"],
+:root[data-color-mode="light"] body[data-theme="editorial"] {
+  color-scheme: light;
+  --bg: #ffffff;
+  --bg-alt: #f4f4f4;
+  --paper: #ffffff;
+}
+
+/* User-forced dark mode (overrides OS preference). */
+:root[data-color-mode="dark"],
+:root[data-color-mode="dark"] body[data-theme="editorial"] {
+  color-scheme: dark;
+  --bg: #000000;
+  --bg-alt: #0c0c0e;
+  --ink: #f2eee6;
+  --ink-soft: #c7c2b6;
+  --ink-muted: #7a7568;
+  --rule: #2a2a30;
+  --accent: #ff7a3d;
+  --paper: #15151a;
+  --harness-bg: #000000;
+  --harness-ink: #d4cfc2;
+  --harness-dim: #555042;
+  --harness-accent: #ff7a3d;
+}
+
+/* OS-level dark mode: applies unless user has explicitly forced light. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-color-mode="light"]),
+  :root:not([data-color-mode="light"]) body[data-theme="editorial"] {
+    color-scheme: dark;
+    --bg: #000000;
+    --bg-alt: #0c0c0e;
+    --ink: #f2eee6;
+    --ink-soft: #c7c2b6;
+    --ink-muted: #7a7568;
+    --rule: #2a2a30;
+    --accent: #ff7a3d;
+    --paper: #15151a;
+    --harness-bg: #000000;
+    --harness-ink: #d4cfc2;
+    --harness-dim: #555042;
+    --harness-accent: #ff7a3d;
+  }
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -138,6 +187,41 @@ button { font-family: inherit; cursor: pointer; background: none; border: none; 
 .topbar-right { display: flex; gap: 24px; justify-content: flex-end; align-items: center; }
 .topbar a { opacity: 0.7; transition: opacity 0.15s; }
 .topbar a:hover { opacity: 1; color: var(--accent); }
+.mode-swatch {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  margin-left: 4px;
+  padding-left: 16px;
+  border-left: 1px solid var(--rule);
+}
+.mode-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid var(--rule);
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  cursor: pointer;
+  opacity: 0.55;
+  transition: opacity 0.15s, transform 0.15s, box-shadow 0.15s;
+}
+.mode-dot:hover { opacity: 1; transform: translate(-1px, -1px); box-shadow: 2px 2px 0 var(--rule); }
+.mode-dot.is-active { opacity: 1; box-shadow: 0 0 0 2px var(--accent); }
+.mode-dot .mode-glyph {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: block;
+}
+.mode-dot[data-mode="light"] .mode-glyph { background: #ffffff; }
+.mode-dot[data-mode="dark"] .mode-glyph { background: #000; }
+.mode-dot[data-mode="system"] .mode-glyph {
+  background: linear-gradient(90deg, #ffffff 0 50%, #000 50% 100%);
+}
 .avatar {
   width: 52px;
   height: 52px;
@@ -1038,4 +1122,8 @@ body::before {
   opacity: 0.6;
 }
 [data-theme="dark"] body::before,
+:root[data-color-mode="dark"] body::before,
 body[data-theme-noise="off"]::before { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-color-mode="light"]) body::before { display: none; }
+}

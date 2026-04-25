@@ -14,6 +14,45 @@
       <a href="#work">Work</a>
       <a href="#writing">Writing</a>
       <a href="#contact">Contact</a>
+      <div class="mode-swatch" role="radiogroup" aria-label="Color mode">
+        <button type="button" class="mode-dot" data-mode="system" role="radio" aria-checked="false" aria-label="System">
+          <span class="mode-glyph"></span>
+        </button>
+        <button type="button" class="mode-dot" data-mode="light" role="radio" aria-checked="false" aria-label="Light">
+          <span class="mode-glyph"></span>
+        </button>
+        <button type="button" class="mode-dot" data-mode="dark" role="radio" aria-checked="false" aria-label="Dark">
+          <span class="mode-glyph"></span>
+        </button>
+      </div>
     </nav>
   </div>
 </header>
+
+<script is:inline>
+  (function () {
+    const KEY = 'color-mode';
+    const valid = ['system', 'light', 'dark'];
+    const stored = (() => { try { return localStorage.getItem(KEY); } catch (_) { return null; } })();
+    const mode = valid.includes(stored) ? stored : 'system';
+    const apply = (m) => {
+      const root = document.documentElement;
+      if (m === 'system') root.removeAttribute('data-color-mode');
+      else root.setAttribute('data-color-mode', m);
+      document.querySelectorAll('.mode-dot').forEach((b) => {
+        const active = b.getAttribute('data-mode') === m;
+        b.setAttribute('aria-checked', active ? 'true' : 'false');
+        b.classList.toggle('is-active', active);
+      });
+    };
+    apply(mode);
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest && e.target.closest('.mode-dot');
+      if (!btn) return;
+      const m = btn.getAttribute('data-mode');
+      if (!valid.includes(m)) return;
+      try { localStorage.setItem(KEY, m); } catch (_) {}
+      apply(m);
+    });
+  })();
+</script>
