@@ -1,0 +1,53 @@
+---
+import { articleHref, type Rung } from '../../data/series.ts';
+
+interface Props {
+  ladder: Rung[] | null;
+  part: number | null;
+  partsTotal?: number | null;
+}
+const { ladder, part } = Astro.props;
+const prev = ladder && part ? ladder.find((r) => r.n === part - 1) : null;
+const next = ladder && part ? ladder.find((r) => r.n === part + 1) : null;
+---
+<div class="art-foot">
+  {prev ? (
+    <a href={articleHref(prev.slug)} class="art-foot-card prev" style="text-decoration:none">
+      <div class="label">⟵ Previous in series</div>
+      <div class="t">{prev.title}</div>
+      <div class="meta">Pt. {prev.n} of 5</div>
+    </a>
+  ) : ladder ? (
+    <div class="art-foot-card prev">
+      <div class="label">⟵ Previous in series</div>
+      <div class="t" style="color:var(--ink-muted)">This is the first essay.</div>
+      <div class="meta">Begin here · Pt. 1 of 5</div>
+    </div>
+  ) : (
+    <div class="art-foot-card prev">
+      <div class="label">⟵ Back to writing</div>
+      <div class="t" style="color:var(--ink-muted)">All essays.</div>
+      <div class="meta"><a href="/#writing" style="color:var(--ink)">← sobu.dev / Writing</a></div>
+    </div>
+  )}
+
+  {next ? (
+    <a href={articleHref(next.slug)} class="art-foot-card" style="text-decoration:none">
+      <div class="label">Next in series ⟶</div>
+      <div class="t">{next.title}</div>
+      <div class="meta">Pt. {next.n} of 5</div>
+    </a>
+  ) : ladder ? (
+    <div class="art-foot-card">
+      <div class="label">Next in series ⟶</div>
+      <div class="t" style="color:var(--ink-muted)">End of the line.</div>
+      <div class="meta">Pt. 5 of 5 · The series concludes here.</div>
+    </div>
+  ) : (
+    <div class="art-foot-card">
+      <div class="label">Read more ⟶</div>
+      <div class="t">The Agent Harness <em>series</em></div>
+      <div class="meta">5 parts · the harness narrates itself</div>
+    </div>
+  )}
+</div>

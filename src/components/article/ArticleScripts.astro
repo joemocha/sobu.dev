@@ -1,0 +1,159 @@
+---
+// Inline JS used by all article pages for scroll progress, TOC active states,
+// Father status, paragraph tracking, and the cite-on-select dock.
+interface Props { totalMin: number }
+const { totalMin } = Astro.props;
+---
+<div class="cite-dock" id="cite-dock">
+  <span class="cite-q" id="cite-q"></span>
+  <button onclick="copyCite()">Copy</button>
+  <button onclick="hideCite()">×</button>
+</div>
+
+<script is:inline define:vars={{ totalMin }}>
+(function () {
+  var bodyWrap = document.getElementById('body-wrap');
+  if (!bodyWrap) return;
+  var prose = document.getElementById('prose');
+  var tocFill = document.getElementById('toc-fill');
+  var inkFill = document.getElementById('ink-fill');
+  var inkPct = document.getElementById('ink-pct');
+  var timeLeft = document.getElementById('time-left');
+  var progressPct = document.getElementById('progress-pct');
+  var progressBar = document.getElementById('progress-bar');
+  var currentPid = document.getElementById('current-pid');
+  var visitorNum = document.getElementById('visitor-num');
+  var harnessPip = document.getElementById('harness-pip');
+  var fatherStatus = document.getElementById('father-status');
+  var tocItems = document.querySelectorAll('#toc-list li');
+  var sections = document.querySelectorAll('.prose h2[id]');
+  var paras = document.querySelectorAll('.prose [data-pid]');
+
+  tocItems.forEach(function (li) {
+    li.addEventListener('click', function () {
+      var t = document.getElementById(li.dataset.target);
+      if (t) window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 60, behavior: 'smooth' });
+    });
+  });
+
+  function scrollProgress() {
+    var rect = bodyWrap.getBoundingClientRect();
+    var total = rect.height - window.innerHeight;
+    var passed = -rect.top;
+    return total > 0 ? Math.max(0, Math.min(1, passed / total)) : 0;
+  }
+
+  function visibleSet() {
+    var v = {};
+    var mid = window.innerHeight * 0.5;
+    var best = null, bestDist = Infinity;
+    paras.forEach(function (p) {
+      var r = p.getBoundingClientRect();
+      if (r.bottom > 60 && r.top < window.innerHeight - 40) v[p.dataset.pid] = true;
+      var c = r.top + r.height / 2;
+      var d = Math.abs(c - mid);
+      if (d < bestDist) { bestDist = d; best = p.dataset.pid; }
+    });
+    return { visible: v, center: best };
+  }
+
+  function tick() {
+    var p = scrollProgress();
+    var pct = (p * 100).toFixed(1) + '%';
+    if (tocFill) tocFill.style.width = pct;
+    if (inkFill) inkFill.style.width = pct;
+    if (inkPct) inkPct.textContent = Math.round(p * 100) + '%';
+    if (timeLeft) timeLeft.textContent = Math.max(0, Math.round(totalMin * (1 - p) * 10) / 10) + 'm left';
+    if (progressPct) progressPct.textContent = Math.round(p * 100);
+    if (progressBar) progressBar.style.setProperty('--w', pct);
+
+    var status = p < 0.35 ? 'asleep' : p < 0.85 ? 'just woke up' : 'writing';
+    var color = status === 'asleep' ? 'var(--ink-muted)' : 'var(--accent)';
+    if (harnessPip) harnessPip.textContent = 'Father · ' + status;
+    if (fatherStatus) {
+      fatherStatus.style.color = color;
+      fatherStatus.firstElementChild.style.background = color;
+      var t = fatherStatus.querySelector('.t'); if (t) t.textContent = 'Father · ' + status;
+    }
+
+    var current = null, currentIdx = -1;
+    sections.forEach(function (s, i) {
+      if (s.getBoundingClientRect().top < 120) { current = s.id; currentIdx = i; }
+    });
+    tocItems.forEach(function (li, i) {
+      var s = sections[i];
+      if (!s) return;
+      li.className = (s.id === current ? 'active ' : '') + (i < currentIdx ? 'read' : '');
+    });
+
+    var vs = visibleSet();
+    if (vs.center && currentPid) currentPid.textContent = vs.center;
+    paras.forEach(function (pp) {
+      pp.dataset.active = pp.dataset.pid === vs.center ? 'true' : 'false';
+    });
+    var anchors = document.querySelectorAll('.margin-anchor');
+    anchors.forEach(function (a) {
+      var pid = a.dataset.pid;
+      if (vs.visible[pid] || vs.center === pid) a.classList.add('visible');
+      else a.classList.remove('visible');
+    });
+  }
+
+  // Cite dock — appears on text selection
+  var citeDock = document.getElementById('cite-dock');
+  var citeQ = document.getElementById('cite-q');
+  var lastSelection = '';
+  document.addEventListener('selectionchange', function () {
+    var s = (window.getSelection && window.getSelection().toString().trim()) || '';
+    if (s && s.length > 8 && s.length < 320) {
+      lastSelection = s;
+      citeQ.textContent = '"' + s + '"';
+      citeDock.classList.add('visible');
+    } else {
+      citeDock.classList.remove('visible');
+    }
+  });
+  window.copyCite = function () {
+    navigator.clipboard.writeText(lastSelection + ' — Samuel Obukwelu, sobu.dev').catch(function () {});
+  };
+  window.hideCite = function () {
+    citeDock.classList.remove('visible');
+    if (window.getSelection) window.getSelection().removeAllRanges();
+  };
+
+  var visitorBase = 1481;
+  setInterval(function () {
+    visitorBase += 1;
+    if (visitorNum) visitorNum.textContent = visitorBase.toLocaleString();
+  }, 13000);
+
+  // Margin anchor offsets (used by article.astro's bespoke marginalia)
+  var marginFlow = document.getElementById('margin-flow');
+  function recomputeOffsets() {
+    if (!marginFlow) return;
+    var marginRect = marginFlow.getBoundingClientRect();
+    var maxTop = 0;
+    document.querySelectorAll('.margin-anchor').forEach(function (a) {
+      var pid = a.dataset.pid;
+      var pp = document.querySelector('[data-pid="' + pid + '"]');
+      if (!pp) return;
+      var top = pp.getBoundingClientRect().top - marginRect.top;
+      a.style.top = top + 'px';
+      if (top > maxTop) maxTop = top;
+    });
+    marginFlow.style.minHeight = (maxTop + 200) + 'px';
+  }
+
+  if (window.ResizeObserver && prose) {
+    var ro = new ResizeObserver(recomputeOffsets);
+    ro.observe(prose);
+  }
+  window.addEventListener('resize', function () { recomputeOffsets(); tick(); });
+  window.addEventListener('scroll', tick, { passive: true });
+  window.addEventListener('load', function () { recomputeOffsets(); tick(); });
+  recomputeOffsets();
+  tick();
+  setTimeout(recomputeOffsets, 250);
+  setTimeout(recomputeOffsets, 800);
+})();
+</script>

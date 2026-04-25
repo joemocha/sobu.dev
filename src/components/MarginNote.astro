@@ -1,0 +1,12 @@
+---
+interface Props {
+  top?: number;
+}
+const { top = 80 } = Astro.props;
+---
+<aside class="margin-note" style={`top:${top}px`}>
+  <div class="margin-note-head"><span>◉ harness.log</span><span class="dim">priv</span></div>
+  <div>
+    <slot />
+  </div>
+</aside>

@@ -1,0 +1,164 @@
+---
+title: "OODA Loops and Git Worktrees: Nine Tactical Lessons from AI-Augmented Development"
+date: "2025-08-27"
+summary: "Feed It Wisely: A Battle-Scarred Guide to Context Windows, Agent Specialists, and Actually Shipping"
+original: "https://sobu1.substack.com/p/ooda-loops-and-git-worktrees-nine"
+tags: ["substack"]
+---
+
+One user story. A simple chat interface spec that ticked every box. Clear acceptance criteria. GraphQL schemas. Database models. Even ASCII diagrams showing the UI flow.
+
+I fed it to Claude Code. It started writing. And writing. And writing.
+
+Tens of thousands of lines of code later, it's still going—somewhere in the digital ether—trying to meet its own definition of done. A perfect implementation that never ships. A beast that keeps eating.
+
+## The Elephant in the Room
+
+Here's what I thought I was doing right: comprehensive specs, detailed context, every file dumped into the context window. Maximum information for maximum output.
+
+BUT the more context I gave, the more elaborate Claude became. It wasn't building what I asked for—it was building what it thought I should want. Production-ready architectures for prototypes. Kubernetes deployments for local scripts. Unit tests for unit tests.
+
+THEREFORE I realized: I was trying to eat an elephant in one bite instead of using a knife and fork.
+
+You've been there. That simple CRUD endpoint that spawned a distributed microservices architecture. The CSS tweak that triggered a complete design system overhaul. The bug fix that became a refactor that became a rewrite.
+
+We've been sold the idea that AI assistants just need more context. Dump everything in. Let the magic happen. But here's the thing—context dumping doesn't reduce hallucinations. It amplifies them. Each additional file becomes another vector for creative interpretation.
+
+## The Three Fears That Keep You Feeding the Beast
+
+Let's address what's really happening when you dump-and-pray.
+
+**"I'm training my replacement."** Every line it writes is a line you didn't. Your fingers atrophy while the machine gets stronger.
+
+**"Planning feels like wasted time."** Why explore when you could be shipping? Why steer when it moves at the speed of light?
+
+**"It should just know what I want."** I gave it everything. The specs, the files, the repo. What more does it need?
+
+But here's the cognitive flip: steering a hyper-intelligent partner requires MORE engineering judgment, not less. You're not being replaced—you're being promoted. From line cook to executive chef.
+
+## The OODA Loop at Light Speed
+
+Colonel John Boyd developed OODA for fighter pilots: Observe → Orient → Decide → Act. In dogfights, the pilot who cycles through OODA faster wins.
+
+Your AI moves at computational speed. BUT its OODA loop is broken without you:
+
+-   It observes everything but understands nothing
+    
+-   It orients toward completeness, not correctness
+    
+-   It decides based on patterns, not purpose
+    
+-   It acts without consequences
+    
+
+THEREFORE you become the missing link. You close the loop.
+
+This is why "Explore → Plan → Execute" works where one-shot prompting fails.
+
+## Explore → Plan → Execute: The Antidote to AI Gambling
+
+One-shot prompting is gambling. Sometimes you win. Usually you don't. The dopamine hit when Claude nails it on the first try? Not worth the cleanup when it doesn't.
+
+### Explore: Teaching It to See
+
+Before touching code, make your AI explore the landscape. Not context dumping—deliberate discovery.
+
+"What would it take to implement this feature?"  
+"What patterns exist in the current codebase?"  
+"What dependencies would this create?"
+
+Each exploration reveals assumptions. Mine. Yours. The AI's. Ask it to ask YOU clarifying questions—one at a time. This surfaces those unspoken requirements that live in your head but not in your spec.
+
+### Plan: Cutting the Elephant
+
+After exploration comes planning. This is where you wield the knife and fork.
+
+The plan isn't just tasks—it's boundaries. What we're building. What we're NOT building. Where we stop. Your AI doesn't know where to stop. Every function could be more robust. Every component more reusable. Every abstraction more abstract.
+
+### Execute: With Discipline
+
+Execution is where discipline matters most. Small changes. Frequent verification. One agent, one task, one focus.
+
+The magic isn't in the speed—it's in the steering.
+
+## The Nine Hard Lessons (Or: How I Learned to Stop Worrying and Leash the Beast)
+
+Each of these lessons was paid for in lost time, corrupted files, or spectacular failures. They're not theory—they're scar tissue.
+
+### Lesson 1: Context Window Bankruptcy
+
+I once watched 49k tokens vanish. Gone before I typed a word. Turned out my MCP servers were eating 25% of my context—context7, Zen, Serena, Playwright. Now I run `/context` like checking my bank balance. YAGNI isn't just for code—it's for tools.
+
+### Lesson 2: The Schizophrenic CLAUDE.md
+
+My frontend CLAUDE.md said "use npm." My backend said "use yarn." The root said "use pnpm." Claude tried to please everyone. The result? A package.json that looked like three different developers were fighting. Now every folder gets its own CLAUDE.md. Specificity beats confusion.
+
+### Lesson 3: The Clarifying Question That Saved Christmas
+
+"Build me a dashboard." Four hours later: enterprise-grade analytics platform with Grafana integration. What I wanted: three charts. Now I make Claude ask ME questions. One at a time. "What metrics?" "Real-time or historical?" "Who's the audience?" Ten minutes of questions saves ten hours of deletion.
+
+### Lesson 4: The Agent Orchestra Disaster
+
+Two agents. Same file. Different approaches. proof-guided-coder implementing business logic with formal verification. qa-engineer writing tests for the same code. The merge conflict looked like abstract art. Now my agents work in parallel universes—git worktree keeps them isolated until they're ready to harmonize.
+
+### Lesson 5: OODA Loops Save Sanity
+
+Watched Claude write 500 lines before discovering the API didn't exist. Now: Write 10 lines. Test. Write 10 more. Test. Colonel Boyd knew—the fastest OODA loop wins. Small changes catch problems while they're still small.
+
+### Lesson 6: Agents Are Specialists, Not Generalists
+
+"Fix all the bugs" → chaos. "debug this PostgreSQL error" → debugger agent finds root cause. "Review this Go code" → code-reviewer spots the race condition. "Check security" → security-guardian identifies SQL injection. Agents excel at focused expertise. They fumble at broad mandates. One agent, one specialization, one success.
+
+### Lesson 7: Context Curation Is Architecture
+
+Before: Dump entire src/ folder.  
+After: Three specific files, one type definition, the failing test.  
+Result: 90% less hallucination, 100% more relevance.  
+Your context window is your architecture. Design it.
+
+### Lesson 8: The Main Agent Is a Conductor
+
+Your main agent shouldn't write code—it should conduct the orchestra. tech-lead designs the architecture. proof-guided-coder implements with verification. qa-engineer writes the tests. code-reviewer ensures quality. When your main agent stays high-level, your context stays clean.
+
+### Lesson 9: Exploration Prevents Excavation
+
+That "quick feature" that required database migration, API versioning, and frontend state management? Should've explored first. Five minutes of "what would this require?" prevents five hours of "why doesn't this work?"
+
+## From Line Cook to Executive Chef
+
+You're not losing skills. You're gaining leverage.
+
+The line cook follows recipes. Chops onions. Sears steaks. Important work, but bounded.
+
+The executive chef designs menus. Manages teams. Ensures quality. Creates experiences.
+
+Your AI handles syntax. You handle semantics. It generates possibilities. You make decisions. It writes code. You write futures.
+
+This isn't about AI replacing you. It's about you conducting an orchestra of AI agents, each playing their part, while you ensure they harmonize toward YOUR vision.
+
+## What You Can Do Tomorrow
+
+Stop feeding the beast. Start leading it.
+
+1.  **Audit your current AI workflow.** Are you gambling with one-shot prompts? Track your success rate for one week. The house always wins.
+    
+2.  **Create folder-specific CLAUDE.md files.** Especially in monorepos. Clear, contextual instructions prevent elaborate misinterpretations.
+    
+3.  **Try Explore → Plan → Execute on your next feature.** Resist the urge to jump straight to execution. The upfront investment pays compound interest.
+    
+4.  **Set up git worktree for parallel work.** Learn it once, leverage it forever. Your agents will thank you.
+    
+5.  **Monitor context usage obsessively.** Use `/context` before, during, and after sessions. Context is currency—spend it wisely.
+    
+6.  **Practice OODA loops.** Small change → Verify → Small change → Verify. Momentum through micro-wins, not moonshots.
+    
+
+Your AI pair programmer moves at the speed of light. Without steering, it's just velocity toward chaos.
+
+The beast will eat everything you feed it.
+
+Feed it wisely.
+
+* * *
+
+_Based on months of Claude Code usage and tens of thousands of lines of unnecessary code. Every mistake mentioned, I've made. Every solution suggested, I use daily._

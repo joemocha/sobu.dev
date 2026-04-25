@@ -1,0 +1,20 @@
+---
+interface Props {
+  issue: string;
+  center: string;
+}
+const { issue, center } = Astro.props;
+---
+<div class="art-masthead">
+  <div class="art-masthead-inner">
+    <div class="left vol"><a href="/">← sobu.dev</a> &nbsp;·&nbsp; Vol. I · Issue {issue}</div>
+    <div class="center">{center}</div>
+    <div class="right" style="display:flex;justify-content:flex-end;align-items:center;gap:14px">
+      <span id="father-status" style="color:var(--ink-muted);font-family:var(--mono);font-size:10px;letter-spacing:0.14em">
+        <span style="display:inline-block;width:6px;height:6px;border-radius:3px;background:var(--ink-muted);margin-right:6px;vertical-align:1px"></span>
+        <span class="t">Father · asleep</span>
+      </span>
+      <a href="/#writing">All writing</a>
+    </div>
+  </div>
+</div>

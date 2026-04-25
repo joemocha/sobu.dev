@@ -1,0 +1,79 @@
+---
+import { getCollection, render } from 'astro:content';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import ArticleMasthead from '../../components/article/ArticleMasthead.astro';
+import ArticleHero from '../../components/article/ArticleHero.astro';
+import ArticleTOC from '../../components/article/ArticleTOC.astro';
+import HarnessStrip from '../../components/article/HarnessStrip.astro';
+import SeriesNav from '../../components/article/SeriesNav.astro';
+import ArticleScripts from '../../components/article/ArticleScripts.astro';
+import { seriesFor, fmtDate, readTime } from '../../data/series.ts';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  // The bespoke Harness Pt 1 lives at /article.html; exclude it from this route.
+  return posts
+    .filter((p) => p.id !== 'i-thought-i-was-building-a-simple')
+    .map((p) => ({ params: { slug: p.id }, props: { post: p } }));
+}
+
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+const info = seriesFor(post.id);
+const wordCount = (post.body ?? '').split(/\s+/).filter(Boolean).length;
+const read = readTime(wordCount);
+const totalMin = parseInt(read, 10) || 6;
+const publishedHuman = fmtDate(post.data.date);
+
+// Build TOC from h2 headings discovered in the rendered MDX
+const toc = headings.filter((h) => h.depth === 2).map((h) => ({ id: h.slug, label: h.text }));
+const mastheadCenter = info.series ?? 'Field Notes';
+---
+<SiteLayout title={`${post.data.title} — sobu.dev`} description={post.data.summary} bodyTheme={true} extraCss={["/article.css"]}>
+<div class="article-page wild">
+
+<ArticleMasthead issue={info.issue} center={mastheadCenter} />
+
+<ArticleHero
+  title={post.data.title}
+  dek={post.data.summary}
+  authorName="Samuel Obukwelu"
+  authorRole="Builder, operator, engineer. Atlanta."
+  read={read}
+  words={wordCount}
+  publishedHuman={publishedHuman}
+  series={info.series}
+  part={info.part}
+  partsTotal={info.partsTotal}
+  ladder={info.ladder}
+/>
+
+<div class="art-body-wrap" id="body-wrap">
+  <div class="art-grid-wild">
+    <ArticleTOC items={toc} readTime={read} />
+
+    <article id="prose" class="prose wild">
+      <Content />
+      <div class="art-end">
+        <span class="glyph">⁂</span>
+        <div class="end-text">
+          {info.series && info.part ? (
+            <>End of <strong>Pt. {info.part}</strong> · {info.partsTotal && info.part < info.partsTotal ? 'Next in series.' : 'End of series.'}</>
+          ) : (
+            <><strong>Standalone note</strong> · Published {publishedHuman}</>
+          )}
+        </div>
+      </div>
+    </article>
+
+    <HarnessStrip />
+  </div>
+
+  <SeriesNav ladder={info.ladder} part={info.part} partsTotal={info.partsTotal} />
+</div>
+
+</div>
+
+<ArticleScripts totalMin={totalMin} />
+
+</SiteLayout>

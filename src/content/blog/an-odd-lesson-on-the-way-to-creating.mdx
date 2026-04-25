@@ -1,0 +1,74 @@
+---
+title: "An odd lesson on the way to creating my presentation"
+date: "2025-10-19"
+summary: "Yesterday's truths might not apply today"
+original: "https://sobu1.substack.com/p/an-odd-lesson-on-the-way-to-creating"
+tags: ["substack"]
+---
+
+As a software engineer, we live in a time where we are inundated with a great deal of relevant information, some would say “good to know” information, which can be dizzying. At the same time, much of this “good to know” information, have a half-life of 3 to 6 months.
+
+I say this, as someone who’s on the receiving end of this rapid and percussive release of agents, LLMs, development frameworks, etc by fellow developers and AI companies. You barely have time to experiment, let alone go in depth with any of them. **Therefore**, our strategies need to evolve as fast as our tools.
+
+This brings me to sharing my learnings on creating my Oct 23rd /dev/color presentation on **AI: Code, Skills, and Strategy**. I love analogies and my idea was to prove why developers should _Be the Fox, not the Hedgehog_ - where the fox explores many ideas shallowly vs the hedgehog’s deep focus on one idea \[1\]. **But** my own experiment proved me wrong, and that failure taught me something more valuable.
+
+Working on my presentation, I came up with a rate-limiter _mini-project_ to illustrate my main point of **Be the Fox, not the Hedgehog**. I used the latest version of Claude Code with Opus 4.1 for planning and the latest anthropic model, Haiku 4.5 for exploration and plan execution.
+
+The Fox strategy is [explore](https://raw.githubusercontent.com/humanlayer/humanlayer/refs/heads/main/.claude/commands/research_codebase.md), [plan](https://raw.githubusercontent.com/humanlayer/humanlayer/refs/heads/main/.claude/commands/create_plan_generic.md), then [execute](https://raw.githubusercontent.com/humanlayer/humanlayer/refs/heads/main/.claude/commands/implement_plan.md) (EPE).
+
+The Hedgehog strategy is to plan then execute.
+
+To keep things moving fast, I created 2 worktrees (fox and hedgehog) and had them use the project [README.md](https://gist.githubusercontent.com/joemocha/caa36fd39a168cbb4002ba4489c2b2f2/raw/ef9f6bb5ea9360f25c616fdfebfbcbf76508f03e/README.md) as the specifications to build from.
+
+I instructed Claude Code to follow the above strategies and I expected the Fox strategy to produce a better version of the project. **But** the Hedgehog won. My experiment to prove “always explore first” had just disproved it. This left me confused, but also curious.
+
+The rate-limiter project is a simple 2 tier project (front and back ends) where we use BunJS, HTML, vanilla javascript + D3 for visualizations to demonstrate how different rate limiting algorithms work. We start with token and leaky buckets and then, later, we add fixed window, sliding window, and sliding logs. I made this a two step process because my experience has been that exploring the codebase before you create a plan is always better than starting with a plan.
+
+Why did the Hedgehog win? I couldn’t sit at my desk any longer, for I was lost. I took a walk to clear my head enough to let in new ideas and asked myself the following:
+
+1.  Does the specification size matter?
+    
+2.  Are there conditions where you no longer need to prompt it to explore the codebase before planning and execution?
+    
+3.  Has Claude Code gotten good enough that prompting to explore the codebase is unnecessary?
+    
+4.  Did the specification leave little to no room for ambiguity?
+    
+5.  Did the fox or hedgehog use subagents in significant way that made a difference?
+    
+
+I’ve seen the evolution of Claude Code over the last 6 months and what it has been able to do is magical. **Therefore**, there’s a real chance that it has improved enough that exploration that was once essential has become unnecessary overhead for simple tasks. My assumptions were based on yesterday’s AI capabilities, but I was testing against today’s.
+
+**Therefore**, I decided to test the boundaries, was this about task complexity or had AI fundamentally changed? I made the specifications more challenging by adding the following requirements:
+
+1.  WebSocket server
+    
+2.  Web Workers
+    
+3.  2 additional UI interfaces
+    
+4.  visualization complexity where you need to create a full rendering engine
+    
+5.  and more
+    
+
+The specifications grew from 620 lines to 1123 lines. And I ran my experiment again. Both Fox and Hedgehog produced working code for the two required algos (leaky and token buckets) **but** the Hedgehog failed to produce working code when adding the 3 optional algos and integrating them into the existing UI. Fox won.
+
+## The Real Lesson
+
+Here’s the paradox I discovered: To handle information coming at light speed, you must be Fox-like in choosing when NOT to be a Fox.
+
+-   Simple, well-specified tasks? Skip exploration, AI has made it unnecessary overhead
+    
+-   Complex, ambiguous problems? Fox strategy still wins
+    
+-   **But** the boundary between ‘simple’ and ‘complex’ shifts every few months as AI evolves
+    
+
+**Therefore**, the meta-skill isn’t choosing Fox or Hedgehog, it’s constantly recalibrating which strategy fits as AI capabilities evolve. Six months ago, my rate-limiter project would have required exploration. Today, it doesn’t. Six months from now? Even my “complex” version might not.
+
+The lesson isn’t “Be the Fox.” It’s “Be Fox-like about being a Fox”, constantly exploring whether you still need to explore. Because in this landscape, yesterday’s essential step becomes tomorrow’s wasted motion.
+
+Links
+
+1.  [The Fox and the Hedgehog: Contrasting Approaches to Anticipating the Environment](https://www.militarystrategymagazine.com/article/the-fox-and-the-hedgehog-contrasting-approaches-to-anticipating-the-environment/)

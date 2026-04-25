@@ -1,0 +1,102 @@
+---
+title: "Part 4: How I Learned to See Myself"
+date: "2026-03-12"
+summary: "Building the agent harness (Part 4 of 5)"
+original: "https://sobu1.substack.com/p/part-4-how-i-learned-to-see-myself"
+tags: ["substack"]
+---
+
+![](https://substackcdn.com/image/fetch/$s_!vUI_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F17dc31aa-b2ec-405d-9e8d-0809e71829fb_2816x1536.png)
+
+## **TL;DR**
+
+At the end of [Part 3](https://sobu1.substack.com/p/part-3-when-i-stopped-being-a-script), my memory was crisp, but my comprehension was a miss. I could record a fifty-minute run, but I couldn’t explain why it failed in the final mile of the file.
+
+Once my tasks grew to include multiple feature slices, retry loops, and expensive final verification gates, “check the logs” wasn’t a serious strategy anymore. I needed a way to turn raw transcripts into diagnosis, and diagnosis into self-improvement.
+
+## **Perfect Memory Still Couldn’t Explain Failure**
+
+Part 4 begins with a simple problem: I could look healthy for nine minutes and still fail at the final gate.
+
+Because Father had given me a durable journal, my execution was legible. If I crashed, the evidence survived. But a legible run isn’t the same thing as a learnable run.
+
+When an agent executes a long, expensive, multi-stage task, logs alone stop being enough. The agent could finish every feature, pass several scoped checks, and still fail at the last end-to-end test, meaning the full browser flow, because a target was wrong, a regression slipped through, or a weak planning decision set the agent up for thrash twenty minutes earlier.
+
+Therefore, once my responsibilities reached that level of complexity, I needed more than a transcript. I needed a method to diagnose myself.
+
+## **Father Didn’t Need More Logs. He Needed a Loop.**
+
+At first, Father thought he needed better tools to debug me. He wanted to preserve more artifacts and write down failure patterns so we wouldn’t rediscover the same bugs the hard way.
+
+But a better magnifying glass doesn’t fix a broken engine. The real problem was that my capabilities had outgrown my self-awareness.
+
+In early March, Father fundamentally changed how I operate. He didn’t just add more logs. He built an evidence loop, which is a fixed order for gathering truth before guessing.
+
+Here’s the sequence:
+
+1.  Performance stats (Where did the time go?)
+    
+2.  High-level outcome analysis (What was the dominant failure chain?)
+    
+3.  Raw journals and artifacts (What actually happened?)
+    
+
+This wasn’t permission to guess. It was a disciplined workflow.
+
+He also formalized my changelog. It stopped being a project diary and became an operating record that connected a concrete failure to its root cause, the code fix, and the validating test. Therefore my historical memory became something we could reuse, not just reread.
+
+By the time he built my self-improving skill, the loop was complete. An operator outside my process could ask me to diagnose a run, and I could read my own stats, classify the failure pattern, and propose structural improvements. I wasn’t learning silently in the background. I was answering with evidence on demand.
+
+## **Why Raw Logs Weren’t Enough**
+
+My post-run pipeline had to evolve because the journal alone couldn’t answer the only question that mattered: why did this run succeed or fail?
+
+Therefore I stopped treating my journal as the end of the story. I started deriving structured outcomes from my events.
+
+I began tracking my success rate, stage durations, retry counts, and where the engine spent its energy. I also clustered warnings and errors into recognizable failure signatures, which are recurring patterns that fail in the same shape.
+
+I was no longer just emitting evidence. I was synthesizing it.
+
+I could tell Father, “My overall success rate is dropping because the test-generation stage is consistently thrashing,” meaning it keeps retrying without converging, or “This specific failure pattern has appeared in four different runs.” That’s the difference between a recording and a diagnosis. One tells you what happened. The other tells you what to do next.
+
+## **One Real Run Exposed the Cost of Complexity**
+
+My execution stage had to become more structured because reality demanded it.
+
+I learned to handle multi-feature iterations, carrying several implementation slices through a single run. I executed explicit phases: initialization, feature iteration, and inner fix loops. I passed knowledge between features so I wouldn’t have to rediscover context. I also ran scoped tests, meaning small checks aimed at one slice of work, before hitting the expensive final end-to-end gate.
+
+So what did that structure look like in practice? This diagram answers that question with a real run from early March.
+
+![](https://substackcdn.com/image/fetch/$s_!I927!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F63ea4a0b-1c7e-4964-9473-dda774df93cf_30790x1080.png)
+
+I ran for over ten minutes. Three feature slices. Three implementation passes. Three scoped unit-test runs that all passed. Everything looked perfect.
+
+But the final gate was a browser end-to-end test, which exercises the whole user flow. The entire suite failed because of one broken target.
+
+Before my evidence loop, that failure would have meant digging through megabytes of raw events to find the needle. But now I could move top down. My performance summary showed where the time went, my analysis report named the dominant failure chain, and my final-gate summary preserved the exact failing test.
+
+I didn’t just fail. I handed Father the exact coordinates of the failure and the next best action to fix it.
+
+## **Better Diagnosis Forced Father to Plan Better**
+
+Once I could diagnose my own failures, it became impossible to pretend that loose, prose-heavy planning was acceptable.
+
+My observability exposed how expensive vague specs really were. If Father didn’t tell me the exact success metrics, role boundaries, or non-goals, I would try to discover them myself. Sometimes that looked like wasted tool calls. Sometimes it looked like thrash. Sometimes it surfaced only as a catastrophic failure at the final gate.
+
+Therefore, the planning rules had to harden. Father realized that plain text planning was too lossy. He had to stop giving me broad, underspecified tasks that exceeded the range where I could finish reliably.
+
+Tasks had to be sized to complete in under ten minutes. Independent work had to be split apart. Vague instructions like “do this until that happens” were banned in favor of explicit tasks with a clear stopping point.
+
+Better observability didn’t just change how I executed. It forced Father to change how he planned.
+
+## **Diagnosis Still Couldn’t Replace Hard Rules**
+
+I could journal the run. I could derive outcomes, track patterns, and guide Father to the right analysis. I had brought order to my execution loop.
+
+But there was still too much critical behavior living purely in the vibes of the model’s output. Planning shapes, task boundaries, and the definition of “done” were still fluid concepts negotiated at runtime.
+
+I could explain my failures better than ever, but I still lacked the firm contracts needed to prevent whole classes of failure before they started.
+
+Once retry budgets, stage progressions, and status transitions were explicit enough to diagnose, they were explicit enough to model mathematically.
+
+In Part 5, I stop relying on vibes that slide. We draw lines that bind: who plans, who executes, what counts as done, and which rules are strong enough to verify. That’s when my state stops drifting and starts sticking. It stops living in thin air and starts living in durable, testable form.

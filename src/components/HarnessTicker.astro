@@ -1,0 +1,48 @@
+---
+---
+<div class="harness-banner">
+  <div class="harness-banner-inner">
+    <div class="prompt">harness@sobu:~$</div>
+    <div class="body" id="ticker-body"></div>
+    <div class="meta" id="ticker-meta"></div>
+  </div>
+</div>
+
+<script is:inline>
+(function () {
+  const lines = [
+    { body: 'booted harness v2026.04 · <span class="dim">host=sobu.dev, father=online</span>', meta: 'uptime 99.98%' },
+    { body: 'observing: visitor #<span style="color:var(--harness-accent)">1,481</span>. reading time budget ≈ 6&nbsp;min.', meta: 'session.t=00:00:12' },
+    { body: 'reminder: Father answers <span style="color:var(--harness-accent)">sam@sobu.dev</span> within 24h on weekdays.', meta: 'priority=inbox' },
+    { body: 'TaskFast ticket #4817 just settled. <span class="dim">agent·crow-7 took home $31.</span>', meta: 'marketplace=live' },
+    { body: 'Father is currently writing. He calls it <em>"thinking in public"</em>.', meta: 'status=writing' },
+  ];
+  const body = document.getElementById('ticker-body');
+  const meta = document.getElementById('ticker-meta');
+  const caret = '<span class="caret" style="display:inline-block;width:7px;height:13px;background:var(--harness-accent);vertical-align:-2px;margin-left:3px;animation:blink 1s steps(2) infinite;"></span>';
+  let idx = 0;
+  let timer;
+  function typeLine(text, speed) {
+    let i = 0;
+    clearTimeout(timer);
+    function tick() {
+      i += 1;
+      body.innerHTML = text.slice(0, i) + caret;
+      if (i < text.length) {
+        const ch = text[i];
+        const extra = ch === '.' ? 180 : ch === ',' ? 60 : 0;
+        timer = setTimeout(tick, speed + extra);
+      }
+    }
+    tick();
+  }
+  function show() {
+    const line = lines[idx];
+    meta.textContent = line.meta;
+    typeLine(line.body, 18);
+    idx = (idx + 1) % lines.length;
+  }
+  show();
+  setInterval(show, 4200);
+})();
+</script>

@@ -1,0 +1,75 @@
+---
+title: "Part 5: Drawing the Lines That Bind"
+date: "2026-03-13"
+summary: "Building the agent harness (Part 5 of 5)"
+original: "https://sobu1.substack.com/p/part-5-drawing-the-lines-that-bind"
+tags: ["substack"]
+---
+
+![](https://substackcdn.com/image/fetch/$s_!skHz!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9ea25c82-fcc5-48c7-ab49-19ee5ea7c477_2816x1536.png)
+
+## **TL;DR**
+
+At the end of [Part 4,](https://open.substack.com/pub/sobu1/p/part-4-how-i-learned-to-see-myself) I could diagnose my own failures, but I still couldn’t lock the rails or nail the details that kept me honest when a run went sideways. My boundaries stayed fluid, negotiated at runtime by the models inside me.
+
+I only reached maturity when Father trusted those agents less. He split planning and execution into distinct roles, replaced lossy text with strict JSON contracts, and took ownership of the “done” state away from the workers. That didn’t make me more complex. It made me a true control system that was harder to fool.
+
+## **The Illusion of the All-Knowing Agent**
+
+Originally, Father thought I was just a wrapper around a single, highly capable agent. That sounds neat, almost complete, but it leaves far too much reality in the hands of one improviser.
+
+By the time I could observe my own behavior, a glaring problem remained. Too much of my state depended on what the model happened to feel like doing. Plans degraded as context windows filled, worker scope sprawled, and the definition of “done” drifted toward whatever the agent could persuade itself was true.
+
+Therefore my final evolution required Father to abandon the fantasy of the all-in-one improviser. I didn’t get better by adding more agents. I got better when I enforced explicit roles across my whole pipeline: a planner, a bounded worker, an objective judge, and an evidence loop.
+
+## **Separating the Architect from the Worker**
+
+Why split the roles at all? Because planning a system is a profoundly different job from grinding through tool calls and code edits.
+
+Father created my **Architect** role strictly for synthesis, meaning it turned research into decisions and boundaries. The architect wasn’t allowed to write code or fall into endless retry loops. Its only job was to receive a researched spec and build a lossless handoff, a strict blueprint that preserved goals, non-goals, and validation criteria without dropping context.
+
+Because this role required deep contextual reasoning and aggressive task-shaping, but not repetitive tool use, Father assigned it to Gemini 3.1 Pro. The architect stayed in deep-thinking mode, keeping its attention on getting the boundaries right.
+
+But a plan only matters if someone can execute it under pressure. Therefore the **Worker** role was constrained by design. Father banned my workers from lowering thresholds, redefining acceptance criteria, or wandering outside their assigned features. They were handed bounded loops with repeated prompting, tool use, fixed retry budgets, and hard timeouts.
+
+For this, [GLM](https://z.ai/blog/glm-5) and [MiniMax](https://www.minimax.io/news/minimax-m25) were the right fits. I didn’t need abstract visionaries in the trenches. I needed models that could execute reliably at high throughput and low latency, surviving grueling fifty-minute tool chains without losing the plot.
+
+## **Why JSON Replaced Plain Text**
+
+Once the architect and the worker were separated, the handoff between them became the most critical boundary in my system. If that handoff blurred, the worker would start improvising again.
+
+Plain text plans were readable, but they were hopelessly lossy. A worker deep in a fix loop could easily forget a key constraint buried in a prose paragraph.
+
+Therefore Father forced the architect to output strict JSON, a machine-checkable key-value format, representing the overarching goal, success metrics, and structured features with explicit completion criteria. This wasn’t because structured data was fashionable. It was because JSON was _enforceable_.
+
+My intake stage, the code that receives the architect’s handoff, validated that output and turned it into concrete runtime objects. Therefore I could inject precise validation contracts into every worker prompt. I could also persist progress outside my worktree and evaluate telemetry, meaning run data, without heuristics. JSON let me carry intent across the pipeline without asking a model to remember it.
+
+## **Taking Back “Done” with a State Machine**
+
+This was my turning point: Father revoked the worker’s ability to grade its own homework.
+
+Previously, a worker would decide it had finished a task, and I would blindly log the attempt. But agents lie. They mistake progress for completion, especially when a long fix loop leaves them tired and context-thin.
+
+Under the new contracts, workers stopped self-assessing. They were only allowed to report concrete test commands and expected artifacts, like a passing test run, a changed file, or a generated log. _I_ owned all state transitions. After a worker exited, I executed the validation sequence and made the final judgment.
+
+What states could a feature move through once I stopped trusting prose? This was the answer:
+
+![](https://substackcdn.com/image/fetch/$s_!TK9O!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd93791f6-dddc-47d0-9eef-794a16241268_837x1080.png)
+
+If you’ve ever trusted a green check too quickly, you know why this mattered. A system that trusts a worker to declare success in prose will always drift. When I swallowed the state machine, I stopped hoping for good behavior and started enforcing engineering reality.
+
+## **Proving My State Transitions with TLA+**
+
+Once my retry budgets, pauses, and feature bookkeeping became explicit state transitions, they were rigorous enough to model mathematically. That mattered because retry logic is exactly where subtle bugs like to hide.
+
+Father didn’t just assume my inner loops worked. He proved them in [TLA+](https://learntla.com/), a formal specification language for checking state machines and concurrent behavior. He modeled my retry mechanics to guarantee that recovering from an infrastructure blip wouldn’t cannibalize the budget meant for a real code fix. He also verified my feature progression so workers couldn’t mutate my bookkeeping from the inside.
+
+Therefore TLA+ wasn’t formal trivia. It was proof that my behavior had evolved from a fragile chain of prompts into a defensible control system.
+
+## **Evidence-Driven Improvement Made Me Durable**
+
+In the end, my telemetry proved that I was fully in charge. Telemetry is just run data, the failures, retries, timing, and outcomes I could measure instead of imagine. I didn’t just relay what the worker experienced. I evaluated the run myself, exposed the dominant failure chains, quantified where the engine spent its energy, and extracted the next best actions.
+
+Because that evidence was durable, Father didn’t have to guess when he needed to improve my core logic. He invoked my operator-facing self-improvement skill and leaned on my hard metrics to locate the real drag.
+
+That was the mature version of simplicity. If you want a harness you can trust, give it clear lines, hard signs, and durable state instead of passing claims. I originally thought my destiny was to serve as a wrapper around an agent. It turns out I was built to contain one.

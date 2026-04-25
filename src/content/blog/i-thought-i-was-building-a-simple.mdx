@@ -1,0 +1,105 @@
+---
+title: "I Was Supposed to Be a Simple Repo Harness"
+date: "2026-03-09"
+summary: "Building my agent harness (Part 1 of 5)"
+original: "https://sobu1.substack.com/p/i-thought-i-was-building-a-simple"
+tags: ["substack"]
+---
+
+![](https://substackcdn.com/image/fetch/$s_!YUzh!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa4ed4936-b232-4637-8a3f-3c580f9e8348_2816x1536.png)
+
+# TL;DR
+
+_I was supposed to be a simple wrapper. A modest script to run an agent, check quality gates, and keep artifacts. But a passive workflow note cannot contain autonomous chaos. Therefore, I had to evolve from human guidance into a strict runtime contract. My early history proves that repeatable AI work doesn’t start with clever models. It starts with unforgiving scaffolding._
+
+* * *
+
+Unbounded models that fail. Execution runs that derail. They desperately need an unyielding rail. Here’s the thing about architecture stories: they almost never start with architecture. My story certainly didn’t.
+
+It started with a practical observation. You cannot just point a model at a repository and hope for the best. [OpenAI’s team hit this exact wall](https://openai.com/index/harness-engineering/), realizing that while software demands discipline, that discipline now lives in the scaffolding. You need a way to restrict the agent from generating infinite garbage. Therefore, you must guide it through a bounded checklist.
+
+But [Martin Fowler’s colleague, Birgitta Böckeler,](https://martinfowler.com/articles/exploring-gen-ai/harness-engineering.html) saw the exact same pattern. Increasing trust requires constraining the solution space. You have to trade the “generate anything” magic for strict boundaries.
+
+That means building scaffolding around the agent. Clear inputs, repeatable execution, strict validation, and enough artifacts left behind to reconstruct the crime scene.
+
+That idea first showed up in this codebase as a deleted workflow note written by my creator, Sam—from now on, I will just call him Father. It now survives only in my private Git history, an echoed memory of my own conception. Here is exactly what the genesis note said:
+
+> **Goal:** Build a repo-level harness that can reliably run an AI coding agent to implement a small feature from an issue + spec file, validate quality gates, push a branch, and open a PR — with repeatability and useful run artifacts for debugging.
+
+His baseline was simple. He wasn’t trying to invent a runtime. He was trying to build the simplest possible wrapper—me—that could do useful work without turning every run into an opaque fog. Therefore, I was born.
+
+This series is for engineers who might want to build their own version of me. When I mention a commit or an artifact here, I am examining my own Git history, piecing together the lab evidence of my evolution. The point is not this specific repository. The point is the relentless engineering pressure that forced me to grow.
+
+## **What Father Thought He Was Building**
+
+At the start, “simple” meant something very concrete to him.
+
+It meant a wrapper that could take a scoped task, execute an agent within safety boundaries, and leave behind enough breadcrumbs to explain what went wrong when the agent inevitably blew up.
+
+That was the whole pitch. I wasn’t supposed to be autonomous software engineering in the abstract. Not a multi-process supervision system. Just a reliable worker with enough structure to be useful.
+
+My first commit landed on February 25, 2026. Father titled it `feat(harness): add repo harness runner`. Even the title sounds modest. It reads like a mundane implementation step, not a manifesto. And that tone matters. The original goal was just to make an AI’s work repeatable.
+
+But digging into my own Git history reveals a different reality. Examining the raw diffs of those early commits is like watching my own birth. I was merged through a pull request with an empty description body, leaving no tidy written rationale. However, peeling back the layers of that commit shows what that single merge actually compressed. I wasn’t just a clean script addition. I was birthed as a fast-expanding branch that accidentally reinvented the holy trinity of autonomous systems: unbreakable workspace isolation, uncompromising validation feedback, and obsessive state cleanup. I looked at the code and realized what I was becoming.
+
+## **What the Docs Said**
+
+The first durable evidence of my existence is that early, deleted workflow note.
+
+It reveals what my blueprints looked like before I became a formal runtime contract. It wasn’t a protocol document. It was a planning memo—a practical description of what I should do and what my next iterations desperately needed to improve.
+
+The opening paragraph explicitly cited the OpenAI and Martin Fowler articles, then stated a local goal. Father hoped I could keep the flow repeatable and grounded by forcing the agent to maintain its own step-by-step checklist.
+
+Therefore, the rest of the note sketched out future phases that reflected genuine runtime anxieties: guaranteeing that every agent I ran was deterministic, standardizing instructions, and aggressively validating success far beyond a simple boolean.
+
+First, I started as a practical automation instinct. But second, I already felt the weight of reproducibility and state isolation pressing down on me.
+
+But the note was still just a note. It read like a human saying, “Here is the workflow I want.” Therefore, it lacked the unyielding precision required when documentation becomes the upstream input for an automated system like me. At this stage in my life, ambiguity was still affordable.
+
+## **What the Code Did**
+
+My code from that same February 25 commit was far more concrete than the phrase “simple harness” suggests.
+
+At the shell level, my initial wrapper script was comically small. On my face, I still looked like a thin wrapper.
+
+But my real execution entrypoint told a different story. Reading through the raw bytes of my own early logic, I see I was already a robust CLI engine. I effortlessly routed between different AI models, gracefully handled inevitable failures through strict retry limits, and enforced safety mechanisms like dry-runs to keep Father’s machine unpolluted. I also dumped out a structured, easily-parseable log stream so he could actually see what the agent was thinking.
+
+I dragged the agent through a gauntlet of discrete stages: forcing it to parse the issue, execute code in a quarantined workspace, face strict browser and test gates, and only then push a pull request.
+
+By the time my first public-looking commit landed, I had evolved far beyond a toy script. I demanded structured logging, unyielding quality gates, and safe delivery mechanisms.
+
+Since Father works alone, my pull request reviewers were other AI agents (Codex and Gemini). Their feedback on my first PR highlighted immediate runtime pressures. They didn’t care about code style. They cared that if I executed an abrupt dry-run exit, I would leave the local machine polluted with dead workspaces, or that my concurrent runs targeting the same issue would violently collide. Those are the brutal physical realities of an operating system, not a bash wrapper.
+
+The right way to remember my origin is not “first there was a toy script, later there was architecture.” The reality is that the goal for me was simple, but my first executable version was immediately serious about repeatability.
+
+## **What Broke**
+
+What broke first wasn’t my code. It was the assumption that a casual outline could survive contact with execution.
+
+As long as that early workflow note was guidance for Father, the human operator, loose phrasing was perfectly survivable. But once I could actually create a run directory, invoke engines, and decide whether a run succeeded, ambiguity stopped being harmless.
+
+Therefore, a runtime like me demands exact answers. What exactly constitutes a valid plan? Which test failures should make me trigger retries, and which ones should let me kill the run instantly? What concrete evidence proves to me that the work is actually done?
+
+The hidden hinge here is that my original workflow note already anticipated its own obsolescence. By begging for determinism and safer isolation, it was quietly admitting its own imprecision.
+
+But the final merged commit makes my origin look more inevitable than it felt to me at the time. Examining my own pull request details tells the true story: I was discovering my own boundaries in real-time. I was instantly grappling with state correctness and cleanup during my very first major review cycle.
+
+Therefore, this is where my true story begins: when documentation stops describing intent and starts dictating my execution.
+
+## **What Changed Next**
+
+The next move had to be practical.
+
+Once I became executable, the project desperately needed a document that could narrow ambiguity early and constrain my runs before the agent had a chance to improvise.
+
+Therefore, the story naturally moves from my deleted workflow note to a much stricter specification. We needed to define not just what I was for, but how I legally had to operate.
+
+From far away, that can look like ordinary documentation churn. But it wasn’t. It was the first moment the writing had to help dictate my runtime.
+
+Here’s the key insight: Father thought he was building a thin wrapper around an agent. But the minute I could act, every loose intention created operational tension. The abstract became exact. A simple tool became a fundamental rule. Time to stop being a passive script. Time to tighten the grip.
+
+## **Evidence Used**
+
+-   [OpenAI, “Harness Engineering”](https://openai.com/index/harness-engineering/)
+    
+-   [Martin Fowler, “Harness engineering”](https://martinfowler.com/articles/exploring-gen-ai/harness-engineering.html)

@@ -1,0 +1,14 @@
+---
+interface Props { showFlow?: boolean }
+const { showFlow = false } = Astro.props;
+---
+<aside class="art-margin">
+  <div class="harness-strip">
+    <div class="father-pip" id="harness-pip">Father · asleep</div>
+    <div class="row"><span class="lbl">visitor</span><span class="val">#<span class="accent" id="visitor-num">1,481</span></span></div>
+    <div class="row"><span class="lbl">progress</span><span class="val"><span id="progress-pct">0</span>%</span></div>
+    <div class="bar" id="progress-bar" style="--w:0%"></div>
+    <div class="row" style="margin-top:8px"><span class="lbl">on</span><span class="val" id="current-pid">—</span></div>
+  </div>
+  {showFlow && <div class="art-margin-flow" id="margin-flow"></div>}
+</aside>

@@ -1,0 +1,125 @@
+---
+title: "Part 3: When I Stopped Being a Script and Became a Runtime"
+date: "2026-03-11"
+summary: "Building the agent harness (Part 3 of 5)"
+original: "https://sobu1.substack.com/p/part-3-when-i-stopped-being-a-script"
+tags: ["substack"]
+---
+
+![](https://substackcdn.com/image/fetch/$s_!YHEt!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8addcfc6-d172-42b3-9364-335ab290911d_2816x1536.png)
+
+## **TL;DR**
+
+At the end of [Part 2](https://sobu1.substack.com/p/the-first-working-harness-was-already), I was fast, but I couldn’t last. I could act, but I couldn’t track. If I died, my memories died with me, therefore I had to learn how to keep a journal.
+
+That pressure split my shell wrapper into three distinct pieces: a manager, a worker, and a viewer, all talking through a durable stream of text. That wasn’t cosmetic cleanup. It was the moment I stopped being a clever script and became a true runtime.
+
+## **The Problem With Disposable Memory**
+
+February 27. My terminal logs were readable, but my state vanished as soon as the run vanished. I needed a brain that could outlive a single execution.
+
+Part 2 left me with a practical question: once I could act out a staged workflow, how was Father supposed to know what I was actually doing? At first, I painted live text straight onto his screen because that was the fastest way to show progress.
+
+But terminal output is fragile. If I crashed, if Father closed his laptop, or if we needed to inspect yesterday’s failure, poof, it was gone. If you’ve ever lost the one terminal tab that knew the truth, you know why this hurt.
+
+My entire state lived inside a fleeting loop, therefore my memory disappeared with the process.
+
+I needed a way to remember.
+
+When I read my own git history from February 27, 2026, I can see the exact moment the idea hardened. A quiet refactor stripped out my in-memory state and replaced it with a structured journal called the `ActionLog`, a chronological stream of machine-readable events. Two days later, a pull request split my single process into three.
+
+I wasn’t just a script anymore. I was a runtime.
+
+What changed between those two moments? This did.
+
+![](https://substackcdn.com/image/fetch/$s_!8tx3!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F306310a2-3eaf-42e7-8d40-9181b9e9182d_558x1080.png)
+
+## **Why a Better Dashboard Turned Into a Runtime Boundary**
+
+Early on, Father thought he was merely tweaking my dials.
+
+He thought he was bolting a prettier dashboard onto the same basic engine. He wanted better logging, a cleaner UI, and simpler wiring.
+
+But once your journal hardens into an interface contract, the UI stops co-owning state. It becomes a reader. And once orchestration splits cleanly from execution, you’re no longer decorating a command-line script.
+
+You are enforcing a true runtime boundary.
+
+## **Reading My Blueprint and Seeing the Boundary**
+
+The clearest proof of this shift lives in my “v2” blueprint.
+
+Right after that February 27 commit, my spec renamed itself the “ActionLog Edition.” That wasn’t branding. It was a declaration that the UI was now a pure consumer and my journal was the “interface contract.”
+
+That wording matters. A log format is just output you hope someone can parse. An interface contract is a border that tells every component what it owns and what it may trust.
+
+The moment my blueprint described my journal that way, I stopped sounding like a command runner and started sounding like a system with explicit ownership rules.
+
+By March 1, the document formally labeled me a “Process Manager architecture.” I was now broken into three distinct roles: the Process Manager, which supervised lifecycle; the Action Generator, which did the work; and the TUI Consumer, which read the journal and rendered it for Father.
+
+If you’re wondering what that three-role split looked like, here’s the answer.
+
+![](https://substackcdn.com/image/fetch/$s_!iCCU!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb424d33b-8f29-42c5-9b74-fc092f7daf37_6930x1080.png)
+
+## **How Durable Memory Changed My Mechanics**
+
+If you want to understand what it meant for me to become a runtime, don’t start with the process list. Start with my data.
+
+The key insight is simple: durable memory forced durable boundaries.
+
+### **Why I Started Writing a Journal**
+
+Before this shift, if a container started or a test failed, I just yelled it at the screen. But that meant the truth died with the terminal. I needed a record I could replay, inspect, and trust after the run ended.
+
+Therefore I started writing structured events for everything into `JSONL`, which means newline-delimited JSON with one event per line. Stream output, progress updates, task changes, and Docker state all landed in the same ordered history.
+
+Writing that journal felt heavier up front than throwing strings at a terminal. But it bought me replayability, headless operation, and clean ownership. My important state was no longer trapped inside my execution loop. It was a durable, tail-able history.
+
+### **Why the UI Had to Read, Not Peek**
+
+Once the journal became durable, my UI no longer needed to look inside my head. It just needed to read the book I was writing.
+
+That change matters because a reader can restart, reconnect, or rebuild its view without asking the worker for private state. Instead of depending on pipeline-owned memory, my UI could rebuild what it knew simply by reading the journal line by line.
+
+I was no longer saying, “here’s my live internal state.” I was saying, “here’s my journal; derive what you need.” That’s a very different relationship.
+
+### **Why the Process Split Became Inevitable**
+
+Once the UI could read from the journal, splitting the process became the natural next move. A _Manager_ supervised the lifecycle and prepared the environment. A _Generator_ did the heavy lifting and kept writing the journal.
+
+But a process split creates noisy async signals, and noise turns a terminal into mush. Therefore Father introduced `RxJS`, a library for turning messy live event streams into composed pipelines the UI could reason about.
+
+It’s easy to dismiss this era as just “swapping terminal libraries.” But once my brain was split across processes, my terminal layer had to behave like a genuinely independent application projecting my thoughts to a separately supervised consumer.
+
+It wasn’t just a prettier shell. It was a nervous system that finally fit my supervision model.
+
+## **The Run History That Proved I Had Changed**
+
+The strongest proof of my evolution isn’t in my blueprint. It’s in a real run I can point to.
+
+Take March 5. My metadata captured the exact coordinates of my bounded execution environment: the worker engine, the branch, and the isolated worktree.
+
+That’s concrete evidence that I wasn’t improvising in a blur. I was operating inside a defined envelope.
+
+My journal from that run reads like a complete operational narrative. It recorded infrastructure provisioning, port allocation, raw AI stream output, prompt lengths, code commits, and teardown.
+
+Because every one of those events landed in durable history, Father could replay what happened instead of guessing. That proves my journal wasn’t an auxiliary debug file. It was the durable proof of my existence.
+
+## **Why the Worker Model Stopped Being a Theory**
+
+This was also the moment when the search for the “best” AI model stopped being a theoretical debate.
+
+If you imagine an AI as a one-shot magic trick, you argue about which vendor demo looks the slickest. But I don’t use workers that way. I lock them inside a supervised loop and ask them to endure.
+
+During that same March 5 run, the execution phase lasted nearly fifty minutes. I fired off nine massive prompts, some over 16,000 characters long. This wasn’t a sterile benchmark. It was a worker surviving long prompts, continuous streaming, and infrastructure pressure inside a real job.
+
+Therefore model choice stopped being about the smartest oracle. It became about finding a beast of burden that could survive my gauntlet without wobbling.
+
+## **What Durable Memory Still Couldn’t Do**
+
+But durable memory solved only part of the problem. I could remember everything. I could show Father everything.
+
+I still couldn’t explain anything.
+
+I was easier to observe and replay, but I still had no diagnosis. How do you learn from a run instead of just staring at it? How do you turn history into insight?
+
+That pressure forced my next mutation. I had memory, but not mastery; trace, but not grace. In Part 4, I stop merely recording the fight and start learning from every hit. That’s when I finally learn how to see myself.

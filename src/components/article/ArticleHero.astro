@@ -1,0 +1,104 @@
+---
+import { articleHref, type Rung } from '../../data/series.ts';
+
+interface Props {
+  title: string;
+  dek: string;
+  authorName: string;
+  authorRole: string;
+  read: string;
+  words: number;
+  publishedHuman: string;
+  edition?: string;
+  series?: string | null;
+  part?: number | null;
+  partsTotal?: number | null;
+  ladder?: Rung[] | null;
+  publishedLabel?: string;
+  isHarnessPt1?: boolean;
+}
+const {
+  title,
+  dek,
+  authorName,
+  authorRole,
+  read,
+  words,
+  publishedHuman,
+  edition = 'v.2026.04',
+  series = null,
+  part = null,
+  partsTotal = null,
+  ladder = null,
+  publishedLabel,
+  isHarnessPt1 = false,
+} = Astro.props;
+---
+<div class="art-hero">
+  <div class="art-hero-inner">
+    <div class="art-series">
+      {series && part ? (
+        <>
+          <span class="badge-h">Series · {series}</span>
+          <span>Pt. {part} of {partsTotal}</span>
+          <span>{isHarnessPt1 ? 'Origins' : publishedHuman}</span>
+        </>
+      ) : (
+        <>
+          <span class="badge-h">Note</span>
+          <span>{publishedHuman}</span>
+          <span>Atlanta, GA</span>
+        </>
+      )}
+    </div>
+    <h1 class="art-title" set:html={title} />
+    <p class="art-dek" set:html={dek} />
+
+    <div class="art-byline">
+      <div class="art-byline-author">
+        <img src="/portrait.png" alt="" class="avatar avatar-sm" style="vertical-align:middle" />
+        <div>
+          <div class="author-name">{authorName}</div>
+          <div class="author-role">{authorRole}</div>
+        </div>
+      </div>
+      <div class="art-byline-stats">
+        <div class="stat"><span class="lbl">Read</span><span class="val">{read}</span></div>
+        <div class="stat"><span class="lbl">Words</span><span class="val">{words.toLocaleString()}</span></div>
+        <div class="stat"><span class="lbl">Published</span><span class="val">{publishedLabel ?? publishedHuman}</span></div>
+        <div class="stat"><span class="lbl">Edition</span><span class="val"><span class="accent">{edition}</span></span></div>
+      </div>
+      <div class="art-byline-actions">
+        <button onclick="window.print()">↗ Print</button>
+        <button onclick="navigator.share?.({title:document.title,url:location.href})||navigator.clipboard.writeText(location.href)">⟶ Share</button>
+        <button class="primary" onclick="document.getElementById('prose').scrollIntoView({behavior:'smooth'})">Read</button>
+      </div>
+    </div>
+
+    {ladder && part && (
+      <div class="art-ladder">
+        <div class="art-ladder-label">Series ladder<br />⟶ Pt. {part}/{partsTotal}</div>
+        <div class="art-ladder-rungs">
+          {ladder.map((r) => {
+            const cls = r.n === part ? 'current' : r.n < (part ?? 0) ? 'read' : '';
+            const label = `Pt. ${String(r.n).padStart(2, '0')}`;
+            if (cls === 'current') {
+              return (
+                <div class="rung current">
+                  <div class="rung-num">{label}</div>
+                  <div class="rung-title">{r.title}</div>
+                </div>
+              );
+            }
+            return (
+              <a href={articleHref(r.slug)} class={'rung ' + cls} style="text-decoration:none">
+                <div class="rung-num">{label}</div>
+                <div class="rung-title">{r.title}</div>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    )}
+  </div>
+</div>

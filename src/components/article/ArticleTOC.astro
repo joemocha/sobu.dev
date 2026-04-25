@@ -1,0 +1,19 @@
+---
+interface TocItem { id: string; label: string }
+interface Props { items: TocItem[]; readTime: string }
+const { items, readTime } = Astro.props;
+---
+<aside class="art-toc">
+  <div class="art-toc-head">In this essay</div>
+  <div class="toc-progress"><div class="toc-progress-fill" id="toc-fill" style="width:0%"></div></div>
+  <ol id="toc-list">
+    {items.map((t) => (
+      <li data-target={t.id}>{t.label}</li>
+    ))}
+  </ol>
+  <div class="ink-meter">
+    <div class="meter-row"><span>Ink</span><span id="ink-pct">0%</span></div>
+    <div class="meter-bar"><div class="meter-fill" id="ink-fill" style="width:0%"></div></div>
+    <div class="meter-row" style="margin-top:10px;margin-bottom:0"><span>Time</span><span id="time-left">{readTime}</span></div>
+  </div>
+</aside>
