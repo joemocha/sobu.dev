@@ -1,0 +1,13 @@
+# Cloudflare Pages configuration for sobu.dev.
+#
+# Codifying config here means the dashboard "Build output directory" setting
+# is no longer load-bearing — `pages_build_output_dir` below wins. The build
+# command itself still comes from the dashboard (or from `npm run build`
+# when deploying via `wrangler pages deploy`).
+#
+# Local preview matching prod:   npx wrangler pages dev
+# Manual deploy without git:     npm run build && npx wrangler pages deploy
+
+name = "sobu-dev"
+compatibility_date = "2026-04-24"
+pages_build_output_dir = "./dist"
