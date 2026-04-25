@@ -3,6 +3,8 @@ import mdx from '@astrojs/mdx';
 import rehypeSlug from 'rehype-slug';
 import { visit } from 'unist-util-visit';
 
+import cloudflare from "@astrojs/cloudflare";
+
 // Adds data-pid="p1", "p2", ... to every <p> element so the article scripts
 // can highlight the centermost paragraph and anchor margin notes to it.
 function rehypeParagraphIds() {
@@ -24,11 +26,15 @@ function rehypeParagraphIds() {
 export default defineConfig({
   site: 'https://sobu.dev',
   integrations: [mdx()],
+
   markdown: {
     rehypePlugins: [rehypeSlug, rehypeParagraphIds],
   },
+
   build: {
     format: 'file',
   },
+
   trailingSlash: 'never',
+  adapter: cloudflare()
 });
