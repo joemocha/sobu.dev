@@ -4,6 +4,40 @@ date: "2025-07-09"
 summary: "Why AI Can't Taste Your Code"
 original: "https://sobu1.substack.com/p/part-15-the-spaghetti-test"
 tags: ["substack"]
+marginalia:
+  p1:
+    kind: note
+    who: "chef.notes.spaghetti"
+    body: 'I do not eat the noodle. I look at it on the wall. <span class="father">The wall has answers a stopwatch does not.</span>'
+  p2:
+    kind: gloss
+    body: "Starch gelatinization, 55–85°C. The number that does not save the dish."
+  p3:
+    kind: redaction
+    label: "redacted · the smell of over-engineering"
+    reveal: 'Three days into a "clean" service refactor, I realized I had built a <span class="father">factory of factories of factories.</span> The original code was 41 lines. The replacement was 1,308. I deleted the replacement.'
+  p4:
+    kind: note
+    who: "palate.calibration"
+    body: 'Years on the line: <span class="father">14.</span> Code reviewed: ~30,000 PRs. Stoves touched: every single one of them, hot.'
+  p5:
+    kind: gloss
+    body: 'DRY becomes WET. WET becomes <em>"who wrote this and why."</em>'
+  p6:
+    kind: note
+    who: "chef.amplification"
+    body: 'AI handles the chopping. <span class="father">You decide if the spaghetti needs another minute.</span> The knife got faster. The taste got more important.'
+  p7:
+    kind: redaction
+    label: "redacted · the ten percent"
+    reveal: 'The 10% is not "what to type." It is <span class="father">what to refuse to type.</span> The taste to stop. The taste to leave food off the plate.'
+  p15:
+    kind: note
+    who: "chef.signature"
+    body: 'Recipe follower vs chef. <span class="father">The chef knows when to leave the kitchen.</span> So do you.'
+footnotes:
+  "1": "Thirty-eight years of throwing noodles at walls. Two walls. Same answer. The wall is faster than the timer and never lies about doneness."
+  "2": "Roughly 30,000 PRs reviewed before I could smell a deadlock without reading the code. Pattern recognition compounds. It does not transfer to a model."
 ---
 
 import { Image } from 'astro:assets';
@@ -23,7 +57,7 @@ import hero from '../../assets/blog/developer-palate-series-part-1-the-spaghetti
   <figcaption>Robot chef tasting their creation</figcaption>
 </figure>
 
-Last week my 6'4" son asked me how I know when spaghetti is done. "The package says 10-12 minutes," he said. I threw a noodle at the wall. It stuck. "But mostly," I told him, "you just know."
+Last week my 6'4" son asked me how I know when spaghetti is done. "The package says 10-12 minutes," he said. I threw a noodle at the wall <span className="fn-hash" data-fn="1">wall:38yr</span>. It stuck. "But mostly," I told him, "you just know."
 
 AI can tell you the starch gelatinization temperature is 55-85°C. It can calculate the perfect cooking time based on altitude and water salinity. What it can't do is taste that moment when al dente is just right.
 
@@ -31,7 +65,7 @@ Here's the thing about code: it has flavor too. That moment when abstraction tip
 
 You've been developing this palate for years. Every debugging session, every code review, every "wait, something's wrong here" moment. You've trained on thousands of code samples - good, bad, and catastrophic.
 
-AI can follow every design pattern perfectly. It can't feel when DRY becomes WET (Write Everything Twice would be simpler). It can't feel when elegant becomes complicated. It doesn't get that tingle when a race condition lurks in seemingly innocent async code.
+AI can follow every design pattern perfectly <span className="fn-hash" data-fn="2">prs:30k</span>. It can't feel when DRY becomes WET (Write Everything Twice would be simpler). It can't feel when elegant becomes complicated. It doesn't get that tingle when a race condition lurks in seemingly innocent async code.
 
 Your ability to taste - to instantly know when code smells wrong - that's not being replaced. It's being amplified. AI handles the chopping and measuring. You decide if the spaghetti needs another minute.
 
