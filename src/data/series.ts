@@ -22,7 +22,7 @@ const HARNESS: Rung[] = [
 ];
 
 const PALATE: Rung[] = [
-  { n: 1, title: "The Spaghetti Test — Why AI Can't Taste Your Code", slug: 'part-15-the-spaghetti-test' },
+  { n: 1, title: "The Spaghetti Test — Why AI Can't Taste Your Code", slug: 'developer-palate-series-part-1-the-spaghetti-test' },
   { n: 2, title: 'From Recipe Follower to Menu Creator', slug: 'developer-palate-series-part-2-of' },
   { n: 3, title: 'The Burnt Garlic Theory of Learning', slug: 'developer-palate-series-part-3-of' },
   { n: 4, title: 'Dinner Rush Decisions', slug: 'developer-palate-series-part-4-dinner' },
@@ -35,7 +35,7 @@ const SERIES_BY_SLUG: Record<string, SeriesInfo> = {
   'part-3-when-i-stopped-being-a-script': { series: 'Agent Harness', part: 3, partsTotal: 5, ladder: HARNESS, issue: '011' },
   'part-4-how-i-learned-to-see-myself': { series: 'Agent Harness', part: 4, partsTotal: 5, ladder: HARNESS, issue: '012' },
   'part-5-drawing-the-lines-that-bind': { series: 'Agent Harness', part: 5, partsTotal: 5, ladder: HARNESS, issue: '013' },
-  'part-15-the-spaghetti-test': { series: 'Developer Palate', part: 1, partsTotal: 5, ladder: PALATE, issue: '001' },
+  'developer-palate-series-part-1-the-spaghetti-test': { series: 'Developer Palate', part: 1, partsTotal: 5, ladder: PALATE, issue: '001' },
   'developer-palate-series-part-2-of': { series: 'Developer Palate', part: 2, partsTotal: 5, ladder: PALATE, issue: '002' },
   'developer-palate-series-part-3-of': { series: 'Developer Palate', part: 3, partsTotal: 5, ladder: PALATE, issue: '003' },
   'developer-palate-series-part-4-dinner': { series: 'Developer Palate', part: 4, partsTotal: 5, ladder: PALATE, issue: '004' },
