@@ -1188,6 +1188,41 @@
   letter-spacing: 0;
   line-height: 1;
   font-weight: 500;
+  transition: color 0.25s, font-size 0.25s;
+}
+
+/* "fin" celebration state */
+.time-orb.is-complete {
+  border-color: var(--accent);
+  box-shadow: 3px 3px 0 var(--accent);
+  background: var(--paper);
+}
+.time-orb.is-complete .time-orb-fill {
+  stroke: var(--accent);
+  opacity: 1;
+}
+.time-orb.is-complete .time-orb-track { opacity: 0; }
+.time-orb.is-complete .time-orb-text {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 22px;
+  color: var(--accent);
+  font-variation-settings: "opsz" 36;
+  letter-spacing: -0.02em;
+  animation: orb-breathe 2.6s ease-in-out infinite;
+}
+.time-orb.celebrate {
+  animation: orb-celebrate 0.7s cubic-bezier(.2, 1.5, .35, 1) 1;
+}
+@keyframes orb-celebrate {
+  0%   { transform: translateY(0) scale(1); box-shadow: 3px 3px 0 var(--accent); }
+  35%  { transform: translateY(-4px) scale(1.18); box-shadow: 0 0 0 14px rgba(184, 52, 27, 0.18), 3px 3px 0 var(--accent); }
+  70%  { transform: translateY(0) scale(0.96); box-shadow: 0 0 0 4px rgba(184, 52, 27, 0.10), 3px 3px 0 var(--accent); }
+  100% { transform: translateY(0) scale(1); box-shadow: 3px 3px 0 var(--accent); }
+}
+@keyframes orb-breathe {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.78; transform: scale(0.95); }
 }
 
 /* ============================================================== */

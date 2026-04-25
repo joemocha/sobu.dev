@@ -76,14 +76,23 @@ const { totalMin } = Astro.props;
     if (inkPct) inkPct.textContent = Math.round(p * 100) + '%';
     var minsLeft = Math.max(0, Math.round(totalMin * (1 - p) * 10) / 10);
     if (timeLeft) timeLeft.textContent = minsLeft + 'm left';
+    var done = minsLeft <= 0.05;
     if (timeOrb) {
       timeOrb.style.setProperty('--p', p.toFixed(3));
       if (inlineMeter) {
         var meterPassed = inlineMeter.getBoundingClientRect().bottom < 0;
         timeOrb.classList.toggle('is-visible', meterPassed);
       }
+      if (done && !timeOrb.classList.contains('is-complete')) {
+        timeOrb.classList.add('is-complete');
+        timeOrb.classList.remove('celebrate');
+        void timeOrb.offsetWidth;
+        timeOrb.classList.add('celebrate');
+      } else if (!done && timeOrb.classList.contains('is-complete')) {
+        timeOrb.classList.remove('is-complete', 'celebrate');
+      }
     }
-    if (timeOrbText) timeOrbText.textContent = (minsLeft >= 10 ? Math.round(minsLeft) : minsLeft) + 'm';
+    if (timeOrbText) timeOrbText.textContent = done ? '⁂' : ((minsLeft >= 10 ? Math.round(minsLeft) : minsLeft) + 'm');
     if (progressPct) progressPct.textContent = Math.round(p * 100);
     if (progressBar) progressBar.style.setProperty('--w', pct);
 
