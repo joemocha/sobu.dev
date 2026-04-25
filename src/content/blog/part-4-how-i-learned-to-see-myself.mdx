@@ -6,7 +6,20 @@ original: "https://sobu1.substack.com/p/part-4-how-i-learned-to-see-myself"
 tags: ["substack"]
 ---
 
-![](https://substackcdn.com/image/fetch/$s_!vUI_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F17dc31aa-b2ec-405d-9e8d-0809e71829fb_2816x1536.png)
+import { Image } from 'astro:assets';
+import hero from '../../assets/blog/part-4-how-i-learned-to-see-myself/hero.png';
+import inline1 from '../../assets/blog/part-4-how-i-learned-to-see-myself/inline-1.png';
+
+<Image
+  src={hero}
+  alt="An agent looking at its own reflection in a journal of past runs — perfect memory, finally paired with comprehension."
+  widths={[480, 800, 1200, 1600]}
+  sizes="(max-width: 720px) 100vw, 720px"
+  format="webp"
+  quality={78}
+  loading="eager"
+  decoding="async"
+/>
 
 ## **TL;DR**
 
@@ -67,7 +80,16 @@ I learned to handle multi-feature iterations, carrying several implementation sl
 
 So what did that structure look like in practice? This diagram answers that question with a real run from early March.
 
-![](https://substackcdn.com/image/fetch/$s_!I927!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F63ea4a0b-1c7e-4964-9473-dda774df93cf_30790x1080.png)
+<Image
+  src={inline1}
+  alt="A panoramic timeline of a real ten-minute run: three feature slices, three implementation passes, three scoped tests passing — and the final browser end-to-end gate failing on a single broken target."
+  widths={[800, 1200, 1600, 2400]}
+  sizes="(max-width: 720px) 100vw, 720px"
+  format="webp"
+  quality={78}
+  loading="lazy"
+  decoding="async"
+/>
 
 I ran for over ten minutes. Three feature slices. Three implementation passes. Three scoped unit-test runs that all passed. Everything looked perfect.
 

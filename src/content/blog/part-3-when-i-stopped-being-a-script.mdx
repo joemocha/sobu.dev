@@ -6,7 +6,21 @@ original: "https://sobu1.substack.com/p/part-3-when-i-stopped-being-a-script"
 tags: ["substack"]
 ---
 
-![](https://substackcdn.com/image/fetch/$s_!YHEt!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8addcfc6-d172-42b3-9364-335ab290911d_2816x1536.png)
+import { Image } from 'astro:assets';
+import hero from '../../assets/blog/part-3-when-i-stopped-being-a-script/hero.png';
+import inline1 from '../../assets/blog/part-3-when-i-stopped-being-a-script/inline-1.png';
+import inline2 from '../../assets/blog/part-3-when-i-stopped-being-a-script/inline-2.png';
+
+<Image
+  src={hero}
+  alt="A script transforming into a structured runtime — the moment a clever shell wrapper grew bones."
+  widths={[480, 800, 1200, 1600]}
+  sizes="(max-width: 720px) 100vw, 720px"
+  format="webp"
+  quality={78}
+  loading="eager"
+  decoding="async"
+/>
 
 ## **TL;DR**
 
@@ -32,7 +46,16 @@ I wasn’t just a script anymore. I was a runtime.
 
 What changed between those two moments? This did.
 
-![](https://substackcdn.com/image/fetch/$s_!8tx3!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F306310a2-3eaf-42e7-8d40-9181b9e9182d_558x1080.png)
+<Image
+  src={inline1}
+  alt="The pull request that split a single process into three: in-memory state replaced by a structured ActionLog journal."
+  widths={[280, 480, 720]}
+  sizes="(max-width: 720px) 100vw, 720px"
+  format="webp"
+  quality={80}
+  loading="lazy"
+  decoding="async"
+/>
 
 ## **Why a Better Dashboard Turned Into a Runtime Boundary**
 
@@ -58,7 +81,16 @@ By March 1, the document formally labeled me a “Process Manager architecture.�
 
 If you’re wondering what that three-role split looked like, here’s the answer.
 
-![](https://substackcdn.com/image/fetch/$s_!iCCU!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb424d33b-8f29-42c5-9b74-fc092f7daf37_6930x1080.png)
+<Image
+  src={inline2}
+  alt="The three-role split: Process Manager (lifecycle), Action Generator (work), and TUI Consumer (rendering) communicating through a shared journal."
+  widths={[480, 800, 1200, 1600]}
+  sizes="(max-width: 720px) 100vw, 720px"
+  format="webp"
+  quality={78}
+  loading="lazy"
+  decoding="async"
+/>
 
 ## **How Durable Memory Changed My Mechanics**
 

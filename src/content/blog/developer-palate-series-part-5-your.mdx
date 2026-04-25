@@ -6,7 +6,19 @@ original: "https://sobu1.substack.com/p/developer-palate-series-part-5-your"
 tags: ["substack"]
 ---
 
-![](https://substackcdn.com/image/fetch/$s_!zqCJ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6af39f78-482e-494f-b9d1-4759070e4ee1_2048x2048.png)
+import { Image } from 'astro:assets';
+import hero from '../../assets/blog/developer-palate-series-part-5-your/hero.png';
+
+<Image
+  src={hero}
+  alt="A finished signature dish on a chef's pass — the singular plate that defines a career."
+  widths={[480, 800, 1200, 1600]}
+  sizes="(max-width: 720px) 100vw, 720px"
+  format="webp"
+  quality={78}
+  loading="eager"
+  decoding="async"
+/>
 
 Every great chef has one. The dish that defines them. Not because it's complex - because it's theirs. A perfect expression of their journey, their taste, their perspective.
 

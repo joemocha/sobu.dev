@@ -6,7 +6,19 @@ original: "https://sobu1.substack.com/p/developer-palate-series-part-2-of"
 tags: ["substack"]
 ---
 
-![](https://substackcdn.com/image/fetch/$s_!wLrg!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff4b4b991-1b28-47d2-a777-81ff7c017d43_2304x1792.jpeg)
+import { Image } from 'astro:assets';
+import hero from '../../assets/blog/developer-palate-series-part-2-of/hero.jpeg';
+
+<Image
+  src={hero}
+  alt="A line cook and a chef in the same kitchen — the cook executing a recipe, the chef composing the menu."
+  widths={[480, 800, 1200, 1600]}
+  sizes="(max-width: 720px) 100vw, 720px"
+  format="webp"
+  quality={78}
+  loading="eager"
+  decoding="async"
+/>
 
 I've noticed something about restaurants. Line cooks execute recipes. Chefs create menus. One follows instructions. The other composes experiences.
 

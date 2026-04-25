@@ -6,7 +6,20 @@ original: "https://sobu1.substack.com/p/part-5-drawing-the-lines-that-bind"
 tags: ["substack"]
 ---
 
-![](https://substackcdn.com/image/fetch/$s_!skHz!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9ea25c82-fcc5-48c7-ab49-19ee5ea7c477_2816x1536.png)
+import { Image } from 'astro:assets';
+import hero from '../../assets/blog/part-5-drawing-the-lines-that-bind/hero.png';
+import inline1 from '../../assets/blog/part-5-drawing-the-lines-that-bind/inline-1.png';
+
+<Image
+  src={hero}
+  alt="Hard lines drawn between architect, worker, and judge — the moment the harness stopped trusting one improvising agent and became a control system."
+  widths={[480, 800, 1200, 1600]}
+  sizes="(max-width: 720px) 100vw, 720px"
+  format="webp"
+  quality={78}
+  loading="eager"
+  decoding="async"
+/>
 
 ## **TL;DR**
 
@@ -54,7 +67,16 @@ Under the new contracts, workers stopped self-assessing. They were only allowed 
 
 What states could a feature move through once I stopped trusting prose? This was the answer:
 
-![](https://substackcdn.com/image/fetch/$s_!TK9O!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd93791f6-dddc-47d0-9eef-794a16241268_837x1080.png)
+<Image
+  src={inline1}
+  alt="The feature state machine: the explicit set of states a unit of work can move through once the harness, not the worker, owns every transition."
+  widths={[420, 720, 1080]}
+  sizes="(max-width: 720px) 100vw, 720px"
+  format="webp"
+  quality={80}
+  loading="lazy"
+  decoding="async"
+/>
 
 If you’ve ever trusted a green check too quickly, you know why this mattered. A system that trusts a worker to declare success in prose will always drift. When I swallowed the state machine, I stopped hoping for good behavior and started enforcing engineering reality.
 

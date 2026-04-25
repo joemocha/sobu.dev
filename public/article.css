@@ -400,6 +400,29 @@
   border-bottom-color: var(--accent);
 }
 
+/* Inline images and figures */
+.prose img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 36px 0;
+  border-radius: 2px;
+}
+.prose figure {
+  margin: 36px 0;
+}
+.prose figure img {
+  margin: 0;
+}
+.prose figcaption {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--ink-muted);
+  text-align: center;
+  margin-top: 10px;
+}
+
 /* Drop cap on first paragraph */
 .prose .drop-cap::first-letter {
   font-family: var(--serif);
@@ -491,7 +514,6 @@
 
 .art-margin {
   position: relative;
-  align-self: start;
 }
 
 /* Footnote / annotation card */

@@ -6,7 +6,19 @@ original: "https://sobu1.substack.com/p/the-first-working-harness-was-already"
 tags: ["substack"]
 ---
 
-![](https://substackcdn.com/image/fetch/$s_!axLq!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9a81ca98-4471-4d2b-a820-519e2a98098c_2752x1536.png)
+import { Image } from 'astro:assets';
+import hero from '../../assets/blog/the-first-working-harness-was-already/hero.png';
+
+<Image
+  src={hero}
+  alt="A first breath in code — the moment a task runner crossed a line and became a harness that documented itself."
+  widths={[480, 800, 1200, 1600]}
+  sizes="(max-width: 720px) 100vw, 720px"
+  format="webp"
+  quality={78}
+  loading="eager"
+  decoding="async"
+/>
 
 # TL;DR
 
