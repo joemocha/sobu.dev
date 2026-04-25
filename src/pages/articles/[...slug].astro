@@ -5,6 +5,7 @@ import ArticleMasthead from '../../components/article/ArticleMasthead.astro';
 import ArticleHero from '../../components/article/ArticleHero.astro';
 import ArticleTOC from '../../components/article/ArticleTOC.astro';
 import HarnessStrip from '../../components/article/HarnessStrip.astro';
+import Marginalia from '../../components/article/Marginalia.astro';
 import SeriesNav from '../../components/article/SeriesNav.astro';
 import ArticleScripts from '../../components/article/ArticleScripts.astro';
 import { seriesFor, fmtDate, readTime } from '../../data/series.ts';
@@ -28,6 +29,9 @@ const publishedHuman = fmtDate(post.data.date);
 // Build TOC from h2 headings discovered in the rendered MDX
 const toc = headings.filter((h) => h.depth === 2).map((h) => ({ id: h.slug, label: h.text }));
 const mastheadCenter = info.series ?? 'Field Notes';
+
+const { marginalia, footnotes } = post.data;
+const hasMarginalia = !!marginalia && Object.keys(marginalia).length > 0;
 ---
 <SiteLayout title={`${post.data.title} — sobu.dev`} description={post.data.summary} bodyTheme={true} extraCss={["/article.css"]}>
 <div class="article-page wild">
@@ -66,7 +70,9 @@ const mastheadCenter = info.series ?? 'Field Notes';
       </div>
     </article>
 
-    <HarnessStrip />
+    <HarnessStrip showFlow={hasMarginalia}>
+      {hasMarginalia && <Marginalia marginalia={marginalia} footnotes={footnotes} />}
+    </HarnessStrip>
   </div>
 
   <SeriesNav ladder={info.ladder} part={info.part} partsTotal={info.partsTotal} />

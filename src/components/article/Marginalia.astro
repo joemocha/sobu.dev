@@ -1,0 +1,58 @@
+---
+type Note = { kind: 'note'; who: string; body: string };
+type Gloss = { kind: 'gloss'; body: string };
+type Redaction = { kind: 'redaction'; label: string; reveal: string };
+type MarginaliaItem = Note | Gloss | Redaction;
+
+interface Props {
+  marginalia?: Record<string, MarginaliaItem>;
+  footnotes?: Record<string, string>;
+}
+
+const { marginalia = {}, footnotes = {} } = Astro.props;
+const entries = Object.entries(marginalia);
+---
+{entries.map(([pid, m]) => (
+  <div class="margin-anchor" data-pid={pid}>
+    {m.kind === 'note' && (
+      <div class="m-note">
+        <span class="who">◉ {m.who}</span>
+        <div set:html={m.body} />
+      </div>
+    )}
+    {m.kind === 'gloss' && <div class="m-gloss" set:html={m.body} />}
+    {m.kind === 'redaction' && (
+      <div class="m-note">
+        <span class="who">▮ {m.label}</span>
+        <div style="color:var(--ink-muted);font-style:italic">Click the redaction in the body to reveal.</div>
+      </div>
+    )}
+  </div>
+))}
+
+<script is:inline define:vars={{ marginalia, footnotes }}>
+(function () {
+  Object.keys(marginalia).forEach(function (pid) {
+    var m = marginalia[pid];
+    if (m.kind !== 'redaction') return;
+    var p = document.querySelector('[data-pid="' + pid + '"]');
+    if (!p) return;
+    var span = document.createElement('span');
+    span.className = 'redaction';
+    span.dataset.label = m.label;
+    span.addEventListener('click', function () {
+      span.classList.add('revealed');
+      span.innerHTML = '<span class="reveal-tag">▾ revealed ·</span> ' + m.reveal;
+    });
+    p.appendChild(document.createTextNode(' '));
+    p.appendChild(span);
+  });
+
+  document.querySelectorAll('.fn-hash').forEach(function (el) {
+    var n = parseInt(el.dataset.fn, 10);
+    el.title = (footnotes[n] || '');
+    el.addEventListener('mouseenter', function () { el.classList.add('active'); });
+    el.addEventListener('mouseleave', function () { el.classList.remove('active'); });
+  });
+})();
+</script>

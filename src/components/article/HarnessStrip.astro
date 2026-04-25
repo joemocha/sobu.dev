@@ -10,5 +10,9 @@ const { showFlow = false } = Astro.props;
     <div class="bar" id="progress-bar" style="--w:0%"></div>
     <div class="row" style="margin-top:8px"><span class="lbl">on</span><span class="val" id="current-pid">—</span></div>
   </div>
-  {showFlow && <div class="art-margin-flow" id="margin-flow"></div>}
+  {showFlow && (
+    <div class="art-margin-flow" id="margin-flow">
+      <slot />
+    </div>
+  )}
 </aside>
