@@ -16,6 +16,7 @@ const { totalMin } = Astro.props;
     <circle class="time-orb-fill" cx="28" cy="28" r="25"></circle>
   </svg>
   <span class="time-orb-text" id="time-orb-text">0m</span>
+  <img class="time-orb-avatar" src="/portrait.webp" alt="" aria-hidden="true" />
 </button>
 
 <script is:inline define:vars={{ totalMin }}>
@@ -92,7 +93,7 @@ const { totalMin } = Astro.props;
         timeOrb.classList.remove('is-complete', 'celebrate');
       }
     }
-    if (timeOrbText) timeOrbText.textContent = done ? '⁂' : ((minsLeft >= 10 ? Math.round(minsLeft) : minsLeft) + 'm');
+    if (timeOrbText) timeOrbText.textContent = (minsLeft >= 10 ? Math.round(minsLeft) : minsLeft) + 'm';
     if (progressPct) progressPct.textContent = Math.round(p * 100);
     if (progressBar) progressBar.style.setProperty('--w', pct);
 

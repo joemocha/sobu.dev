@@ -1188,7 +1188,19 @@
   letter-spacing: 0;
   line-height: 1;
   font-weight: 500;
-  transition: color 0.25s, font-size 0.25s;
+  transition: opacity 0.25s;
+}
+.time-orb-avatar {
+  position: absolute;
+  inset: 5px;
+  width: calc(100% - 10px);
+  height: calc(100% - 10px);
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: none;
+  z-index: 1;
+  filter: saturate(0.96) contrast(1.02);
 }
 
 /* "fin" celebration state */
@@ -1202,13 +1214,9 @@
   opacity: 1;
 }
 .time-orb.is-complete .time-orb-track { opacity: 0; }
-.time-orb.is-complete .time-orb-text {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 22px;
-  color: var(--accent);
-  font-variation-settings: "opsz" 36;
-  letter-spacing: -0.02em;
+.time-orb.is-complete .time-orb-text { display: none; }
+.time-orb.is-complete .time-orb-avatar {
+  display: block;
   animation: orb-breathe 2.6s ease-in-out infinite;
 }
 .time-orb.celebrate {
