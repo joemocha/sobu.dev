@@ -10,6 +10,14 @@ const { totalMin } = Astro.props;
   <button onclick="hideCite()">×</button>
 </div>
 
+<button type="button" class="time-orb" id="time-orb" aria-label="Scroll to top of article">
+  <svg class="time-orb-svg" viewBox="0 0 56 56" aria-hidden="true">
+    <circle class="time-orb-track" cx="28" cy="28" r="25"></circle>
+    <circle class="time-orb-fill" cx="28" cy="28" r="25"></circle>
+  </svg>
+  <span class="time-orb-text" id="time-orb-text">0m</span>
+</button>
+
 <script is:inline define:vars={{ totalMin }}>
 (function () {
   var bodyWrap = document.getElementById('body-wrap');
@@ -19,6 +27,9 @@ const { totalMin } = Astro.props;
   var inkFill = document.getElementById('ink-fill');
   var inkPct = document.getElementById('ink-pct');
   var timeLeft = document.getElementById('time-left');
+  var timeOrb = document.getElementById('time-orb');
+  var timeOrbText = document.getElementById('time-orb-text');
+  var inlineMeter = document.querySelector('.ink-meter');
   var progressPct = document.getElementById('progress-pct');
   var progressBar = document.getElementById('progress-bar');
   var currentPid = document.getElementById('current-pid');
@@ -63,7 +74,16 @@ const { totalMin } = Astro.props;
     if (tocFill) tocFill.style.width = pct;
     if (inkFill) inkFill.style.width = pct;
     if (inkPct) inkPct.textContent = Math.round(p * 100) + '%';
-    if (timeLeft) timeLeft.textContent = Math.max(0, Math.round(totalMin * (1 - p) * 10) / 10) + 'm left';
+    var minsLeft = Math.max(0, Math.round(totalMin * (1 - p) * 10) / 10);
+    if (timeLeft) timeLeft.textContent = minsLeft + 'm left';
+    if (timeOrb) {
+      timeOrb.style.setProperty('--p', p.toFixed(3));
+      if (inlineMeter) {
+        var meterPassed = inlineMeter.getBoundingClientRect().bottom < 0;
+        timeOrb.classList.toggle('is-visible', meterPassed);
+      }
+    }
+    if (timeOrbText) timeOrbText.textContent = (minsLeft >= 10 ? Math.round(minsLeft) : minsLeft) + 'm';
     if (progressPct) progressPct.textContent = Math.round(p * 100);
     if (progressBar) progressBar.style.setProperty('--w', pct);
 
@@ -155,5 +175,11 @@ const { totalMin } = Astro.props;
   tick();
   setTimeout(recomputeOffsets, 250);
   setTimeout(recomputeOffsets, 800);
+
+  if (timeOrb) {
+    timeOrb.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
 })();
 </script>

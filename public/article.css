@@ -1124,9 +1124,77 @@
 }
 
 /* ============================================================== */
+/*  Floating time-left orb (mobile only, shown via JS)              */
+/* ============================================================== */
+.time-orb {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  box-shadow: 3px 3px 0 var(--rule);
+  z-index: 55;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink);
+  cursor: pointer;
+  padding: 0;
+  opacity: 0;
+  transform: translateY(8px) scale(0.92);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.15s;
+  --p: 0;
+  --circ: 157;
+}
+.time-orb.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+.time-orb:active { transform: translate(1px, 1px) scale(0.97); box-shadow: 1px 1px 0 var(--rule); }
+.time-orb-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+.time-orb-track {
+  fill: none;
+  stroke: var(--rule);
+  stroke-width: 3;
+  opacity: 0.22;
+}
+.time-orb-fill {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: var(--circ);
+  stroke-dashoffset: calc(var(--circ) * (1 - var(--p)));
+  transition: stroke-dashoffset 0.18s linear;
+}
+.time-orb-text {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 1;
+  font-weight: 500;
+}
+
+/* ============================================================== */
 /*  PHONE — 640px and below                                         */
 /* ============================================================== */
 @media (max-width: 640px) {
+  .time-orb { display: flex; }
   .art-masthead { padding: 10px 0 8px; }
   .art-masthead-inner {
     padding: 0 16px;
