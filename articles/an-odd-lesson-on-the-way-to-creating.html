@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>An odd lesson on the way to creating my presentation — sobu.dev</title>
+<meta name="description" content="Yesterday&#x27;s truths might not apply today" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css" />
+<link rel="stylesheet" href="../article.css" />
+</head>
+<body data-theme="editorial">
+
+<div class="article-page wild">
+
+<div class="art-masthead">
+  <div class="art-masthead-inner">
+    <div class="left vol"><a href="../index.html">← sobu.dev</a> &nbsp;·&nbsp; Vol. I · Issue 008</div>
+    <div class="center">Field Notes</div>
+    <div class="right" style="display:flex;justify-content:flex-end;align-items:center;gap:14px">
+      <span id="father-status" style="color:var(--ink-muted);font-family:var(--mono);font-size:10px;letter-spacing:0.14em">
+        <span style="display:inline-block;width:6px;height:6px;border-radius:3px;background:var(--ink-muted);margin-right:6px;vertical-align:1px"></span>Father · asleep
+      </span>
+      <a href="../index.html#writing">All writing</a>
+    </div>
+  </div>
+</div>
+
+<div class="art-hero">
+  <div class="art-hero-inner">
+    <div class="art-series"><span class="badge-h">Note</span><span>Oct 19, 2025</span><span>Atlanta, GA</span></div>
+    <h1 class="art-title">An odd lesson on the way to creating my presentation</h1>
+    <p class="art-dek">Yesterday&#x27;s truths might not apply today</p>
+    <div class="art-byline">
+      <div class="art-byline-author">
+        <img src="../portrait.png" alt="" class="avatar avatar-sm" style="vertical-align:middle" />
+        <div>
+          <div class="author-name">Samuel Obukwelu</div>
+          <div class="author-role">Builder, operator, engineer. Atlanta.</div>
+        </div>
+      </div>
+      <div class="art-byline-stats">
+        <div class="stat"><span class="lbl">Read</span><span class="val">4 min</span></div>
+        <div class="stat"><span class="lbl">Words</span><span class="val">820</span></div>
+        <div class="stat"><span class="lbl">Published</span><span class="val">Oct 19, 2025</span></div>
+        <div class="stat"><span class="lbl">Edition</span><span class="val"><span class="accent">v.2026.04</span></span></div>
+      </div>
+      <div class="art-byline-actions">
+        <button onclick="window.print()" title="Print">↗ Print</button>
+        <button onclick="navigator.share?.({title:document.title,url:location.href})||navigator.clipboard.writeText(location.href)" title="Share">⟶ Share</button>
+        <button class="primary" onclick="document.querySelector('.prose').scrollIntoView({behavior:'smooth'})">Read</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<div class="art-body-wrap" id="body-wrap">
+  <div class="art-grid-wild">
+    <aside class="art-toc">
+      <div class="art-toc-head">In this essay</div>
+      <div class="toc-progress"><div class="toc-progress-fill" id="toc-fill" style="width:0%"></div></div>
+      <ol id="toc-list"><li onclick="document.getElementById('the-real-lesson').scrollIntoView({behavior:'smooth',block:'start'})">The Real Lesson</li></ol>
+      <div class="ink-meter">
+        <div class="meter-row"><span>Ink</span><span id="ink-pct">0%</span></div>
+        <div class="meter-bar"><div class="meter-fill" id="ink-fill" style="width:0%"></div></div>
+        <div class="meter-row" style="margin-top:10px;margin-bottom:0"><span>Time</span><span id="time-left">4 min</span></div>
+      </div>
+    </aside>
+
+    <article id="prose" class="prose wild">
+      <p data-pid="p1">As a software engineer, we live in a time where we are inundated with a great deal of relevant information, some would say “good to know” information, which can be dizzying. At the same time, much of this “good to know” information, have a half-life of 3 to 6 months.</p>
+<p data-pid="p2">I say this, as someone who’s on the receiving end of this rapid and percussive release of agents, LLMs, development frameworks, etc by fellow developers and AI companies. You barely have time to experiment, let alone go in depth with any of them. <strong>Therefore</strong>, our strategies need to evolve as fast as our tools.</p>
+<p data-pid="p3">This brings me to sharing my learnings on creating my Oct 23rd /dev/color presentation on <strong>AI: Code, Skills, and Strategy</strong>. I love analogies and my idea was to prove why developers should <em>Be the Fox, not the Hedgehog</em> - where the fox explores many ideas shallowly vs the hedgehog’s deep focus on one idea [1]. <strong>But</strong> my own experiment proved me wrong, and that failure taught me something more valuable.</p>
+<p data-pid="p4">Working on my presentation, I came up with a rate-limiter <em>mini-project</em> to illustrate my main point of <strong>Be the Fox, not the Hedgehog</strong>. I used the latest version of Claude Code with Opus 4.1 for planning and the latest anthropic model, Haiku 4.5 for exploration and plan execution.</p>
+<p data-pid="p5">The Fox strategy is <a href="https://raw.githubusercontent.com/humanlayer/humanlayer/refs/heads/main/.claude/commands/research_codebase.md">explore</a>, <a href="https://raw.githubusercontent.com/humanlayer/humanlayer/refs/heads/main/.claude/commands/create_plan_generic.md">plan</a>, then <a href="https://raw.githubusercontent.com/humanlayer/humanlayer/refs/heads/main/.claude/commands/implement_plan.md">execute</a> (EPE).</p>
+<p data-pid="p6">The Hedgehog strategy is to plan then execute.</p>
+<p data-pid="p7">To keep things moving fast, I created 2 worktrees (fox and hedgehog) and had them use the project <a href="https://gist.githubusercontent.com/joemocha/caa36fd39a168cbb4002ba4489c2b2f2/raw/ef9f6bb5ea9360f25c616fdfebfbcbf76508f03e/README.md">README.md</a> as the specifications to build from.</p>
+<p data-pid="p8">I instructed Claude Code to follow the above strategies and I expected the Fox strategy to produce a better version of the project. <strong>But</strong> the Hedgehog won. My experiment to prove “always explore first” had just disproved it. This left me confused, but also curious.</p>
+<p data-pid="p9">The rate-limiter project is a simple 2 tier project (front and back ends) where we use BunJS, HTML, vanilla javascript + D3 for visualizations to demonstrate how different rate limiting algorithms work. We start with token and leaky buckets and then, later, we add fixed window, sliding window, and sliding logs. I made this a two step process because my experience has been that exploring the codebase before you create a plan is always better than starting with a plan.</p>
+<p data-pid="p10">Why did the Hedgehog win? I couldn’t sit at my desk any longer, for I was lost. I took a walk to clear my head enough to let in new ideas and asked myself the following:</p>
+<ol>
+<li>
+<p data-pid="p11">Does the specification size matter?</p>
+</li>
+<li>
+<p data-pid="p12">Are there conditions where you no longer need to prompt it to explore the codebase before planning and execution?</p>
+</li>
+<li>
+<p data-pid="p13">Has Claude Code gotten good enough that prompting to explore the codebase is unnecessary?</p>
+</li>
+<li>
+<p data-pid="p14">Did the specification leave little to no room for ambiguity?</p>
+</li>
+<li>
+<p data-pid="p15">Did the fox or hedgehog use subagents in significant way that made a difference?</p>
+</li>
+</ol>
+<p data-pid="p16">I’ve seen the evolution of Claude Code over the last 6 months and what it has been able to do is magical. <strong>Therefore</strong>, there’s a real chance that it has improved enough that exploration that was once essential has become unnecessary overhead for simple tasks. My assumptions were based on yesterday’s AI capabilities, but I was testing against today’s.</p>
+<p data-pid="p17"><strong>Therefore</strong>, I decided to test the boundaries, was this about task complexity or had AI fundamentally changed? I made the specifications more challenging by adding the following requirements:</p>
+<ol>
+<li>
+<p data-pid="p18">WebSocket server</p>
+</li>
+<li>
+<p data-pid="p19">Web Workers</p>
+</li>
+<li>
+<p data-pid="p20">2 additional UI interfaces</p>
+</li>
+<li>
+<p data-pid="p21">visualization complexity where you need to create a full rendering engine</p>
+</li>
+<li>
+<p data-pid="p22">and more</p>
+</li>
+</ol>
+<p data-pid="p23">The specifications grew from 620 lines to 1123 lines. And I ran my experiment again. Both Fox and Hedgehog produced working code for the two required algos (leaky and token buckets) <strong>but</strong> the Hedgehog failed to produce working code when adding the 3 optional algos and integrating them into the existing UI. Fox won.</p>
+<h2 id="the-real-lesson"><span class="h-num">01.</span>The Real Lesson</h2>
+<p data-pid="p24">Here’s the paradox I discovered: To handle information coming at light speed, you must be Fox-like in choosing when NOT to be a Fox.</p>
+<ul>
+<li>
+<p data-pid="p25">Simple, well-specified tasks? Skip exploration, AI has made it unnecessary overhead</p>
+</li>
+<li>
+<p data-pid="p26">Complex, ambiguous problems? Fox strategy still wins</p>
+</li>
+<li>
+<p data-pid="p27"><strong>But</strong> the boundary between ‘simple’ and ‘complex’ shifts every few months as AI evolves</p>
+</li>
+</ul>
+<p data-pid="p28"><strong>Therefore</strong>, the meta-skill isn’t choosing Fox or Hedgehog, it’s constantly recalibrating which strategy fits as AI capabilities evolve. Six months ago, my rate-limiter project would have required exploration. Today, it doesn’t. Six months from now? Even my “complex” version might not.</p>
+<p data-pid="p29">The lesson isn’t “Be the Fox.” It’s “Be Fox-like about being a Fox”, constantly exploring whether you still need to explore. Because in this landscape, yesterday’s essential step becomes tomorrow’s wasted motion.</p>
+<p data-pid="p30">Links</p>
+<ol>
+<li><a href="https://www.militarystrategymagazine.com/article/the-fox-and-the-hedgehog-contrasting-approaches-to-anticipating-the-environment/">The Fox and the Hedgehog: Contrasting Approaches to Anticipating the Environment</a></li>
+</ol>
+      <div class="art-end">
+        <span class="glyph">⁂</span>
+        <div class="end-text"><strong>Standalone note</strong> · Published Oct 19, 2025</div>
+      </div>
+    </article>
+
+    <aside class="art-margin">
+      <div class="harness-strip">
+        <div class="father-pip" id="harness-pip">Father · asleep</div>
+        <div class="row"><span class="lbl">visitor</span><span class="val">#<span class="accent" id="visitor-num">1,481</span></span></div>
+        <div class="row"><span class="lbl">progress</span><span class="val"><span id="progress-pct">0</span>%</span></div>
+        <div class="bar" id="progress-bar" style="--w:0%"></div>
+        <div class="row" style="margin-top:8px"><span class="lbl">on</span><span class="val" id="current-pid">—</span></div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="art-foot">
+    <div class="art-foot-card prev"><div class="label">⟵ Back to writing</div><div class="t" style="color:var(--ink-muted)">All essays.</div><div class="meta"><a href="../index.html#writing" style="color:var(--ink)">← sobu.dev / Writing</a></div></div>
+    <div class="art-foot-card"><div class="label">Read more ⟶</div><div class="t">The Agent Harness <em>series</em></div><div class="meta">5 parts · the harness narrates itself</div></div>
+  </div>
+</div>
+
+</div>
+
+<script>
+(function () {
+  var bodyWrap = document.getElementById('body-wrap');
+  var prose = document.getElementById('prose');
+  var tocFill = document.getElementById('toc-fill');
+  var inkFill = document.getElementById('ink-fill');
+  var inkPct = document.getElementById('ink-pct');
+  var timeLeft = document.getElementById('time-left');
+  var progressPct = document.getElementById('progress-pct');
+  var progressBar = document.getElementById('progress-bar');
+  var currentPid = document.getElementById('current-pid');
+  var visitorNum = document.getElementById('visitor-num');
+  var harnessPip = document.getElementById('harness-pip');
+  var fatherStatus = document.getElementById('father-status');
+  var tocItems = document.querySelectorAll('#toc-list li');
+  var sections = document.querySelectorAll('.prose h2[id]');
+  var paras = document.querySelectorAll('.prose [data-pid]');
+  var totalRead = '4 min';
+  var totalMin = parseInt(totalRead) || 9;
+
+  function scrollProgress() {
+    var rect = bodyWrap.getBoundingClientRect();
+    var total = rect.height - window.innerHeight;
+    var passed = -rect.top;
+    return total > 0 ? Math.max(0, Math.min(1, passed / total)) : 0;
+  }
+
+  function updateActiveSection() {
+    var current = null;
+    sections.forEach(function (s) {
+      if (s.getBoundingClientRect().top < 120) current = s.id;
+    });
+    tocItems.forEach(function (li, i) {
+      var s = sections[i];
+      if (!s) return;
+      var passed = current && Array.prototype.indexOf.call(sections, document.getElementById(current)) > i;
+      li.className = (s.id === current ? 'active ' : '') + (passed ? 'read' : '');
+    });
+  }
+
+  function updateCenterPara() {
+    var mid = window.innerHeight * 0.5;
+    var best = null, bestDist = Infinity;
+    paras.forEach(function (p) {
+      var r = p.getBoundingClientRect();
+      var c = r.top + r.height / 2;
+      var d = Math.abs(c - mid);
+      if (d < bestDist) { bestDist = d; best = p.dataset.pid; }
+    });
+    if (best && currentPid) currentPid.textContent = best;
+  }
+
+  function tick() {
+    var p = scrollProgress();
+    var pct = (p * 100).toFixed(1) + '%';
+    if (tocFill) tocFill.style.width = pct;
+    if (inkFill) inkFill.style.width = pct;
+    if (inkPct) inkPct.textContent = Math.round(p * 100) + '%';
+    if (timeLeft) timeLeft.textContent = (Math.max(0, Math.round(totalMin * (1 - p) * 10) / 10)) + 'm left';
+    if (progressPct) progressPct.textContent = Math.round(p * 100);
+    if (progressBar) progressBar.style.setProperty('--w', pct);
+
+    var status = p < 0.35 ? 'asleep' : p < 0.85 ? 'just woke up' : 'writing';
+    var color = status === 'asleep' ? 'var(--ink-muted)' : 'var(--accent)';
+    if (harnessPip) {
+      harnessPip.textContent = 'Father · ' + status;
+      harnessPip.style.color = 'var(--harness-accent)';
+    }
+    if (fatherStatus) {
+      fatherStatus.style.color = color;
+      fatherStatus.firstElementChild.style.background = color;
+      fatherStatus.lastChild.textContent = 'Father · ' + status;
+    }
+    updateActiveSection();
+    updateCenterPara();
+  }
+
+  var visitorBase = 1481;
+  setInterval(function () {
+    visitorBase += 1;
+    if (visitorNum) visitorNum.textContent = visitorBase.toLocaleString();
+  }, 13000);
+
+  window.addEventListener('scroll', tick, { passive: true });
+  window.addEventListener('resize', tick);
+  tick();
+})();
+</script>
+
+</body>
+</html>

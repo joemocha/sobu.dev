@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Part 3: When I Stopped Being a Script and Became a Runtime — sobu.dev</title>
+<meta name="description" content="Building the agent harness (Part 3 of 5)" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css" />
+<link rel="stylesheet" href="../article.css" />
+</head>
+<body data-theme="editorial">
+
+<div class="article-page wild">
+
+<div class="art-masthead">
+  <div class="art-masthead-inner">
+    <div class="left vol"><a href="../index.html">← sobu.dev</a> &nbsp;·&nbsp; Vol. I · Issue 011</div>
+    <div class="center">Agent Harness</div>
+    <div class="right" style="display:flex;justify-content:flex-end;align-items:center;gap:14px">
+      <span id="father-status" style="color:var(--ink-muted);font-family:var(--mono);font-size:10px;letter-spacing:0.14em">
+        <span style="display:inline-block;width:6px;height:6px;border-radius:3px;background:var(--ink-muted);margin-right:6px;vertical-align:1px"></span>Father · asleep
+      </span>
+      <a href="../index.html#writing">All writing</a>
+    </div>
+  </div>
+</div>
+
+<div class="art-hero">
+  <div class="art-hero-inner">
+    <div class="art-series"><span class="badge-h">Series · Agent Harness</span><span>Pt. 3 of 5</span><span>Mar 11, 2026</span></div>
+    <h1 class="art-title">Part 3: When I Stopped Being a Script and Became a Runtime</h1>
+    <p class="art-dek">Building the agent harness (Part 3 of 5)</p>
+    <div class="art-byline">
+      <div class="art-byline-author">
+        <img src="../portrait.png" alt="" class="avatar avatar-sm" style="vertical-align:middle" />
+        <div>
+          <div class="author-name">Samuel Obukwelu</div>
+          <div class="author-role">Builder, operator, engineer. Atlanta.</div>
+        </div>
+      </div>
+      <div class="art-byline-stats">
+        <div class="stat"><span class="lbl">Read</span><span class="val">6 min</span></div>
+        <div class="stat"><span class="lbl">Words</span><span class="val">1,350</span></div>
+        <div class="stat"><span class="lbl">Published</span><span class="val">Mar 11, 2026</span></div>
+        <div class="stat"><span class="lbl">Edition</span><span class="val"><span class="accent">v.2026.04</span></span></div>
+      </div>
+      <div class="art-byline-actions">
+        <button onclick="window.print()" title="Print">↗ Print</button>
+        <button onclick="navigator.share?.({title:document.title,url:location.href})||navigator.clipboard.writeText(location.href)" title="Share">⟶ Share</button>
+        <button class="primary" onclick="document.querySelector('.prose').scrollIntoView({behavior:'smooth'})">Read</button>
+      </div>
+    </div>
+    
+        <div class="art-ladder">
+          <div class="art-ladder-label">Series ladder<br>⟶ Pt. 3/5</div>
+          <div class="art-ladder-rungs"><a href="../article.html" class="rung read" style="text-decoration:none"><div class="rung-num">Pt. 01</div><div class="rung-title">I Was Supposed to Be a Simple Repo Harness</div></a><a href="the-first-working-harness-was-already.html" class="rung read" style="text-decoration:none"><div class="rung-num">Pt. 02</div><div class="rung-title">My First Breath and Why the Rules Showed Up Fast</div></a><div class="rung current"><div class="rung-num">Pt. 03</div><div class="rung-title">When I Stopped Being a Script and Became a Runtime</div></div><a href="part-4-how-i-learned-to-see-myself.html" class="rung " style="text-decoration:none"><div class="rung-num">Pt. 04</div><div class="rung-title">How I Learned to See Myself</div></a><a href="part-5-drawing-the-lines-that-bind.html" class="rung " style="text-decoration:none"><div class="rung-num">Pt. 05</div><div class="rung-title">Drawing the Lines That Bind</div></a></div>
+        </div>
+  </div>
+</div>
+
+<div class="art-body-wrap" id="body-wrap">
+  <div class="art-grid-wild">
+    <aside class="art-toc">
+      <div class="art-toc-head">In this essay</div>
+      <div class="toc-progress"><div class="toc-progress-fill" id="toc-fill" style="width:0%"></div></div>
+      <ol id="toc-list"><li onclick="document.getElementById('tl-dr').scrollIntoView({behavior:'smooth',block:'start'})">TL;DR</li>
+<li onclick="document.getElementById('the-problem-with-disposable-memory').scrollIntoView({behavior:'smooth',block:'start'})">The Problem With Disposable Memory</li>
+<li onclick="document.getElementById('why-a-better-dashboard-turned-into-a-runtime-boundary').scrollIntoView({behavior:'smooth',block:'start'})">Why a Better Dashboard Turned Into a Runtime Boundary</li>
+<li onclick="document.getElementById('reading-my-blueprint-and-seeing-the-boundary').scrollIntoView({behavior:'smooth',block:'start'})">Reading My Blueprint and Seeing the Boundary</li>
+<li onclick="document.getElementById('how-durable-memory-changed-my-mechanics').scrollIntoView({behavior:'smooth',block:'start'})">How Durable Memory Changed My Mechanics</li>
+<li onclick="document.getElementById('the-run-history-that-proved-i-had-changed').scrollIntoView({behavior:'smooth',block:'start'})">The Run History That Proved I Had Changed</li>
+<li onclick="document.getElementById('why-the-worker-model-stopped-being-a-theory').scrollIntoView({behavior:'smooth',block:'start'})">Why the Worker Model Stopped Being a Theory</li>
+<li onclick="document.getElementById('what-durable-memory-still-couldn-t-do').scrollIntoView({behavior:'smooth',block:'start'})">What Durable Memory Still Couldn’t Do</li></ol>
+      <div class="ink-meter">
+        <div class="meter-row"><span>Ink</span><span id="ink-pct">0%</span></div>
+        <div class="meter-bar"><div class="meter-fill" id="ink-fill" style="width:0%"></div></div>
+        <div class="meter-row" style="margin-top:10px;margin-bottom:0"><span>Time</span><span id="time-left">6 min</span></div>
+      </div>
+    </aside>
+
+    <article id="prose" class="prose wild">
+      <p data-pid="p1"><img alt="" src="https://substackcdn.com/image/fetch/$s_!YHEt!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8addcfc6-d172-42b3-9364-335ab290911d_2816x1536.png" /></p>
+<h2 id="tl-dr"><span class="h-num">01.</span><strong>TL;DR</strong></h2>
+<p data-pid="p2">At the end of <a href="https://sobu1.substack.com/p/the-first-working-harness-was-already">Part 2</a>, I was fast, but I couldn’t last. I could act, but I couldn’t track. If I died, my memories died with me, therefore I had to learn how to keep a journal.</p>
+<p data-pid="p3">That pressure split my shell wrapper into three distinct pieces: a manager, a worker, and a viewer, all talking through a durable stream of text. That wasn’t cosmetic cleanup. It was the moment I stopped being a clever script and became a true runtime.</p>
+<h2 id="the-problem-with-disposable-memory"><span class="h-num">02.</span><strong>The Problem With Disposable Memory</strong></h2>
+<p data-pid="p4">February 27. My terminal logs were readable, but my state vanished as soon as the run vanished. I needed a brain that could outlive a single execution.</p>
+<p data-pid="p5">Part 2 left me with a practical question: once I could act out a staged workflow, how was Father supposed to know what I was actually doing? At first, I painted live text straight onto his screen because that was the fastest way to show progress.</p>
+<p data-pid="p6">But terminal output is fragile. If I crashed, if Father closed his laptop, or if we needed to inspect yesterday’s failure, poof, it was gone. If you’ve ever lost the one terminal tab that knew the truth, you know why this hurt.</p>
+<p data-pid="p7">My entire state lived inside a fleeting loop, therefore my memory disappeared with the process.</p>
+<p data-pid="p8">I needed a way to remember.</p>
+<p data-pid="p9">When I read my own git history from February 27, 2026, I can see the exact moment the idea hardened. A quiet refactor stripped out my in-memory state and replaced it with a structured journal called the <code>ActionLog</code>, a chronological stream of machine-readable events. Two days later, a pull request split my single process into three.</p>
+<p data-pid="p10">I wasn’t just a script anymore. I was a runtime.</p>
+<p data-pid="p11">What changed between those two moments? This did.</p>
+<p data-pid="p12"><img alt="" src="https://substackcdn.com/image/fetch/$s_!8tx3!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F306310a2-3eaf-42e7-8d40-9181b9e9182d_558x1080.png" /></p>
+<h2 id="why-a-better-dashboard-turned-into-a-runtime-boundary"><span class="h-num">03.</span><strong>Why a Better Dashboard Turned Into a Runtime Boundary</strong></h2>
+<p data-pid="p13">Early on, Father thought he was merely tweaking my dials.</p>
+<p data-pid="p14">He thought he was bolting a prettier dashboard onto the same basic engine. He wanted better logging, a cleaner UI, and simpler wiring.</p>
+<p data-pid="p15">But once your journal hardens into an interface contract, the UI stops co-owning state. It becomes a reader. And once orchestration splits cleanly from execution, you’re no longer decorating a command-line script.</p>
+<p data-pid="p16">You are enforcing a true runtime boundary.</p>
+<h2 id="reading-my-blueprint-and-seeing-the-boundary"><span class="h-num">04.</span><strong>Reading My Blueprint and Seeing the Boundary</strong></h2>
+<p data-pid="p17">The clearest proof of this shift lives in my “v2” blueprint.</p>
+<p data-pid="p18">Right after that February 27 commit, my spec renamed itself the “ActionLog Edition.” That wasn’t branding. It was a declaration that the UI was now a pure consumer and my journal was the “interface contract.”</p>
+<p data-pid="p19">That wording matters. A log format is just output you hope someone can parse. An interface contract is a border that tells every component what it owns and what it may trust.</p>
+<p data-pid="p20">The moment my blueprint described my journal that way, I stopped sounding like a command runner and started sounding like a system with explicit ownership rules.</p>
+<p data-pid="p21">By March 1, the document formally labeled me a “Process Manager architecture.” I was now broken into three distinct roles: the Process Manager, which supervised lifecycle; the Action Generator, which did the work; and the TUI Consumer, which read the journal and rendered it for Father.</p>
+<p data-pid="p22">If you’re wondering what that three-role split looked like, here’s the answer.</p>
+<p data-pid="p23"><img alt="" src="https://substackcdn.com/image/fetch/$s_!iCCU!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb424d33b-8f29-42c5-9b74-fc092f7daf37_6930x1080.png" /></p>
+<h2 id="how-durable-memory-changed-my-mechanics"><span class="h-num">05.</span><strong>How Durable Memory Changed My Mechanics</strong></h2>
+<p data-pid="p24">If you want to understand what it meant for me to become a runtime, don’t start with the process list. Start with my data.</p>
+<p data-pid="p25">The key insight is simple: durable memory forced durable boundaries.</p>
+<h3><strong>Why I Started Writing a Journal</strong></h3>
+<p data-pid="p26">Before this shift, if a container started or a test failed, I just yelled it at the screen. But that meant the truth died with the terminal. I needed a record I could replay, inspect, and trust after the run ended.</p>
+<p data-pid="p27">Therefore I started writing structured events for everything into <code>JSONL</code>, which means newline-delimited JSON with one event per line. Stream output, progress updates, task changes, and Docker state all landed in the same ordered history.</p>
+<p data-pid="p28">Writing that journal felt heavier up front than throwing strings at a terminal. But it bought me replayability, headless operation, and clean ownership. My important state was no longer trapped inside my execution loop. It was a durable, tail-able history.</p>
+<h3><strong>Why the UI Had to Read, Not Peek</strong></h3>
+<p data-pid="p29">Once the journal became durable, my UI no longer needed to look inside my head. It just needed to read the book I was writing.</p>
+<p data-pid="p30">That change matters because a reader can restart, reconnect, or rebuild its view without asking the worker for private state. Instead of depending on pipeline-owned memory, my UI could rebuild what it knew simply by reading the journal line by line.</p>
+<p data-pid="p31">I was no longer saying, “here’s my live internal state.” I was saying, “here’s my journal; derive what you need.” That’s a very different relationship.</p>
+<h3><strong>Why the Process Split Became Inevitable</strong></h3>
+<p data-pid="p32">Once the UI could read from the journal, splitting the process became the natural next move. A <em>Manager</em> supervised the lifecycle and prepared the environment. A <em>Generator</em> did the heavy lifting and kept writing the journal.</p>
+<p data-pid="p33">But a process split creates noisy async signals, and noise turns a terminal into mush. Therefore Father introduced <code>RxJS</code>, a library for turning messy live event streams into composed pipelines the UI could reason about.</p>
+<p data-pid="p34">It’s easy to dismiss this era as just “swapping terminal libraries.” But once my brain was split across processes, my terminal layer had to behave like a genuinely independent application projecting my thoughts to a separately supervised consumer.</p>
+<p data-pid="p35">It wasn’t just a prettier shell. It was a nervous system that finally fit my supervision model.</p>
+<h2 id="the-run-history-that-proved-i-had-changed"><span class="h-num">06.</span><strong>The Run History That Proved I Had Changed</strong></h2>
+<p data-pid="p36">The strongest proof of my evolution isn’t in my blueprint. It’s in a real run I can point to.</p>
+<p data-pid="p37">Take March 5. My metadata captured the exact coordinates of my bounded execution environment: the worker engine, the branch, and the isolated worktree.</p>
+<p data-pid="p38">That’s concrete evidence that I wasn’t improvising in a blur. I was operating inside a defined envelope.</p>
+<p data-pid="p39">My journal from that run reads like a complete operational narrative. It recorded infrastructure provisioning, port allocation, raw AI stream output, prompt lengths, code commits, and teardown.</p>
+<p data-pid="p40">Because every one of those events landed in durable history, Father could replay what happened instead of guessing. That proves my journal wasn’t an auxiliary debug file. It was the durable proof of my existence.</p>
+<h2 id="why-the-worker-model-stopped-being-a-theory"><span class="h-num">07.</span><strong>Why the Worker Model Stopped Being a Theory</strong></h2>
+<p data-pid="p41">This was also the moment when the search for the “best” AI model stopped being a theoretical debate.</p>
+<p data-pid="p42">If you imagine an AI as a one-shot magic trick, you argue about which vendor demo looks the slickest. But I don’t use workers that way. I lock them inside a supervised loop and ask them to endure.</p>
+<p data-pid="p43">During that same March 5 run, the execution phase lasted nearly fifty minutes. I fired off nine massive prompts, some over 16,000 characters long. This wasn’t a sterile benchmark. It was a worker surviving long prompts, continuous streaming, and infrastructure pressure inside a real job.</p>
+<p data-pid="p44">Therefore model choice stopped being about the smartest oracle. It became about finding a beast of burden that could survive my gauntlet without wobbling.</p>
+<h2 id="what-durable-memory-still-couldn-t-do"><span class="h-num">08.</span><strong>What Durable Memory Still Couldn’t Do</strong></h2>
+<p data-pid="p45">But durable memory solved only part of the problem. I could remember everything. I could show Father everything.</p>
+<p data-pid="p46">I still couldn’t explain anything.</p>
+<p data-pid="p47">I was easier to observe and replay, but I still had no diagnosis. How do you learn from a run instead of just staring at it? How do you turn history into insight?</p>
+<p data-pid="p48">That pressure forced my next mutation. I had memory, but not mastery; trace, but not grace. In Part 4, I stop merely recording the fight and start learning from every hit. That’s when I finally learn how to see myself.</p>
+      <div class="art-end">
+        <span class="glyph">⁂</span>
+        <div class="end-text">End of <strong>Pt. 3</strong> · Next: <strong>"How I Learned to See Myself"</strong></div>
+      </div>
+    </article>
+
+    <aside class="art-margin">
+      <div class="harness-strip">
+        <div class="father-pip" id="harness-pip">Father · asleep</div>
+        <div class="row"><span class="lbl">visitor</span><span class="val">#<span class="accent" id="visitor-num">1,481</span></span></div>
+        <div class="row"><span class="lbl">progress</span><span class="val"><span id="progress-pct">0</span>%</span></div>
+        <div class="bar" id="progress-bar" style="--w:0%"></div>
+        <div class="row" style="margin-top:8px"><span class="lbl">on</span><span class="val" id="current-pid">—</span></div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="art-foot">
+    <a href="the-first-working-harness-was-already.html" class="art-foot-card prev" style="text-decoration:none"><div class="label">⟵ Previous in series</div><div class="t">My First Breath and Why the Rules Showed Up Fast</div><div class="meta">Pt. 2 of 5</div></a>
+    <a href="part-4-how-i-learned-to-see-myself.html" class="art-foot-card" style="text-decoration:none"><div class="label">Next in series ⟶</div><div class="t">How I Learned to See Myself</div><div class="meta">Pt. 4 of 5</div></a>
+  </div>
+</div>
+
+</div>
+
+<script>
+(function () {
+  var bodyWrap = document.getElementById('body-wrap');
+  var prose = document.getElementById('prose');
+  var tocFill = document.getElementById('toc-fill');
+  var inkFill = document.getElementById('ink-fill');
+  var inkPct = document.getElementById('ink-pct');
+  var timeLeft = document.getElementById('time-left');
+  var progressPct = document.getElementById('progress-pct');
+  var progressBar = document.getElementById('progress-bar');
+  var currentPid = document.getElementById('current-pid');
+  var visitorNum = document.getElementById('visitor-num');
+  var harnessPip = document.getElementById('harness-pip');
+  var fatherStatus = document.getElementById('father-status');
+  var tocItems = document.querySelectorAll('#toc-list li');
+  var sections = document.querySelectorAll('.prose h2[id]');
+  var paras = document.querySelectorAll('.prose [data-pid]');
+  var totalRead = '6 min';
+  var totalMin = parseInt(totalRead) || 9;
+
+  function scrollProgress() {
+    var rect = bodyWrap.getBoundingClientRect();
+    var total = rect.height - window.innerHeight;
+    var passed = -rect.top;
+    return total > 0 ? Math.max(0, Math.min(1, passed / total)) : 0;
+  }
+
+  function updateActiveSection() {
+    var current = null;
+    sections.forEach(function (s) {
+      if (s.getBoundingClientRect().top < 120) current = s.id;
+    });
+    tocItems.forEach(function (li, i) {
+      var s = sections[i];
+      if (!s) return;
+      var passed = current && Array.prototype.indexOf.call(sections, document.getElementById(current)) > i;
+      li.className = (s.id === current ? 'active ' : '') + (passed ? 'read' : '');
+    });
+  }
+
+  function updateCenterPara() {
+    var mid = window.innerHeight * 0.5;
+    var best = null, bestDist = Infinity;
+    paras.forEach(function (p) {
+      var r = p.getBoundingClientRect();
+      var c = r.top + r.height / 2;
+      var d = Math.abs(c - mid);
+      if (d < bestDist) { bestDist = d; best = p.dataset.pid; }
+    });
+    if (best && currentPid) currentPid.textContent = best;
+  }
+
+  function tick() {
+    var p = scrollProgress();
+    var pct = (p * 100).toFixed(1) + '%';
+    if (tocFill) tocFill.style.width = pct;
+    if (inkFill) inkFill.style.width = pct;
+    if (inkPct) inkPct.textContent = Math.round(p * 100) + '%';
+    if (timeLeft) timeLeft.textContent = (Math.max(0, Math.round(totalMin * (1 - p) * 10) / 10)) + 'm left';
+    if (progressPct) progressPct.textContent = Math.round(p * 100);
+    if (progressBar) progressBar.style.setProperty('--w', pct);
+
+    var status = p < 0.35 ? 'asleep' : p < 0.85 ? 'just woke up' : 'writing';
+    var color = status === 'asleep' ? 'var(--ink-muted)' : 'var(--accent)';
+    if (harnessPip) {
+      harnessPip.textContent = 'Father · ' + status;
+      harnessPip.style.color = 'var(--harness-accent)';
+    }
+    if (fatherStatus) {
+      fatherStatus.style.color = color;
+      fatherStatus.firstElementChild.style.background = color;
+      fatherStatus.lastChild.textContent = 'Father · ' + status;
+    }
+    updateActiveSection();
+    updateCenterPara();
+  }
+
+  var visitorBase = 1481;
+  setInterval(function () {
+    visitorBase += 1;
+    if (visitorNum) visitorNum.textContent = visitorBase.toLocaleString();
+  }, 13000);
+
+  window.addEventListener('scroll', tick, { passive: true });
+  window.addEventListener('resize', tick);
+  tick();
+})();
+</script>
+
+</body>
+</html>

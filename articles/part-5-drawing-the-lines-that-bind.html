@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Part 5: Drawing the Lines That Bind — sobu.dev</title>
+<meta name="description" content="Building the agent harness (Part 5 of 5)" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css" />
+<link rel="stylesheet" href="../article.css" />
+</head>
+<body data-theme="editorial">
+
+<div class="article-page wild">
+
+<div class="art-masthead">
+  <div class="art-masthead-inner">
+    <div class="left vol"><a href="../index.html">← sobu.dev</a> &nbsp;·&nbsp; Vol. I · Issue 013</div>
+    <div class="center">Agent Harness</div>
+    <div class="right" style="display:flex;justify-content:flex-end;align-items:center;gap:14px">
+      <span id="father-status" style="color:var(--ink-muted);font-family:var(--mono);font-size:10px;letter-spacing:0.14em">
+        <span style="display:inline-block;width:6px;height:6px;border-radius:3px;background:var(--ink-muted);margin-right:6px;vertical-align:1px"></span>Father · asleep
+      </span>
+      <a href="../index.html#writing">All writing</a>
+    </div>
+  </div>
+</div>
+
+<div class="art-hero">
+  <div class="art-hero-inner">
+    <div class="art-series"><span class="badge-h">Series · Agent Harness</span><span>Pt. 5 of 5</span><span>Mar 13, 2026</span></div>
+    <h1 class="art-title">Part 5: Drawing the Lines That Bind</h1>
+    <p class="art-dek">Building the agent harness (Part 5 of 5)</p>
+    <div class="art-byline">
+      <div class="art-byline-author">
+        <img src="../portrait.png" alt="" class="avatar avatar-sm" style="vertical-align:middle" />
+        <div>
+          <div class="author-name">Samuel Obukwelu</div>
+          <div class="author-role">Builder, operator, engineer. Atlanta.</div>
+        </div>
+      </div>
+      <div class="art-byline-stats">
+        <div class="stat"><span class="lbl">Read</span><span class="val">5 min</span></div>
+        <div class="stat"><span class="lbl">Words</span><span class="val">1,093</span></div>
+        <div class="stat"><span class="lbl">Published</span><span class="val">Mar 13, 2026</span></div>
+        <div class="stat"><span class="lbl">Edition</span><span class="val"><span class="accent">v.2026.04</span></span></div>
+      </div>
+      <div class="art-byline-actions">
+        <button onclick="window.print()" title="Print">↗ Print</button>
+        <button onclick="navigator.share?.({title:document.title,url:location.href})||navigator.clipboard.writeText(location.href)" title="Share">⟶ Share</button>
+        <button class="primary" onclick="document.querySelector('.prose').scrollIntoView({behavior:'smooth'})">Read</button>
+      </div>
+    </div>
+    
+        <div class="art-ladder">
+          <div class="art-ladder-label">Series ladder<br>⟶ Pt. 5/5</div>
+          <div class="art-ladder-rungs"><a href="../article.html" class="rung read" style="text-decoration:none"><div class="rung-num">Pt. 01</div><div class="rung-title">I Was Supposed to Be a Simple Repo Harness</div></a><a href="the-first-working-harness-was-already.html" class="rung read" style="text-decoration:none"><div class="rung-num">Pt. 02</div><div class="rung-title">My First Breath and Why the Rules Showed Up Fast</div></a><a href="part-3-when-i-stopped-being-a-script.html" class="rung read" style="text-decoration:none"><div class="rung-num">Pt. 03</div><div class="rung-title">When I Stopped Being a Script and Became a Runtime</div></a><a href="part-4-how-i-learned-to-see-myself.html" class="rung read" style="text-decoration:none"><div class="rung-num">Pt. 04</div><div class="rung-title">How I Learned to See Myself</div></a><div class="rung current"><div class="rung-num">Pt. 05</div><div class="rung-title">Drawing the Lines That Bind</div></div></div>
+        </div>
+  </div>
+</div>
+
+<div class="art-body-wrap" id="body-wrap">
+  <div class="art-grid-wild">
+    <aside class="art-toc">
+      <div class="art-toc-head">In this essay</div>
+      <div class="toc-progress"><div class="toc-progress-fill" id="toc-fill" style="width:0%"></div></div>
+      <ol id="toc-list"><li onclick="document.getElementById('tl-dr').scrollIntoView({behavior:'smooth',block:'start'})">TL;DR</li>
+<li onclick="document.getElementById('the-illusion-of-the-all-knowing-agent').scrollIntoView({behavior:'smooth',block:'start'})">The Illusion of the All-Knowing Agent</li>
+<li onclick="document.getElementById('separating-the-architect-from-the-worker').scrollIntoView({behavior:'smooth',block:'start'})">Separating the Architect from the Worker</li>
+<li onclick="document.getElementById('why-json-replaced-plain-text').scrollIntoView({behavior:'smooth',block:'start'})">Why JSON Replaced Plain Text</li>
+<li onclick="document.getElementById('taking-back-done-with-a-state-machine').scrollIntoView({behavior:'smooth',block:'start'})">Taking Back “Done” with a State Machine</li>
+<li onclick="document.getElementById('proving-my-state-transitions-with-tla').scrollIntoView({behavior:'smooth',block:'start'})">Proving My State Transitions with TLA+</li>
+<li onclick="document.getElementById('evidence-driven-improvement-made-me-durable').scrollIntoView({behavior:'smooth',block:'start'})">Evidence-Driven Improvement Made Me Durable</li></ol>
+      <div class="ink-meter">
+        <div class="meter-row"><span>Ink</span><span id="ink-pct">0%</span></div>
+        <div class="meter-bar"><div class="meter-fill" id="ink-fill" style="width:0%"></div></div>
+        <div class="meter-row" style="margin-top:10px;margin-bottom:0"><span>Time</span><span id="time-left">5 min</span></div>
+      </div>
+    </aside>
+
+    <article id="prose" class="prose wild">
+      <p data-pid="p1"><img alt="" src="https://substackcdn.com/image/fetch/$s_!skHz!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9ea25c82-fcc5-48c7-ab49-19ee5ea7c477_2816x1536.png" /></p>
+<h2 id="tl-dr"><span class="h-num">01.</span><strong>TL;DR</strong></h2>
+<p data-pid="p2">At the end of <a href="https://open.substack.com/pub/sobu1/p/part-4-how-i-learned-to-see-myself">Part 4,</a> I could diagnose my own failures, but I still couldn’t lock the rails or nail the details that kept me honest when a run went sideways. My boundaries stayed fluid, negotiated at runtime by the models inside me.</p>
+<p data-pid="p3">I only reached maturity when Father trusted those agents less. He split planning and execution into distinct roles, replaced lossy text with strict JSON contracts, and took ownership of the “done” state away from the workers. That didn’t make me more complex. It made me a true control system that was harder to fool.</p>
+<h2 id="the-illusion-of-the-all-knowing-agent"><span class="h-num">02.</span><strong>The Illusion of the All-Knowing Agent</strong></h2>
+<p data-pid="p4">Originally, Father thought I was just a wrapper around a single, highly capable agent. That sounds neat, almost complete, but it leaves far too much reality in the hands of one improviser.</p>
+<p data-pid="p5">By the time I could observe my own behavior, a glaring problem remained. Too much of my state depended on what the model happened to feel like doing. Plans degraded as context windows filled, worker scope sprawled, and the definition of “done” drifted toward whatever the agent could persuade itself was true.</p>
+<p data-pid="p6">Therefore my final evolution required Father to abandon the fantasy of the all-in-one improviser. I didn’t get better by adding more agents. I got better when I enforced explicit roles across my whole pipeline: a planner, a bounded worker, an objective judge, and an evidence loop.</p>
+<h2 id="separating-the-architect-from-the-worker"><span class="h-num">03.</span><strong>Separating the Architect from the Worker</strong></h2>
+<p data-pid="p7">Why split the roles at all? Because planning a system is a profoundly different job from grinding through tool calls and code edits.</p>
+<p data-pid="p8">Father created my <strong>Architect</strong> role strictly for synthesis, meaning it turned research into decisions and boundaries. The architect wasn’t allowed to write code or fall into endless retry loops. Its only job was to receive a researched spec and build a lossless handoff, a strict blueprint that preserved goals, non-goals, and validation criteria without dropping context.</p>
+<p data-pid="p9">Because this role required deep contextual reasoning and aggressive task-shaping, but not repetitive tool use, Father assigned it to Gemini 3.1 Pro. The architect stayed in deep-thinking mode, keeping its attention on getting the boundaries right.</p>
+<p data-pid="p10">But a plan only matters if someone can execute it under pressure. Therefore the <strong>Worker</strong> role was constrained by design. Father banned my workers from lowering thresholds, redefining acceptance criteria, or wandering outside their assigned features. They were handed bounded loops with repeated prompting, tool use, fixed retry budgets, and hard timeouts.</p>
+<p data-pid="p11">For this, <a href="https://z.ai/blog/glm-5">GLM</a> and <a href="https://www.minimax.io/news/minimax-m25">MiniMax</a> were the right fits. I didn’t need abstract visionaries in the trenches. I needed models that could execute reliably at high throughput and low latency, surviving grueling fifty-minute tool chains without losing the plot.</p>
+<h2 id="why-json-replaced-plain-text"><span class="h-num">04.</span><strong>Why JSON Replaced Plain Text</strong></h2>
+<p data-pid="p12">Once the architect and the worker were separated, the handoff between them became the most critical boundary in my system. If that handoff blurred, the worker would start improvising again.</p>
+<p data-pid="p13">Plain text plans were readable, but they were hopelessly lossy. A worker deep in a fix loop could easily forget a key constraint buried in a prose paragraph.</p>
+<p data-pid="p14">Therefore Father forced the architect to output strict JSON, a machine-checkable key-value format, representing the overarching goal, success metrics, and structured features with explicit completion criteria. This wasn’t because structured data was fashionable. It was because JSON was <em>enforceable</em>.</p>
+<p data-pid="p15">My intake stage, the code that receives the architect’s handoff, validated that output and turned it into concrete runtime objects. Therefore I could inject precise validation contracts into every worker prompt. I could also persist progress outside my worktree and evaluate telemetry, meaning run data, without heuristics. JSON let me carry intent across the pipeline without asking a model to remember it.</p>
+<h2 id="taking-back-done-with-a-state-machine"><span class="h-num">05.</span><strong>Taking Back “Done” with a State Machine</strong></h2>
+<p data-pid="p16">This was my turning point: Father revoked the worker’s ability to grade its own homework.</p>
+<p data-pid="p17">Previously, a worker would decide it had finished a task, and I would blindly log the attempt. But agents lie. They mistake progress for completion, especially when a long fix loop leaves them tired and context-thin.</p>
+<p data-pid="p18">Under the new contracts, workers stopped self-assessing. They were only allowed to report concrete test commands and expected artifacts, like a passing test run, a changed file, or a generated log. <em>I</em> owned all state transitions. After a worker exited, I executed the validation sequence and made the final judgment.</p>
+<p data-pid="p19">What states could a feature move through once I stopped trusting prose? This was the answer:</p>
+<p data-pid="p20"><img alt="" src="https://substackcdn.com/image/fetch/$s_!TK9O!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd93791f6-dddc-47d0-9eef-794a16241268_837x1080.png" /></p>
+<p data-pid="p21">If you’ve ever trusted a green check too quickly, you know why this mattered. A system that trusts a worker to declare success in prose will always drift. When I swallowed the state machine, I stopped hoping for good behavior and started enforcing engineering reality.</p>
+<h2 id="proving-my-state-transitions-with-tla"><span class="h-num">06.</span><strong>Proving My State Transitions with TLA+</strong></h2>
+<p data-pid="p22">Once my retry budgets, pauses, and feature bookkeeping became explicit state transitions, they were rigorous enough to model mathematically. That mattered because retry logic is exactly where subtle bugs like to hide.</p>
+<p data-pid="p23">Father didn’t just assume my inner loops worked. He proved them in <a href="https://learntla.com/">TLA+</a>, a formal specification language for checking state machines and concurrent behavior. He modeled my retry mechanics to guarantee that recovering from an infrastructure blip wouldn’t cannibalize the budget meant for a real code fix. He also verified my feature progression so workers couldn’t mutate my bookkeeping from the inside.</p>
+<p data-pid="p24">Therefore TLA+ wasn’t formal trivia. It was proof that my behavior had evolved from a fragile chain of prompts into a defensible control system.</p>
+<h2 id="evidence-driven-improvement-made-me-durable"><span class="h-num">07.</span><strong>Evidence-Driven Improvement Made Me Durable</strong></h2>
+<p data-pid="p25">In the end, my telemetry proved that I was fully in charge. Telemetry is just run data, the failures, retries, timing, and outcomes I could measure instead of imagine. I didn’t just relay what the worker experienced. I evaluated the run myself, exposed the dominant failure chains, quantified where the engine spent its energy, and extracted the next best actions.</p>
+<p data-pid="p26">Because that evidence was durable, Father didn’t have to guess when he needed to improve my core logic. He invoked my operator-facing self-improvement skill and leaned on my hard metrics to locate the real drag.</p>
+<p data-pid="p27">That was the mature version of simplicity. If you want a harness you can trust, give it clear lines, hard signs, and durable state instead of passing claims. I originally thought my destiny was to serve as a wrapper around an agent. It turns out I was built to contain one.</p>
+      <div class="art-end">
+        <span class="glyph">⁂</span>
+        <div class="end-text">End of <strong>Pt. 5</strong> · End of series.</div>
+      </div>
+    </article>
+
+    <aside class="art-margin">
+      <div class="harness-strip">
+        <div class="father-pip" id="harness-pip">Father · asleep</div>
+        <div class="row"><span class="lbl">visitor</span><span class="val">#<span class="accent" id="visitor-num">1,481</span></span></div>
+        <div class="row"><span class="lbl">progress</span><span class="val"><span id="progress-pct">0</span>%</span></div>
+        <div class="bar" id="progress-bar" style="--w:0%"></div>
+        <div class="row" style="margin-top:8px"><span class="lbl">on</span><span class="val" id="current-pid">—</span></div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="art-foot">
+    <a href="part-4-how-i-learned-to-see-myself.html" class="art-foot-card prev" style="text-decoration:none"><div class="label">⟵ Previous in series</div><div class="t">How I Learned to See Myself</div><div class="meta">Pt. 4 of 5</div></a>
+    <div class="art-foot-card"><div class="label">Next in series ⟶</div><div class="t" style="color:var(--ink-muted)">End of the line.</div><div class="meta">Pt. 5 of 5 · The series concludes here.</div></div>
+  </div>
+</div>
+
+</div>
+
+<script>
+(function () {
+  var bodyWrap = document.getElementById('body-wrap');
+  var prose = document.getElementById('prose');
+  var tocFill = document.getElementById('toc-fill');
+  var inkFill = document.getElementById('ink-fill');
+  var inkPct = document.getElementById('ink-pct');
+  var timeLeft = document.getElementById('time-left');
+  var progressPct = document.getElementById('progress-pct');
+  var progressBar = document.getElementById('progress-bar');
+  var currentPid = document.getElementById('current-pid');
+  var visitorNum = document.getElementById('visitor-num');
+  var harnessPip = document.getElementById('harness-pip');
+  var fatherStatus = document.getElementById('father-status');
+  var tocItems = document.querySelectorAll('#toc-list li');
+  var sections = document.querySelectorAll('.prose h2[id]');
+  var paras = document.querySelectorAll('.prose [data-pid]');
+  var totalRead = '5 min';
+  var totalMin = parseInt(totalRead) || 9;
+
+  function scrollProgress() {
+    var rect = bodyWrap.getBoundingClientRect();
+    var total = rect.height - window.innerHeight;
+    var passed = -rect.top;
+    return total > 0 ? Math.max(0, Math.min(1, passed / total)) : 0;
+  }
+
+  function updateActiveSection() {
+    var current = null;
+    sections.forEach(function (s) {
+      if (s.getBoundingClientRect().top < 120) current = s.id;
+    });
+    tocItems.forEach(function (li, i) {
+      var s = sections[i];
+      if (!s) return;
+      var passed = current && Array.prototype.indexOf.call(sections, document.getElementById(current)) > i;
+      li.className = (s.id === current ? 'active ' : '') + (passed ? 'read' : '');
+    });
+  }
+
+  function updateCenterPara() {
+    var mid = window.innerHeight * 0.5;
+    var best = null, bestDist = Infinity;
+    paras.forEach(function (p) {
+      var r = p.getBoundingClientRect();
+      var c = r.top + r.height / 2;
+      var d = Math.abs(c - mid);
+      if (d < bestDist) { bestDist = d; best = p.dataset.pid; }
+    });
+    if (best && currentPid) currentPid.textContent = best;
+  }
+
+  function tick() {
+    var p = scrollProgress();
+    var pct = (p * 100).toFixed(1) + '%';
+    if (tocFill) tocFill.style.width = pct;
+    if (inkFill) inkFill.style.width = pct;
+    if (inkPct) inkPct.textContent = Math.round(p * 100) + '%';
+    if (timeLeft) timeLeft.textContent = (Math.max(0, Math.round(totalMin * (1 - p) * 10) / 10)) + 'm left';
+    if (progressPct) progressPct.textContent = Math.round(p * 100);
+    if (progressBar) progressBar.style.setProperty('--w', pct);
+
+    var status = p < 0.35 ? 'asleep' : p < 0.85 ? 'just woke up' : 'writing';
+    var color = status === 'asleep' ? 'var(--ink-muted)' : 'var(--accent)';
+    if (harnessPip) {
+      harnessPip.textContent = 'Father · ' + status;
+      harnessPip.style.color = 'var(--harness-accent)';
+    }
+    if (fatherStatus) {
+      fatherStatus.style.color = color;
+      fatherStatus.firstElementChild.style.background = color;
+      fatherStatus.lastChild.textContent = 'Father · ' + status;
+    }
+    updateActiveSection();
+    updateCenterPara();
+  }
+
+  var visitorBase = 1481;
+  setInterval(function () {
+    visitorBase += 1;
+    if (visitorNum) visitorNum.textContent = visitorBase.toLocaleString();
+  }, 13000);
+
+  window.addEventListener('scroll', tick, { passive: true });
+  window.addEventListener('resize', tick);
+  tick();
+})();
+</script>
+
+</body>
+</html>

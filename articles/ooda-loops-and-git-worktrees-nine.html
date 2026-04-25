@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>OODA Loops and Git Worktrees: Nine Tactical Lessons from AI-Augmented Development — sobu.dev</title>
+<meta name="description" content="Feed It Wisely: A Battle-Scarred Guide to Context Windows, Agent Specialists, and Actually Shipping" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css" />
+<link rel="stylesheet" href="../article.css" />
+</head>
+<body data-theme="editorial">
+
+<div class="article-page wild">
+
+<div class="art-masthead">
+  <div class="art-masthead-inner">
+    <div class="left vol"><a href="../index.html">← sobu.dev</a> &nbsp;·&nbsp; Vol. I · Issue 007</div>
+    <div class="center">Field Notes</div>
+    <div class="right" style="display:flex;justify-content:flex-end;align-items:center;gap:14px">
+      <span id="father-status" style="color:var(--ink-muted);font-family:var(--mono);font-size:10px;letter-spacing:0.14em">
+        <span style="display:inline-block;width:6px;height:6px;border-radius:3px;background:var(--ink-muted);margin-right:6px;vertical-align:1px"></span>Father · asleep
+      </span>
+      <a href="../index.html#writing">All writing</a>
+    </div>
+  </div>
+</div>
+
+<div class="art-hero">
+  <div class="art-hero-inner">
+    <div class="art-series"><span class="badge-h">Note</span><span>Aug 27, 2025</span><span>Atlanta, GA</span></div>
+    <h1 class="art-title">OODA Loops and Git Worktrees: Nine Tactical Lessons from AI-Augmented Development</h1>
+    <p class="art-dek">Feed It Wisely: A Battle-Scarred Guide to Context Windows, Agent Specialists, and Actually Shipping</p>
+    <div class="art-byline">
+      <div class="art-byline-author">
+        <img src="../portrait.png" alt="" class="avatar avatar-sm" style="vertical-align:middle" />
+        <div>
+          <div class="author-name">Samuel Obukwelu</div>
+          <div class="author-role">Builder, operator, engineer. Atlanta.</div>
+        </div>
+      </div>
+      <div class="art-byline-stats">
+        <div class="stat"><span class="lbl">Read</span><span class="val">6 min</span></div>
+        <div class="stat"><span class="lbl">Words</span><span class="val">1,488</span></div>
+        <div class="stat"><span class="lbl">Published</span><span class="val">Aug 27, 2025</span></div>
+        <div class="stat"><span class="lbl">Edition</span><span class="val"><span class="accent">v.2026.04</span></span></div>
+      </div>
+      <div class="art-byline-actions">
+        <button onclick="window.print()" title="Print">↗ Print</button>
+        <button onclick="navigator.share?.({title:document.title,url:location.href})||navigator.clipboard.writeText(location.href)" title="Share">⟶ Share</button>
+        <button class="primary" onclick="document.querySelector('.prose').scrollIntoView({behavior:'smooth'})">Read</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<div class="art-body-wrap" id="body-wrap">
+  <div class="art-grid-wild">
+    <aside class="art-toc">
+      <div class="art-toc-head">In this essay</div>
+      <div class="toc-progress"><div class="toc-progress-fill" id="toc-fill" style="width:0%"></div></div>
+      <ol id="toc-list"><li onclick="document.getElementById('the-elephant-in-the-room').scrollIntoView({behavior:'smooth',block:'start'})">The Elephant in the Room</li>
+<li onclick="document.getElementById('the-three-fears-that-keep-you-feeding-the-beast').scrollIntoView({behavior:'smooth',block:'start'})">The Three Fears That Keep You Feeding the Beast</li>
+<li onclick="document.getElementById('the-ooda-loop-at-light-speed').scrollIntoView({behavior:'smooth',block:'start'})">The OODA Loop at Light Speed</li>
+<li onclick="document.getElementById('explore-plan-execute-the-antidote-to-ai-gambling').scrollIntoView({behavior:'smooth',block:'start'})">Explore → Plan → Execute: The Antidote to AI Gambling</li>
+<li onclick="document.getElementById('the-nine-hard-lessons-or-how-i-learned-to-stop-worrying-and-').scrollIntoView({behavior:'smooth',block:'start'})">The Nine Hard Lessons (Or: How I Learned to Stop Worrying and Leash the Beast)</li>
+<li onclick="document.getElementById('from-line-cook-to-executive-chef').scrollIntoView({behavior:'smooth',block:'start'})">From Line Cook to Executive Chef</li>
+<li onclick="document.getElementById('what-you-can-do-tomorrow').scrollIntoView({behavior:'smooth',block:'start'})">What You Can Do Tomorrow</li></ol>
+      <div class="ink-meter">
+        <div class="meter-row"><span>Ink</span><span id="ink-pct">0%</span></div>
+        <div class="meter-bar"><div class="meter-fill" id="ink-fill" style="width:0%"></div></div>
+        <div class="meter-row" style="margin-top:10px;margin-bottom:0"><span>Time</span><span id="time-left">6 min</span></div>
+      </div>
+    </aside>
+
+    <article id="prose" class="prose wild">
+      <p data-pid="p1">One user story. A simple chat interface spec that ticked every box. Clear acceptance criteria. GraphQL schemas. Database models. Even ASCII diagrams showing the UI flow.</p>
+<p data-pid="p2">I fed it to Claude Code. It started writing. And writing. And writing.</p>
+<p data-pid="p3">Tens of thousands of lines of code later, it&rsquo;s still going—somewhere in the digital ether—trying to meet its own definition of done. A perfect implementation that never ships. A beast that keeps eating.</p>
+<h2 id="the-elephant-in-the-room"><span class="h-num">01.</span>The Elephant in the Room</h2>
+<p data-pid="p4">Here&rsquo;s what I thought I was doing right: comprehensive specs, detailed context, every file dumped into the context window. Maximum information for maximum output.</p>
+<p data-pid="p5">BUT the more context I gave, the more elaborate Claude became. It wasn&rsquo;t building what I asked for—it was building what it thought I should want. Production-ready architectures for prototypes. Kubernetes deployments for local scripts. Unit tests for unit tests.</p>
+<p data-pid="p6">THEREFORE I realized: I was trying to eat an elephant in one bite instead of using a knife and fork.</p>
+<p data-pid="p7">You&rsquo;ve been there. That simple CRUD endpoint that spawned a distributed microservices architecture. The CSS tweak that triggered a complete design system overhaul. The bug fix that became a refactor that became a rewrite.</p>
+<p data-pid="p8">We&rsquo;ve been sold the idea that AI assistants just need more context. Dump everything in. Let the magic happen. But here&rsquo;s the thing—context dumping doesn&rsquo;t reduce hallucinations. It amplifies them. Each additional file becomes another vector for creative interpretation.</p>
+<h2 id="the-three-fears-that-keep-you-feeding-the-beast"><span class="h-num">02.</span>The Three Fears That Keep You Feeding the Beast</h2>
+<p data-pid="p9">Let&rsquo;s address what&rsquo;s really happening when you dump-and-pray.</p>
+<p data-pid="p10"><strong>&ldquo;I&rsquo;m training my replacement.&rdquo;</strong> Every line it writes is a line you didn&rsquo;t. Your fingers atrophy while the machine gets stronger.</p>
+<p data-pid="p11"><strong>&ldquo;Planning feels like wasted time.&rdquo;</strong> Why explore when you could be shipping? Why steer when it moves at the speed of light?</p>
+<p data-pid="p12"><strong>&ldquo;It should just know what I want.&rdquo;</strong> I gave it everything. The specs, the files, the repo. What more does it need?</p>
+<p data-pid="p13">But here&rsquo;s the cognitive flip: steering a hyper-intelligent partner requires MORE engineering judgment, not less. You&rsquo;re not being replaced—you&rsquo;re being promoted. From line cook to executive chef.</p>
+<h2 id="the-ooda-loop-at-light-speed"><span class="h-num">03.</span>The OODA Loop at Light Speed</h2>
+<p data-pid="p14">Colonel John Boyd developed OODA for fighter pilots: Observe → Orient → Decide → Act. In dogfights, the pilot who cycles through OODA faster wins.</p>
+<p data-pid="p15">Your AI moves at computational speed. BUT its OODA loop is broken without you:</p>
+<ul>
+<li>
+<p data-pid="p16">It observes everything but understands nothing</p>
+</li>
+<li>
+<p data-pid="p17">It orients toward completeness, not correctness</p>
+</li>
+<li>
+<p data-pid="p18">It decides based on patterns, not purpose</p>
+</li>
+<li>
+<p data-pid="p19">It acts without consequences</p>
+</li>
+</ul>
+<p data-pid="p20">THEREFORE you become the missing link. You close the loop.</p>
+<p data-pid="p21">This is why &ldquo;Explore → Plan → Execute&rdquo; works where one-shot prompting fails.</p>
+<h2 id="explore-plan-execute-the-antidote-to-ai-gambling"><span class="h-num">04.</span>Explore → Plan → Execute: The Antidote to AI Gambling</h2>
+<p data-pid="p22">One-shot prompting is gambling. Sometimes you win. Usually you don&rsquo;t. The dopamine hit when Claude nails it on the first try? Not worth the cleanup when it doesn&rsquo;t.</p>
+<h3>Explore: Teaching It to See</h3>
+<p data-pid="p23">Before touching code, make your AI explore the landscape. Not context dumping—deliberate discovery.</p>
+<p data-pid="p24">&ldquo;What would it take to implement this feature?&rdquo;<br />
+&ldquo;What patterns exist in the current codebase?&rdquo;<br />
+&ldquo;What dependencies would this create?&rdquo;</p>
+<p data-pid="p25">Each exploration reveals assumptions. Mine. Yours. The AI&rsquo;s. Ask it to ask YOU clarifying questions—one at a time. This surfaces those unspoken requirements that live in your head but not in your spec.</p>
+<h3>Plan: Cutting the Elephant</h3>
+<p data-pid="p26">After exploration comes planning. This is where you wield the knife and fork.</p>
+<p data-pid="p27">The plan isn&rsquo;t just tasks—it&rsquo;s boundaries. What we&rsquo;re building. What we&rsquo;re NOT building. Where we stop. Your AI doesn&rsquo;t know where to stop. Every function could be more robust. Every component more reusable. Every abstraction more abstract.</p>
+<h3>Execute: With Discipline</h3>
+<p data-pid="p28">Execution is where discipline matters most. Small changes. Frequent verification. One agent, one task, one focus.</p>
+<p data-pid="p29">The magic isn&rsquo;t in the speed—it&rsquo;s in the steering.</p>
+<h2 id="the-nine-hard-lessons-or-how-i-learned-to-stop-worrying-and-"><span class="h-num">05.</span>The Nine Hard Lessons (Or: How I Learned to Stop Worrying and Leash the Beast)</h2>
+<p data-pid="p30">Each of these lessons was paid for in lost time, corrupted files, or spectacular failures. They&rsquo;re not theory—they&rsquo;re scar tissue.</p>
+<h3>Lesson 1: Context Window Bankruptcy</h3>
+<p data-pid="p31">I once watched 49k tokens vanish. Gone before I typed a word. Turned out my MCP servers were eating 25% of my context—context7, Zen, Serena, Playwright. Now I run <code>/context</code> like checking my bank balance. YAGNI isn&rsquo;t just for code—it&rsquo;s for tools.</p>
+<h3>Lesson 2: The Schizophrenic CLAUDE.md</h3>
+<p data-pid="p32">My frontend CLAUDE.md said &ldquo;use npm.&rdquo; My backend said &ldquo;use yarn.&rdquo; The root said &ldquo;use pnpm.&rdquo; Claude tried to please everyone. The result? A package.json that looked like three different developers were fighting. Now every folder gets its own CLAUDE.md. Specificity beats confusion.</p>
+<h3>Lesson 3: The Clarifying Question That Saved Christmas</h3>
+<p data-pid="p33">&ldquo;Build me a dashboard.&rdquo; Four hours later: enterprise-grade analytics platform with Grafana integration. What I wanted: three charts. Now I make Claude ask ME questions. One at a time. &ldquo;What metrics?&rdquo; &ldquo;Real-time or historical?&rdquo; &ldquo;Who&rsquo;s the audience?&rdquo; Ten minutes of questions saves ten hours of deletion.</p>
+<h3>Lesson 4: The Agent Orchestra Disaster</h3>
+<p data-pid="p34">Two agents. Same file. Different approaches. proof-guided-coder implementing business logic with formal verification. qa-engineer writing tests for the same code. The merge conflict looked like abstract art. Now my agents work in parallel universes—git worktree keeps them isolated until they&rsquo;re ready to harmonize.</p>
+<h3>Lesson 5: OODA Loops Save Sanity</h3>
+<p data-pid="p35">Watched Claude write 500 lines before discovering the API didn&rsquo;t exist. Now: Write 10 lines. Test. Write 10 more. Test. Colonel Boyd knew—the fastest OODA loop wins. Small changes catch problems while they&rsquo;re still small.</p>
+<h3>Lesson 6: Agents Are Specialists, Not Generalists</h3>
+<p data-pid="p36">&ldquo;Fix all the bugs&rdquo; → chaos. &ldquo;debug this PostgreSQL error&rdquo; → debugger agent finds root cause. &ldquo;Review this Go code&rdquo; → code-reviewer spots the race condition. &ldquo;Check security&rdquo; → security-guardian identifies SQL injection. Agents excel at focused expertise. They fumble at broad mandates. One agent, one specialization, one success.</p>
+<h3>Lesson 7: Context Curation Is Architecture</h3>
+<p data-pid="p37">Before: Dump entire src/ folder.<br />
+After: Three specific files, one type definition, the failing test.<br />
+Result: 90% less hallucination, 100% more relevance.<br />
+Your context window is your architecture. Design it.</p>
+<h3>Lesson 8: The Main Agent Is a Conductor</h3>
+<p data-pid="p38">Your main agent shouldn&rsquo;t write code—it should conduct the orchestra. tech-lead designs the architecture. proof-guided-coder implements with verification. qa-engineer writes the tests. code-reviewer ensures quality. When your main agent stays high-level, your context stays clean.</p>
+<h3>Lesson 9: Exploration Prevents Excavation</h3>
+<p data-pid="p39">That &ldquo;quick feature&rdquo; that required database migration, API versioning, and frontend state management? Should&rsquo;ve explored first. Five minutes of &ldquo;what would this require?&rdquo; prevents five hours of &ldquo;why doesn&rsquo;t this work?&rdquo;</p>
+<h2 id="from-line-cook-to-executive-chef"><span class="h-num">06.</span>From Line Cook to Executive Chef</h2>
+<p data-pid="p40">You&rsquo;re not losing skills. You&rsquo;re gaining leverage.</p>
+<p data-pid="p41">The line cook follows recipes. Chops onions. Sears steaks. Important work, but bounded.</p>
+<p data-pid="p42">The executive chef designs menus. Manages teams. Ensures quality. Creates experiences.</p>
+<p data-pid="p43">Your AI handles syntax. You handle semantics. It generates possibilities. You make decisions. It writes code. You write futures.</p>
+<p data-pid="p44">This isn&rsquo;t about AI replacing you. It&rsquo;s about you conducting an orchestra of AI agents, each playing their part, while you ensure they harmonize toward YOUR vision.</p>
+<h2 id="what-you-can-do-tomorrow"><span class="h-num">07.</span>What You Can Do Tomorrow</h2>
+<p data-pid="p45">Stop feeding the beast. Start leading it.</p>
+<ol>
+<li>
+<p data-pid="p46"><strong>Audit your current AI workflow.</strong> Are you gambling with one-shot prompts? Track your success rate for one week. The house always wins.</p>
+</li>
+<li>
+<p data-pid="p47"><strong>Create folder-specific CLAUDE.md files.</strong> Especially in monorepos. Clear, contextual instructions prevent elaborate misinterpretations.</p>
+</li>
+<li>
+<p data-pid="p48"><strong>Try Explore → Plan → Execute on your next feature.</strong> Resist the urge to jump straight to execution. The upfront investment pays compound interest.</p>
+</li>
+<li>
+<p data-pid="p49"><strong>Set up git worktree for parallel work.</strong> Learn it once, leverage it forever. Your agents will thank you.</p>
+</li>
+<li>
+<p data-pid="p50"><strong>Monitor context usage obsessively.</strong> Use <code>/context</code> before, during, and after sessions. Context is currency—spend it wisely.</p>
+</li>
+<li>
+<p data-pid="p51"><strong>Practice OODA loops.</strong> Small change → Verify → Small change → Verify. Momentum through micro-wins, not moonshots.</p>
+</li>
+</ol>
+<p data-pid="p52">Your AI pair programmer moves at the speed of light. Without steering, it&rsquo;s just velocity toward chaos.</p>
+<p data-pid="p53">The beast will eat everything you feed it.</p>
+<p data-pid="p54">Feed it wisely.</p>
+<hr />
+<p data-pid="p55"><em>Based on months of Claude Code usage and tens of thousands of lines of unnecessary code. Every mistake mentioned, I&rsquo;ve made. Every solution suggested, I use daily.</em></p>
+      <div class="art-end">
+        <span class="glyph">⁂</span>
+        <div class="end-text"><strong>Standalone note</strong> · Published Aug 27, 2025</div>
+      </div>
+    </article>
+
+    <aside class="art-margin">
+      <div class="harness-strip">
+        <div class="father-pip" id="harness-pip">Father · asleep</div>
+        <div class="row"><span class="lbl">visitor</span><span class="val">#<span class="accent" id="visitor-num">1,481</span></span></div>
+        <div class="row"><span class="lbl">progress</span><span class="val"><span id="progress-pct">0</span>%</span></div>
+        <div class="bar" id="progress-bar" style="--w:0%"></div>
+        <div class="row" style="margin-top:8px"><span class="lbl">on</span><span class="val" id="current-pid">—</span></div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="art-foot">
+    <div class="art-foot-card prev"><div class="label">⟵ Back to writing</div><div class="t" style="color:var(--ink-muted)">All essays.</div><div class="meta"><a href="../index.html#writing" style="color:var(--ink)">← sobu.dev / Writing</a></div></div>
+    <div class="art-foot-card"><div class="label">Read more ⟶</div><div class="t">The Agent Harness <em>series</em></div><div class="meta">5 parts · the harness narrates itself</div></div>
+  </div>
+</div>
+
+</div>
+
+<script>
+(function () {
+  var bodyWrap = document.getElementById('body-wrap');
+  var prose = document.getElementById('prose');
+  var tocFill = document.getElementById('toc-fill');
+  var inkFill = document.getElementById('ink-fill');
+  var inkPct = document.getElementById('ink-pct');
+  var timeLeft = document.getElementById('time-left');
+  var progressPct = document.getElementById('progress-pct');
+  var progressBar = document.getElementById('progress-bar');
+  var currentPid = document.getElementById('current-pid');
+  var visitorNum = document.getElementById('visitor-num');
+  var harnessPip = document.getElementById('harness-pip');
+  var fatherStatus = document.getElementById('father-status');
+  var tocItems = document.querySelectorAll('#toc-list li');
+  var sections = document.querySelectorAll('.prose h2[id]');
+  var paras = document.querySelectorAll('.prose [data-pid]');
+  var totalRead = '6 min';
+  var totalMin = parseInt(totalRead) || 9;
+
+  function scrollProgress() {
+    var rect = bodyWrap.getBoundingClientRect();
+    var total = rect.height - window.innerHeight;
+    var passed = -rect.top;
+    return total > 0 ? Math.max(0, Math.min(1, passed / total)) : 0;
+  }
+
+  function updateActiveSection() {
+    var current = null;
+    sections.forEach(function (s) {
+      if (s.getBoundingClientRect().top < 120) current = s.id;
+    });
+    tocItems.forEach(function (li, i) {
+      var s = sections[i];
+      if (!s) return;
+      var passed = current && Array.prototype.indexOf.call(sections, document.getElementById(current)) > i;
+      li.className = (s.id === current ? 'active ' : '') + (passed ? 'read' : '');
+    });
+  }
+
+  function updateCenterPara() {
+    var mid = window.innerHeight * 0.5;
+    var best = null, bestDist = Infinity;
+    paras.forEach(function (p) {
+      var r = p.getBoundingClientRect();
+      var c = r.top + r.height / 2;
+      var d = Math.abs(c - mid);
+      if (d < bestDist) { bestDist = d; best = p.dataset.pid; }
+    });
+    if (best && currentPid) currentPid.textContent = best;
+  }
+
+  function tick() {
+    var p = scrollProgress();
+    var pct = (p * 100).toFixed(1) + '%';
+    if (tocFill) tocFill.style.width = pct;
+    if (inkFill) inkFill.style.width = pct;
+    if (inkPct) inkPct.textContent = Math.round(p * 100) + '%';
+    if (timeLeft) timeLeft.textContent = (Math.max(0, Math.round(totalMin * (1 - p) * 10) / 10)) + 'm left';
+    if (progressPct) progressPct.textContent = Math.round(p * 100);
+    if (progressBar) progressBar.style.setProperty('--w', pct);
+
+    var status = p < 0.35 ? 'asleep' : p < 0.85 ? 'just woke up' : 'writing';
+    var color = status === 'asleep' ? 'var(--ink-muted)' : 'var(--accent)';
+    if (harnessPip) {
+      harnessPip.textContent = 'Father · ' + status;
+      harnessPip.style.color = 'var(--harness-accent)';
+    }
+    if (fatherStatus) {
+      fatherStatus.style.color = color;
+      fatherStatus.firstElementChild.style.background = color;
+      fatherStatus.lastChild.textContent = 'Father · ' + status;
+    }
+    updateActiveSection();
+    updateCenterPara();
+  }
+
+  var visitorBase = 1481;
+  setInterval(function () {
+    visitorBase += 1;
+    if (visitorNum) visitorNum.textContent = visitorBase.toLocaleString();
+  }, 13000);
+
+  window.addEventListener('scroll', tick, { passive: true });
+  window.addEventListener('resize', tick);
+  tick();
+})();
+</script>
+
+</body>
+</html>

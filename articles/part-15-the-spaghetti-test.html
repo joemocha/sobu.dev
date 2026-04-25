@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Developer Palate Series Part 1 of 5: The Spaghetti Test — sobu.dev</title>
+<meta name="description" content="Why AI Can&#x27;t Taste Your Code" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css" />
+<link rel="stylesheet" href="../article.css" />
+</head>
+<body data-theme="editorial">
+
+<div class="article-page wild">
+
+<div class="art-masthead">
+  <div class="art-masthead-inner">
+    <div class="left vol"><a href="../index.html">← sobu.dev</a> &nbsp;·&nbsp; Vol. I · Issue 001</div>
+    <div class="center">Developer Palate</div>
+    <div class="right" style="display:flex;justify-content:flex-end;align-items:center;gap:14px">
+      <span id="father-status" style="color:var(--ink-muted);font-family:var(--mono);font-size:10px;letter-spacing:0.14em">
+        <span style="display:inline-block;width:6px;height:6px;border-radius:3px;background:var(--ink-muted);margin-right:6px;vertical-align:1px"></span>Father · asleep
+      </span>
+      <a href="../index.html#writing">All writing</a>
+    </div>
+  </div>
+</div>
+
+<div class="art-hero">
+  <div class="art-hero-inner">
+    <div class="art-series"><span class="badge-h">Series · Developer Palate</span><span>Pt. 1 of 5</span><span>Jul 09, 2025</span></div>
+    <h1 class="art-title">Developer Palate Series Part 1 of 5: The Spaghetti Test</h1>
+    <p class="art-dek">Why AI Can&#x27;t Taste Your Code</p>
+    <div class="art-byline">
+      <div class="art-byline-author">
+        <img src="../portrait.png" alt="" class="avatar avatar-sm" style="vertical-align:middle" />
+        <div>
+          <div class="author-name">Samuel Obukwelu</div>
+          <div class="author-role">Builder, operator, engineer. Atlanta.</div>
+        </div>
+      </div>
+      <div class="art-byline-stats">
+        <div class="stat"><span class="lbl">Read</span><span class="val">1 min</span></div>
+        <div class="stat"><span class="lbl">Words</span><span class="val">331</span></div>
+        <div class="stat"><span class="lbl">Published</span><span class="val">Jul 09, 2025</span></div>
+        <div class="stat"><span class="lbl">Edition</span><span class="val"><span class="accent">v.2026.04</span></span></div>
+      </div>
+      <div class="art-byline-actions">
+        <button onclick="window.print()" title="Print">↗ Print</button>
+        <button onclick="navigator.share?.({title:document.title,url:location.href})||navigator.clipboard.writeText(location.href)" title="Share">⟶ Share</button>
+        <button class="primary" onclick="document.querySelector('.prose').scrollIntoView({behavior:'smooth'})">Read</button>
+      </div>
+    </div>
+    
+        <div class="art-ladder">
+          <div class="art-ladder-label">Series ladder<br>⟶ Pt. 1/5</div>
+          <div class="art-ladder-rungs"><div class="rung current"><div class="rung-num">Pt. 01</div><div class="rung-title">The Spaghetti Test — Why AI Can&#x27;t Taste Your Code</div></div><a href="developer-palate-series-part-2-of.html" class="rung " style="text-decoration:none"><div class="rung-num">Pt. 02</div><div class="rung-title">From Recipe Follower to Menu Creator</div></a><a href="developer-palate-series-part-3-of.html" class="rung " style="text-decoration:none"><div class="rung-num">Pt. 03</div><div class="rung-title">The Burnt Garlic Theory of Learning</div></a><a href="developer-palate-series-part-4-dinner.html" class="rung " style="text-decoration:none"><div class="rung-num">Pt. 04</div><div class="rung-title">Dinner Rush Decisions</div></a><a href="developer-palate-series-part-5-your.html" class="rung " style="text-decoration:none"><div class="rung-num">Pt. 05</div><div class="rung-title">Your Signature Dish</div></a></div>
+        </div>
+  </div>
+</div>
+
+<div class="art-body-wrap" id="body-wrap">
+  <div class="art-grid-wild">
+    <aside class="art-toc">
+      <div class="art-toc-head">In this essay</div>
+      <div class="toc-progress"><div class="toc-progress-fill" id="toc-fill" style="width:0%"></div></div>
+      <ol id="toc-list"></ol>
+      <div class="ink-meter">
+        <div class="meter-row"><span>Ink</span><span id="ink-pct">0%</span></div>
+        <div class="meter-bar"><div class="meter-fill" id="ink-fill" style="width:0%"></div></div>
+        <div class="meter-row" style="margin-top:10px;margin-bottom:0"><span>Time</span><span id="time-left">1 min</span></div>
+      </div>
+    </aside>
+
+    <article id="prose" class="prose wild">
+      <p data-pid="p1"><img alt="" src="https://substackcdn.com/image/fetch/$s_!1THZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa6456705-8891-43d4-859b-dbc5eb0e1e93_1024x608.png" /></p>
+<p data-pid="p2">Robot chef tasting their creation</p>
+<p data-pid="p3">Last week my 6&lsquo;4&rdquo; son asked me how I know when spaghetti is done. &ldquo;The package says 10-12 minutes,&rdquo; he said. I threw a noodle at the wall. It stuck. &ldquo;But mostly,&rdquo; I told him, &ldquo;you just know.&rdquo;</p>
+<p data-pid="p4">AI can tell you the starch gelatinization temperature is 55-85°C. It can calculate the perfect cooking time based on altitude and water salinity. What it can&rsquo;t do is taste that moment when al dente is just right.</p>
+<p data-pid="p5">Here&rsquo;s the thing about code: it has flavor too. That moment when abstraction tips into over-engineering? When a clever solution becomes too clever? When the architecture feels&hellip; off? That&rsquo;s your palate talking.</p>
+<p data-pid="p6">You&rsquo;ve been developing this palate for years. Every debugging session, every code review, every &ldquo;wait, something&rsquo;s wrong here&rdquo; moment. You&rsquo;ve trained on thousands of code samples - good, bad, and catastrophic.</p>
+<p data-pid="p7">AI can follow every design pattern perfectly. It can&rsquo;t feel when DRY becomes WET (Write Everything Twice would be simpler). It can&rsquo;t feel when elegant becomes complicated. It doesn&rsquo;t get that tingle when a race condition lurks in seemingly innocent async code.</p>
+<p data-pid="p8">Your ability to taste - to instantly know when code smells wrong - that&rsquo;s not being replaced. It&rsquo;s being amplified. AI handles the chopping and measuring. You decide if the spaghetti needs another minute.</p>
+<p data-pid="p9">That&rsquo;s your irreplaceable 10% -</p>
+<p data-pid="p10">[</p>
+<p data-pid="p11">Software Design: Tidy First?</p>
+<p data-pid="p12">90% of My Skills Are Now Worth $0</p>
+<p data-pid="p13">I tweeted about this yesterday &amp; it blew up…</p>
+<p data-pid="p14">Read more</p>
+<p data-pid="p15">3 years ago · 187 likes · 49 comments · Kent Beck</p>
+<p data-pid="p16">](https://tidyfirst.substack.com/p/90-of-my-skills-are-now-worth-0?utm_source=substack&amp;utm_campaign=post_embed&amp;utm_medium=web)</p>
+<p data-pid="p17">the skills that matter 1000x more. That&rsquo;s what makes you the chef, not the recipe follower.</p>
+      <div class="art-end">
+        <span class="glyph">⁂</span>
+        <div class="end-text">End of <strong>Pt. 1</strong> · Next: <strong>"From Recipe Follower to Menu Creator"</strong></div>
+      </div>
+    </article>
+
+    <aside class="art-margin">
+      <div class="harness-strip">
+        <div class="father-pip" id="harness-pip">Father · asleep</div>
+        <div class="row"><span class="lbl">visitor</span><span class="val">#<span class="accent" id="visitor-num">1,481</span></span></div>
+        <div class="row"><span class="lbl">progress</span><span class="val"><span id="progress-pct">0</span>%</span></div>
+        <div class="bar" id="progress-bar" style="--w:0%"></div>
+        <div class="row" style="margin-top:8px"><span class="lbl">on</span><span class="val" id="current-pid">—</span></div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="art-foot">
+    <div class="art-foot-card prev"><div class="label">⟵ Previous in series</div><div class="t" style="color:var(--ink-muted)">This is the first essay.</div><div class="meta">Begin here · Pt. 1 of 5</div></div>
+    <a href="developer-palate-series-part-2-of.html" class="art-foot-card" style="text-decoration:none"><div class="label">Next in series ⟶</div><div class="t">From Recipe Follower to Menu Creator</div><div class="meta">Pt. 2 of 5</div></a>
+  </div>
+</div>
+
+</div>
+
+<script>
+(function () {
+  var bodyWrap = document.getElementById('body-wrap');
+  var prose = document.getElementById('prose');
+  var tocFill = document.getElementById('toc-fill');
+  var inkFill = document.getElementById('ink-fill');
+  var inkPct = document.getElementById('ink-pct');
+  var timeLeft = document.getElementById('time-left');
+  var progressPct = document.getElementById('progress-pct');
+  var progressBar = document.getElementById('progress-bar');
+  var currentPid = document.getElementById('current-pid');
+  var visitorNum = document.getElementById('visitor-num');
+  var harnessPip = document.getElementById('harness-pip');
+  var fatherStatus = document.getElementById('father-status');
+  var tocItems = document.querySelectorAll('#toc-list li');
+  var sections = document.querySelectorAll('.prose h2[id]');
+  var paras = document.querySelectorAll('.prose [data-pid]');
+  var totalRead = '1 min';
+  var totalMin = parseInt(totalRead) || 9;
+
+  function scrollProgress() {
+    var rect = bodyWrap.getBoundingClientRect();
+    var total = rect.height - window.innerHeight;
+    var passed = -rect.top;
+    return total > 0 ? Math.max(0, Math.min(1, passed / total)) : 0;
+  }
+
+  function updateActiveSection() {
+    var current = null;
+    sections.forEach(function (s) {
+      if (s.getBoundingClientRect().top < 120) current = s.id;
+    });
+    tocItems.forEach(function (li, i) {
+      var s = sections[i];
+      if (!s) return;
+      var passed = current && Array.prototype.indexOf.call(sections, document.getElementById(current)) > i;
+      li.className = (s.id === current ? 'active ' : '') + (passed ? 'read' : '');
+    });
+  }
+
+  function updateCenterPara() {
+    var mid = window.innerHeight * 0.5;
+    var best = null, bestDist = Infinity;
+    paras.forEach(function (p) {
+      var r = p.getBoundingClientRect();
+      var c = r.top + r.height / 2;
+      var d = Math.abs(c - mid);
+      if (d < bestDist) { bestDist = d; best = p.dataset.pid; }
+    });
+    if (best && currentPid) currentPid.textContent = best;
+  }
+
+  function tick() {
+    var p = scrollProgress();
+    var pct = (p * 100).toFixed(1) + '%';
+    if (tocFill) tocFill.style.width = pct;
+    if (inkFill) inkFill.style.width = pct;
+    if (inkPct) inkPct.textContent = Math.round(p * 100) + '%';
+    if (timeLeft) timeLeft.textContent = (Math.max(0, Math.round(totalMin * (1 - p) * 10) / 10)) + 'm left';
+    if (progressPct) progressPct.textContent = Math.round(p * 100);
+    if (progressBar) progressBar.style.setProperty('--w', pct);
+
+    var status = p < 0.35 ? 'asleep' : p < 0.85 ? 'just woke up' : 'writing';
+    var color = status === 'asleep' ? 'var(--ink-muted)' : 'var(--accent)';
+    if (harnessPip) {
+      harnessPip.textContent = 'Father · ' + status;
+      harnessPip.style.color = 'var(--harness-accent)';
+    }
+    if (fatherStatus) {
+      fatherStatus.style.color = color;
+      fatherStatus.firstElementChild.style.background = color;
+      fatherStatus.lastChild.textContent = 'Father · ' + status;
+    }
+    updateActiveSection();
+    updateCenterPara();
+  }
+
+  var visitorBase = 1481;
+  setInterval(function () {
+    visitorBase += 1;
+    if (visitorNum) visitorNum.textContent = visitorBase.toLocaleString();
+  }, 13000);
+
+  window.addEventListener('scroll', tick, { passive: true });
+  window.addEventListener('resize', tick);
+  tick();
+})();
+</script>
+
+</body>
+</html>
