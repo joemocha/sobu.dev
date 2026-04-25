@@ -4,6 +4,39 @@ date: "2025-07-14"
 summary: "When Perfect Code Meets Business Reality"
 original: "https://sobu1.substack.com/p/developer-palate-series-part-4-dinner"
 tags: ["substack"]
+marginalia:
+  p1:
+    kind: note
+    who: "pass.ticket.fri-455"
+    body: 'Friday at the pass. <span class="father">Three tickets. Two complaints. One PM in tears.</span> The pass does not care about elegance. The pass cares what leaves first.'
+  p2:
+    kind: gloss
+    body: "AI sees three optimizations. You see one Friday."
+  p3:
+    kind: redaction
+    label: "redacted · the triage"
+    reveal: 'The demo bug fix was 14 lines. The checkout bug fix was 240 lines. <span class="father">Guess which one shipped on Friday.</span>'
+  p4:
+    kind: gloss
+    body: "Not code. Context. Different palate. Same nose."
+  p6:
+    kind: note
+    who: "tradeoff.calc"
+    body: '<span class="father">Cost of a missed CEO demo:</span> immeasurable. Cost of a deferred 0.01% checkout bug: a Tuesday morning. Cost of "perfect for everyone": Monday morning panic for one.'
+  p8:
+    kind: gloss
+    body: "Six hours of perfect equals one quarter of disaster."
+  p9:
+    kind: note
+    who: "patch.notify.schedule"
+    body: 'The imperfect-perfect playbook: <span class="father">patch the loud, document the quiet, notify the affected, schedule the rest.</span> No heroics. No martyrdom.'
+  p12:
+    kind: note
+    who: "chef.signature"
+    body: 'AI cooks by the book. <span class="father">You cook by the clock.</span> The book is right. The clock is honest.'
+footnotes:
+  "1": "The CEO had spent six weeks setting up the meeting. The bug was a misaligned chart label. Twenty minutes to fix. Career-altering if missed."
+  "2": "Twenty-three production fires logged that quarter. Eighteen during business hours. Five at three a.m. The five taught more than the eighteen."
 ---
 
 import { Image } from 'astro:assets';
@@ -24,7 +57,7 @@ import hero from '../../assets/blog/developer-palate-series-part-4-dinner/hero.p
 
 AI sees three optimization problems. It can generate perfect solutions for each bug. Elegant code, comprehensive tests, proper error handling. What it can't see is the bigger picture.
 
-Bug #1 affects the CEO's demo Monday. Bug #2 breaks checkout for 0.01% of users. Bug #3 makes the app "feel slow" but still works. AI ranks them by technical severity. You rank them by business reality.
+Bug #1 affects the CEO's demo Monday <span className="fn-hash" data-fn="1">demo:mon</span>. Bug #2 breaks checkout for 0.01% of users. Bug #3 makes the app "feel slow" but still works. AI ranks them by technical severity. You rank them by business reality.
 
 This is your palate at work. Not tasting code - tasting context.
 
@@ -32,7 +65,7 @@ This is your palate at work. Not tasting code - tasting context.
 
 You know the CEO's demo matters more than perfect code. You know that checkout bug can wait until Monday if you notify support. You know "feels slow" might matter more next week when the marketing campaign launches.
 
-These aren't technical decisions. They're taste decisions. Judgment calls honed by every production fire you've fought.
+These aren't technical decisions. They're taste decisions. Judgment calls honed by every production fire you've fought <span className="fn-hash" data-fn="2">fire:23</span>.
 
 AI would fix all three "properly." Take six hours. Miss the deadline. Technically correct, business disaster.
 
