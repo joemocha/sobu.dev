@@ -4,6 +4,44 @@ date: "2025-07-11"
 summary: "When Failure Becomes Instinct"
 original: "https://sobu1.substack.com/p/developer-palate-series-part-3-of"
 tags: ["substack"]
+marginalia:
+  p1:
+    kind: note
+    who: "chef.notes.burnt-garlic"
+    body: 'Every cook has the same flinch reflex. <span class="father">It comes back at the speed of smell, not thought.</span>'
+  p2:
+    kind: redaction
+    label: "redacted · the AWS migration"
+    reveal: 'Three senior engineers. One full week. <span class="father">Months of goodwill capital incinerated.</span> The fix was four lines of IAM policy. The lesson was twelve months of mandatory pre-flight checklists.'
+  p4:
+    kind: gloss
+    body: "Best systems have gaps. Best engineers know where they hide."
+  p5:
+    kind: note
+    who: "ai.amnesia"
+    body: 'Every conversation a clean room. <span class="father">No scars.</span> No flinches. Pattern recognition without pattern memory.'
+  p6:
+    kind: note
+    who: "junior.hot-stove"
+    body: 'You cannot read your way to a flinch. <span class="father">You have to touch something hot</span> while a senior is in the room to bandage it.'
+  p8:
+    kind: gloss
+    body: "Less code writing. More disaster prevention. The tradeoff favors the scarred."
+  p15:
+    kind: note
+    who: "teach.scars"
+    body: 'Every junior you save from your mistake is a <span class="father">force multiplier.</span> Every junior you do not save is two engineers re-learning the same lesson.'
+  p16:
+    kind: redaction
+    label: "redacted · the five-second difference"
+    reveal: 'Five seconds = ten years. <span class="father">A decade of burnt garlic compressed into a flinch.</span> No model has lived ten years yet. None will until they can be wrong and remember it.'
+  p18:
+    kind: note
+    who: "chef.signature"
+    body: 'Hero vs teacher. <span class="father">The hero is alone.</span> The teacher is everywhere.'
+footnotes:
+  "1": "Three senior engineers, one full week, months of goodwill capital. The fix was four lines of IAM policy. The lesson was twelve months of pre-flight checklists."
+  "2": "81 million rows in production. The query came from a junior copying a snippet from staging. Three minutes of downtime. Two hours of incident review. Zero people ever did it again."
 ---
 
 import { Image } from 'astro:assets';
@@ -22,13 +60,13 @@ import hero from '../../assets/blog/developer-palate-series-part-3-of/hero.png';
 
 Every chef has burnt garlic. That acrid smell hits, and you know instantly - too far, can't save it. Start over. But here's the thing: you never forget that smell.
 
-I've got my own burnt garlic collection. That "simple" AWS migration from on-prem? Everything tested perfectly until Monday morning when our weekly batch job failed. Turns out we forgot to whitelist the new IP addresses. Cost us three senior engineers' entire week, endless status meetings explaining up the chain, and burned through months of goodwill capital. THEREFORE the next migration got scrutinized like a moon landing. BUT the three similar issues I've prevented since? Invisible wins worth 10x more. Your burnt garlic collection is a P&L shield that never shows up in metrics.
+I've got my own burnt garlic collection. That "simple" AWS migration from on-prem <span className="fn-hash" data-fn="1">aws:wk</span>? Everything tested perfectly until Monday morning when our weekly batch job failed. Turns out we forgot to whitelist the new IP addresses. Cost us three senior engineers' entire week, endless status meetings explaining up the chain, and burned through months of goodwill capital. THEREFORE the next migration got scrutinized like a moon landing. BUT the three similar issues I've prevented since? Invisible wins worth 10x more. Your burnt garlic collection is a P&L shield that never shows up in metrics.
 
 **Your failures are your competitive advantage.**
 
 Sure, we should have had better guardrails. The best organizations build systems to prevent disasters. BUT even the best systems have gaps. Your experience tells you where those gaps hide. That IP whitelisting issue? We had runbooks. We had checklists. But nobody thought to check if the weekly batch job's source IPs would change in AWS.
 
-AI starts fresh every conversation. Load context, get brilliant responses, conversation ends - everything forgotten. THEREFORE it can't build the gut instinct that makes you flinch when you see `SELECT * FROM users` without a LIMIT. BUT here's what matters more: AI can't feel the tension when the PM pushes for a "quick fix." Can't sense when the team is about to burn out. Can't notice that the junior who's been quiet all week is probably stuck. These human sensors matter more as our tools get smarter.
+AI starts fresh every conversation. Load context, get brilliant responses, conversation ends - everything forgotten. THEREFORE it can't build the gut instinct that makes you flinch when you see `SELECT * FROM users` <span className="fn-hash" data-fn="2">sql:81m</span> without a LIMIT. BUT here's what matters more: AI can't feel the tension when the PM pushes for a "quick fix." Can't sense when the team is about to burn out. Can't notice that the junior who's been quiet all week is probably stuck. These human sensors matter more as our tools get smarter.
 
 This is why juniors still need to touch some hot stoves. Not maliciously - but they need their own burnt garlic collection. Those visceral failures that create instant pattern recognition. The kind you feel in your gut before your brain catches up. AI can generate perfect code, BUT it can't help them develop the instincts that'll save them at 3am.
 
