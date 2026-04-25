@@ -9,11 +9,13 @@
     </div>
     <div class="topbar-center">Builder · Operator · Engineer</div>
     <nav class="topbar-right">
-      <a href="#hats">Hats</a>
-      <a href="#taskfast">TaskFast</a>
-      <a href="#work">Work</a>
-      <a href="#writing">Writing</a>
-      <a href="#contact">Contact</a>
+      <div class="topbar-links">
+        <a href="#hats">Hats</a>
+        <a href="#taskfast">TaskFast</a>
+        <a href="#work">Work</a>
+        <a href="#writing">Writing</a>
+        <a href="#contact">Contact</a>
+      </div>
       <div class="mode-swatch" role="radiogroup" aria-label="Color mode">
         <button type="button" class="mode-dot" data-mode="system" role="radio" aria-checked="false" aria-label="System">
           <span class="mode-glyph"></span>
@@ -46,13 +48,59 @@
       });
     };
     apply(mode);
+    const swatch = document.querySelector('.mode-swatch');
+    const isMobile = () => window.matchMedia('(max-width: 640px)').matches;
+    const collapse = () => {
+      if (!swatch) return;
+      swatch.classList.remove('is-expanded');
+      swatch.setAttribute('aria-expanded', 'false');
+    };
+    const expand = () => {
+      if (!swatch) return;
+      swatch.classList.add('is-expanded');
+      swatch.setAttribute('aria-expanded', 'true');
+    };
+    if (swatch) swatch.setAttribute('aria-expanded', 'false');
     document.addEventListener('click', (e) => {
       const btn = e.target.closest && e.target.closest('.mode-dot');
-      if (!btn) return;
-      const m = btn.getAttribute('data-mode');
-      if (!valid.includes(m)) return;
-      try { localStorage.setItem(KEY, m); } catch (_) {}
-      apply(m);
+      if (btn) {
+        if (isMobile() && swatch && !swatch.classList.contains('is-expanded')) {
+          expand();
+          e.preventDefault();
+          return;
+        }
+        const m = btn.getAttribute('data-mode');
+        if (!valid.includes(m)) return;
+        try { localStorage.setItem(KEY, m); } catch (_) {}
+        apply(m);
+        if (isMobile()) collapse();
+        return;
+      }
+      if (swatch && swatch.classList.contains('is-expanded') && !(e.target.closest && e.target.closest('.mode-swatch'))) {
+        collapse();
+      }
     });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && swatch && swatch.classList.contains('is-expanded')) collapse();
+    });
+
+    const links = document.querySelector('.topbar-links');
+    if (links) {
+      const updateFades = () => {
+        const max = links.scrollWidth - links.clientWidth;
+        if (max <= 1) {
+          links.style.setProperty('--fade-l', '0px');
+          links.style.setProperty('--fade-r', '0px');
+          return;
+        }
+        const left = links.scrollLeft > 4;
+        const right = links.scrollLeft < max - 4;
+        links.style.setProperty('--fade-l', left ? '20px' : '0px');
+        links.style.setProperty('--fade-r', right ? '20px' : '0px');
+      };
+      links.addEventListener('scroll', updateFades, { passive: true });
+      window.addEventListener('resize', updateFades);
+      requestAnimationFrame(updateFades);
+    }
   })();
 </script>
