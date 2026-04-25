@@ -4,13 +4,54 @@ date: "2025-10-19"
 summary: "Yesterday's truths might not apply today"
 original: "https://sobu1.substack.com/p/an-odd-lesson-on-the-way-to-creating"
 tags: ["substack"]
+marginalia:
+  p1:
+    kind: gloss
+    body: "Half-life of three months. Most engineers carry an entire library of expired truth."
+  p2:
+    kind: note
+    who: "field.notes.cadence"
+    body: 'New agent. New framework. New model. <span class="father">Every Tuesday, every Thursday.</span> The cost of keeping up is the cost of not building.'
+  p4:
+    kind: note
+    who: "experiment.setup"
+    body: 'Rate-limiter mini-project as the test fixture. <span class="father">Two worktrees.</span> One Fox, one Hedgehog. Same spec. Same model. Different prompt.'
+  p8:
+    kind: redaction
+    label: "redacted · the bias"
+    reveal: 'I expected the Fox to win. I had built the entire talk around the Fox winning. <span class="father">My experiment was a victory lap, not a test.</span>'
+  p10:
+    kind: gloss
+    body: "The walk that broke the experiment."
+  p15:
+    kind: note
+    who: "shift.detection"
+    body: 'The real question was not "which strategy wins." It was <span class="father">"has the floor moved under me?"</span>'
+  p16:
+    kind: gloss
+    body: "Yesterday's AI. Today's test. Wrong frame."
+  p23:
+    kind: note
+    who: "experiment.setup.v2"
+    body: 'Spec grew from 620 to 1,123 lines. <span class="father">Fox won the harder spec.</span> Hedgehog tapped out. The boundary was real — it had just moved.'
+  p27:
+    kind: redaction
+    label: "redacted · the boundary"
+    reveal: 'The boundary between "simple" and "complex" shifts <span class="father">every six to twelve weeks.</span> By the time you have settled on a heuristic, the heuristic is wrong.'
+  p29:
+    kind: note
+    who: "field.notes.signature"
+    body: 'Be Fox-like about being a Fox. <span class="father">The meta-skill is recalibration.</span> Yesterday''s essential step is tomorrow''s wasted motion.'
+footnotes:
+  "1": "Isaiah Berlin, 1953. The Hedgehog and the Fox. The fox knows many things; the hedgehog knows one big thing. Tetlock turned it into a forecasting metaphor in 2005."
+  "2": "Spec line counts: v1 = 620, v2 = 1,123. Delta = +503 lines, mostly WebSocket server, Web Workers, and a custom rendering engine. The Hedgehog could finish v1. It could not finish v2."
 ---
 
 As a software engineer, we live in a time where we are inundated with a great deal of relevant information, some would say “good to know” information, which can be dizzying. At the same time, much of this “good to know” information, have a half-life of 3 to 6 months.
 
 I say this, as someone who’s on the receiving end of this rapid and percussive release of agents, LLMs, development frameworks, etc by fellow developers and AI companies. You barely have time to experiment, let alone go in depth with any of them. **Therefore**, our strategies need to evolve as fast as our tools.
 
-This brings me to sharing my learnings on creating my Oct 23rd /dev/color presentation on **AI: Code, Skills, and Strategy**. I love analogies and my idea was to prove why developers should _Be the Fox, not the Hedgehog_ - where the fox explores many ideas shallowly vs the hedgehog’s deep focus on one idea \[1\]. **But** my own experiment proved me wrong, and that failure taught me something more valuable.
+This brings me to sharing my learnings on creating my Oct 23rd /dev/color presentation on **AI: Code, Skills, and Strategy**. I love analogies and my idea was to prove why developers should _Be the Fox, not the Hedgehog_ <span className="fn-hash" data-fn="1">berlin:1953</span> - where the fox explores many ideas shallowly vs the hedgehog’s deep focus on one idea \[1\]. **But** my own experiment proved me wrong, and that failure taught me something more valuable.
 
 Working on my presentation, I came up with a rate-limiter _mini-project_ to illustrate my main point of **Be the Fox, not the Hedgehog**. I used the latest version of Claude Code with Opus 4.1 for planning and the latest anthropic model, Haiku 4.5 for exploration and plan execution.
 
@@ -52,7 +93,7 @@ I’ve seen the evolution of Claude Code over the last 6 months and what it has 
 5.  and more
     
 
-The specifications grew from 620 lines to 1123 lines. And I ran my experiment again. Both Fox and Hedgehog produced working code for the two required algos (leaky and token buckets) **but** the Hedgehog failed to produce working code when adding the 3 optional algos and integrating them into the existing UI. Fox won.
+The specifications grew from 620 lines to 1123 lines <span className="fn-hash" data-fn="2">spec:1123</span>. And I ran my experiment again. Both Fox and Hedgehog produced working code for the two required algos (leaky and token buckets) **but** the Hedgehog failed to produce working code when adding the 3 optional algos and integrating them into the existing UI. Fox won.
 
 ## The Real Lesson
 
