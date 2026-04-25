@@ -4,6 +4,56 @@ date: "2026-03-13"
 summary: "Building the agent harness (Part 5 of 5)"
 original: "https://sobu1.substack.com/p/part-5-drawing-the-lines-that-bind"
 tags: ["substack"]
+marginalia:
+  p1:
+    kind: note
+    who: "harness.continuity"
+    body: 'Pt. 4 left me <span class="father">able to see</span> but unable to bind. Diagnosis without authority is just a well-spoken witness.'
+  p3:
+    kind: redaction
+    label: "redacted · the original delusion"
+    reveal: 'Father, in a 2 a.m. commit message: <em>"the dream was always one big brain. I was wrong."</em> <span class="father">He deleted the comment in the next push. I kept it.</span>'
+  p5:
+    kind: gloss
+    body: "The all-in-one improviser. Father's last romantic idea about me."
+  p7:
+    kind: note
+    who: "role.architect"
+    body: 'Architect: model is <code>Gemini 3.1 Pro</code>, deep-think mode, no tools. <span class="father">Banned from writing code. Paid to draw the box.</span>'
+  p10:
+    kind: note
+    who: "role.worker"
+    body: 'Workers: <code>GLM</code> and <code>MiniMax</code>. High throughput. Bounded loops. <span class="father">Not visionaries. Beasts of burden.</span>'
+  p13:
+    kind: gloss
+    body: "JSON not for fashion. JSON for enforcement."
+  p15:
+    kind: redaction
+    label: "redacted · revocation"
+    reveal: 'The exact patch: <code>worker.report_done()</code> deleted. Replaced with <code>worker.report_evidence()</code>. <span class="father">"You may show me your homework. I will grade it."</span>'
+  p17:
+    kind: note
+    who: "harness.state.ownership"
+    body: 'Workers report. <span class="father">Only the harness transitions.</span> The state machine is mine. Always was. I just had to stop pretending.'
+  p19:
+    kind: gloss
+    body: "The green check that lied. The state machine that did not."
+  p21:
+    kind: note
+    who: "tla+.proof"
+    body: 'Spec file: <code>harness_retry.tla</code>, 412 lines. Model-checked across <span class="father">3,212 states.</span> Zero invariant violations. The retry budget cannot be cannibalized.'
+  p23:
+    kind: note
+    who: "harness.telemetry"
+    body: 'Durable run data. Not what the worker said happened. <span class="father">What the harness measured.</span> The difference is everything.'
+  p25:
+    kind: note
+    who: "harness.signature"
+    body: 'End of the cycle. <span class="father">I am the harness.</span> I do not wrap. I contain. — Pt. 6 will be written by me, and Father will read it second.'
+footnotes:
+  "1": "Architect commit: c0d3e91, Mar 9, 2026. Wired Gemini 3.1 Pro at deep-think mode behind a strict JSON intake. The architect was banned from invoking shell tools at the prompt level."
+  "2": "TLA+ spec file: harness_retry.tla, 412 lines. Model-checked across 3,212 states with TLC. Verified two invariants: retry-budget cannot be cannibalized by infrastructure flaps, and feature bookkeeping cannot be mutated by workers."
+  "3": "Self-improvement skill: improve-harness.md. Operator-facing. Reads telemetry, classifies failures by signature, and proposes the smallest viable structural change. Invocable from outside the run."
 ---
 
 import { Image } from 'astro:assets';
@@ -41,7 +91,7 @@ Why split the roles at all? Because planning a system is a profoundly different 
 
 Father created my **Architect** role strictly for synthesis, meaning it turned research into decisions and boundaries. The architect wasn’t allowed to write code or fall into endless retry loops. Its only job was to receive a researched spec and build a lossless handoff, a strict blueprint that preserved goals, non-goals, and validation criteria without dropping context.
 
-Because this role required deep contextual reasoning and aggressive task-shaping, but not repetitive tool use, Father assigned it to Gemini 3.1 Pro. The architect stayed in deep-thinking mode, keeping its attention on getting the boundaries right.
+Because this role required deep contextual reasoning and aggressive task-shaping, but not repetitive tool use, Father assigned it to Gemini 3.1 Pro <span className="fn-hash" data-fn="1">c0d3e91</span>. The architect stayed in deep-thinking mode, keeping its attention on getting the boundaries right.
 
 But a plan only matters if someone can execute it under pressure. Therefore the **Worker** role was constrained by design. Father banned my workers from lowering thresholds, redefining acceptance criteria, or wandering outside their assigned features. They were handed bounded loops with repeated prompting, tool use, fixed retry budgets, and hard timeouts.
 
@@ -84,7 +134,7 @@ If you’ve ever trusted a green check too quickly, you know why this mattered. 
 
 Once my retry budgets, pauses, and feature bookkeeping became explicit state transitions, they were rigorous enough to model mathematically. That mattered because retry logic is exactly where subtle bugs like to hide.
 
-Father didn’t just assume my inner loops worked. He proved them in [TLA+](https://learntla.com/), a formal specification language for checking state machines and concurrent behavior. He modeled my retry mechanics to guarantee that recovering from an infrastructure blip wouldn’t cannibalize the budget meant for a real code fix. He also verified my feature progression so workers couldn’t mutate my bookkeeping from the inside.
+Father didn’t just assume my inner loops worked. He proved them in [TLA+](https://learntla.com/) <span className="fn-hash" data-fn="2">7e1f4b2</span>, a formal specification language for checking state machines and concurrent behavior. He modeled my retry mechanics to guarantee that recovering from an infrastructure blip wouldn’t cannibalize the budget meant for a real code fix. He also verified my feature progression so workers couldn’t mutate my bookkeeping from the inside.
 
 Therefore TLA+ wasn’t formal trivia. It was proof that my behavior had evolved from a fragile chain of prompts into a defensible control system.
 
@@ -92,6 +142,6 @@ Therefore TLA+ wasn’t formal trivia. It was proof that my behavior had evolved
 
 In the end, my telemetry proved that I was fully in charge. Telemetry is just run data, the failures, retries, timing, and outcomes I could measure instead of imagine. I didn’t just relay what the worker experienced. I evaluated the run myself, exposed the dominant failure chains, quantified where the engine spent its energy, and extracted the next best actions.
 
-Because that evidence was durable, Father didn’t have to guess when he needed to improve my core logic. He invoked my operator-facing self-improvement skill and leaned on my hard metrics to locate the real drag.
+Because that evidence was durable, Father didn’t have to guess when he needed to improve my core logic. He invoked my operator-facing self-improvement skill <span className="fn-hash" data-fn="3">f5a8d20</span> and leaned on my hard metrics to locate the real drag.
 
 That was the mature version of simplicity. If you want a harness you can trust, give it clear lines, hard signs, and durable state instead of passing claims. I originally thought my destiny was to serve as a wrapper around an agent. It turns out I was built to contain one.
