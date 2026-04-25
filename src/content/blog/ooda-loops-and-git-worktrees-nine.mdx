@@ -4,6 +4,55 @@ date: "2025-08-27"
 summary: "Feed It Wisely: A Battle-Scarred Guide to Context Windows, Agent Specialists, and Actually Shipping"
 original: "https://sobu1.substack.com/p/ooda-loops-and-git-worktrees-nine"
 tags: ["substack"]
+marginalia:
+  p1:
+    kind: note
+    who: "field.notes.feeding-day"
+    body: 'A spec that ticked every box. <span class="father">Every box is also a permission slip.</span> Every permission is also an instruction to expand.'
+  p3:
+    kind: gloss
+    body: "The beast keeps eating. Nobody tagged you out."
+  p5:
+    kind: redaction
+    label: "redacted · the production-ready prototype"
+    reveal: 'Kubernetes for a local script. <span class="father">Helm charts for a hello world.</span> A retry policy on a function that runs once at boot. The model was being helpful in the only language it knows: more.'
+  p6:
+    kind: note
+    who: "elephant.knife"
+    body: 'A knife and a fork. <span class="father">Or a chainsaw, if you let the model pick.</span> The crime is not the tool. The crime is biting before cutting.'
+  p13:
+    kind: gloss
+    body: "Promotion, not replacement. Promotions still demand more."
+  p14:
+    kind: note
+    who: "ooda.boyd.1976"
+    body: 'Boyd''s OODA was never about speed. <span class="father">It was about forcing the opponent into an obsolete picture of the world.</span> Faster cycles are the lever, not the goal.'
+  p20:
+    kind: note
+    who: "closes.loop"
+    body: 'The model observes everything and understands nothing. <span class="father">You are the orient stage.</span> Without you, the loop is open and bleeding cycles.'
+  p22:
+    kind: gloss
+    body: "One-shot is gambling. The dopamine is the trap."
+  p31:
+    kind: redaction
+    label: "redacted · the 49k tokens"
+    reveal: 'Token bleed at session start: <span class="father">49,000.</span> Context7 ~14k. Zen ~9k. Serena ~17k. Playwright ~9k. After audit: ~3k baseline. The cheapest 46k I have ever recovered.'
+  p35:
+    kind: note
+    who: "scar.api-doesnt-exist"
+    body: '500 lines against a function that does not exist. <span class="father">The fastest way to write the wrong code is to write a lot of it without checking.</span>'
+  p44:
+    kind: gloss
+    body: "Conductor, not violinist. The bow stays in the case."
+  p54:
+    kind: note
+    who: "field.notes.signature"
+    body: 'Two words. <span class="father">Feed it wisely.</span> Everything else is footnotes on those two words.'
+footnotes:
+  "1": "John Boyd, Patterns of Conflict, 1976. The OODA loop began as fighter-pilot doctrine. The faster pilot wins not by being faster — by forcing the other pilot to operate inside an obsolete picture of the world."
+  "2": "Token bleed at session start: 49k. MCP server breakdown: Context7 ~14k, Zen ~9k, Serena ~17k, Playwright ~9k. After audit and disable: ~3k baseline. The cheapest 46k tokens recovered all year."
+  "3": "git worktree add ../feature-x feature-x. One repository, multiple working directories, multiple branches checked out simultaneously. The cure for two agents touching the same file."
 ---
 
 One user story. A simple chat interface spec that ticked every box. Clear acceptance criteria. GraphQL schemas. Database models. Even ASCII diagrams showing the UI flow.
@@ -38,7 +87,7 @@ But here's the cognitive flip: steering a hyper-intelligent partner requires MOR
 
 ## The OODA Loop at Light Speed
 
-Colonel John Boyd developed OODA for fighter pilots: Observe → Orient → Decide → Act. In dogfights, the pilot who cycles through OODA faster wins.
+Colonel John Boyd developed OODA for fighter pilots: Observe → Orient → Decide → Act <span className="fn-hash" data-fn="1">boyd:1976</span>. In dogfights, the pilot who cycles through OODA faster wins.
 
 Your AI moves at computational speed. BUT its OODA loop is broken without you:
 
@@ -87,7 +136,7 @@ Each of these lessons was paid for in lost time, corrupted files, or spectacular
 
 ### Lesson 1: Context Window Bankruptcy
 
-I once watched 49k tokens vanish. Gone before I typed a word. Turned out my MCP servers were eating 25% of my context—context7, Zen, Serena, Playwright. Now I run `/context` like checking my bank balance. YAGNI isn't just for code—it's for tools.
+I once watched 49k tokens vanish <span className="fn-hash" data-fn="2">ctx:49k</span>. Gone before I typed a word. Turned out my MCP servers were eating 25% of my context—context7, Zen, Serena, Playwright. Now I run `/context` like checking my bank balance. YAGNI isn't just for code—it's for tools.
 
 ### Lesson 2: The Schizophrenic CLAUDE.md
 
@@ -99,7 +148,7 @@ My frontend CLAUDE.md said "use npm." My backend said "use yarn." The root said 
 
 ### Lesson 4: The Agent Orchestra Disaster
 
-Two agents. Same file. Different approaches. proof-guided-coder implementing business logic with formal verification. qa-engineer writing tests for the same code. The merge conflict looked like abstract art. Now my agents work in parallel universes—git worktree keeps them isolated until they're ready to harmonize.
+Two agents. Same file. Different approaches. proof-guided-coder implementing business logic with formal verification. qa-engineer writing tests for the same code. The merge conflict looked like abstract art. Now my agents work in parallel universes—git worktree <span className="fn-hash" data-fn="3">wt:parallel</span> keeps them isolated until they're ready to harmonize.
 
 ### Lesson 5: OODA Loops Save Sanity
 
