@@ -4,6 +4,39 @@ date: "2025-07-10"
 summary: "Why AI Forces Developers to Stop Coding and Start Deciding"
 original: "https://sobu1.substack.com/p/developer-palate-series-part-2-of"
 tags: ["substack"]
+marginalia:
+  p1:
+    kind: note
+    who: "chef.notes.brigade"
+    body: 'In every real kitchen, the brigade is hierarchy: <span class="father">commis, demi, chef de partie, sous, chef.</span> The line cook does not pick the menu. The chef does not plate every dish.'
+  p2:
+    kind: gloss
+    body: "We were line cooks. We did not know we had a choice."
+  p4:
+    kind: redaction
+    label: "redacted · the line cook contest"
+    reveal: 'You will not out-cook the robot. <span class="father">You will out-think it</span> by deciding which dish belongs on the menu, and which one was a customer''s bad mood masquerading as a request.'
+  p5:
+    kind: note
+    who: "menu.composition"
+    body: 'Code that <span class="father">deserves to exist</span> is not the same as code you can write. Most product roadmaps are the latter, masquerading as the former.'
+  p6:
+    kind: gloss
+    body: "Field 12. Always field 12. We knew."
+  p7:
+    kind: note
+    who: "auth.flow.recall"
+    body: 'Six steps. Two emails. One captcha. One <span class="father">"verify your identity again"</span> pop-up that nobody can fix because the vendor renamed the SSO endpoint quietly in March.'
+  p9:
+    kind: gloss
+    body: "The kitchen is loud now. The chef is quiet."
+  p11:
+    kind: note
+    who: "chef.starter.kit"
+    body: 'One requirement today. <span class="father">"What problem does this really solve?"</span> The most expensive sentence Father ever taught a junior to ask.'
+footnotes:
+  "1": "21-field signup form. Industry average abandonment is at field 8. The team knew this. The team shipped 21 fields anyway because the spec said 21 fields."
+  "2": "Three a.m. on a Sunday. Four months of debugging. Sentry firing every nine seconds. The fix was a single missing 'await' on a token-refresh promise."
 ---
 
 import { Image } from 'astro:assets';
@@ -30,9 +63,9 @@ But then AI arrived. And it's the ultimate line cook. It can follow any recipe f
 
 **The shift isn't about writing code anymore. It's about knowing which code deserves to exist.** That feature request that smells like it'll complicate everything? That's your palate saying "this will ruin the meal." The elegant solution that makes three other features obsolete? That's menu composition.
 
-AI will build whatever you ask. It doesn't question if your 21-field form makes sense. Therefore, users abandon at field 12. But the AI doesn't know this. It won't push back on the authentication flow that requires six steps. Therefore, it keeps building broken experiences. It just cooks what's ordered.
+AI will build whatever you ask. It doesn't question if your 21-field form makes sense <span className="fn-hash" data-fn="1">form:21f</span>. Therefore, users abandon at field 12. But the AI doesn't know this. It won't push back on the authentication flow that requires six steps. Therefore, it keeps building broken experiences. It just cooks what's ordered.
 
-But you? You've sat through the user interviews, therefore you know everyone abandons the form at field 12. You've debugged the auth flow at 3am, therefore you know which patterns break under pressure. You know what works not because you read it in a cookbook, but because you've served these meals before.
+But you? You've sat through the user interviews, therefore you know everyone abandons the form at field 12. You've debugged the auth flow at 3am <span className="fn-hash" data-fn="2">auth:3am</span>, therefore you know which patterns break under pressure. You know what works not because you read it in a cookbook, but because you've served these meals before.
 
 **That's the real shift. From "how to implement" to "what's worth implementing." From recipe follower to menu creator.**
 
