@@ -1,0 +1,60 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import TopBar from '../components/TopBar.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import MarginNote from '../components/MarginNote.astro';
+---
+<SiteLayout title="404 — You missed your stop · sobu.dev" description="The page you were looking for is not at this station.">
+
+<TopBar />
+
+<section class="notfound" id="top">
+  <div class="wrap">
+    <div class="notfound-board">
+      <div class="notfound-board-row">
+        <span class="nf-time">— : —</span>
+        <span class="nf-route">REQUESTED ROUTE</span>
+        <span class="nf-status nf-missed">MISSED</span>
+      </div>
+      <div class="notfound-board-row dim">
+        <span class="nf-time">NOW</span>
+        <span class="nf-route">sobu.dev — all platforms</span>
+        <span class="nf-status nf-onboard">BOARDING</span>
+      </div>
+    </div>
+
+    <h1 class="notfound-headline">
+      You missed your <em>stop.</em>
+    </h1>
+
+    <p class="notfound-dek">
+      The conductor announced it twice. You were reading. The doors closed.
+      Wherever you meant to get off — it's not <em>here.</em>
+      <span class="dim">(Possibly because here doesn't exist.)</span>
+    </p>
+
+    <div class="notfound-stops">
+      <div class="notfound-stops-label">Stops still in service</div>
+      <ul class="notfound-stops-list">
+        <li><a href="/">↩ Central Station</a><span class="dim"> · the homepage</span></li>
+        <li><a href="/notes.html">→ Notes Junction</a><span class="dim"> · short observations, off-cuts</span></li>
+        <li><a href="/#writing">→ Writing Terminal</a><span class="dim"> · the Palate &amp; Harness essays</span></li>
+        <li><a href="/#taskfast">→ TaskFast Platform</a><span class="dim"> · the current bet</span></li>
+        <li><a href="mailto:onyekwelu@obukwelu.com">→ Lost &amp; Found</a><span class="dim"> · email me directly</span></li>
+      </ul>
+    </div>
+
+    <a class="notfound-cta" href="/">Catch the next train →</a>
+
+    <MarginNote top={60}>
+      <p>Father will not slow the train for <span class="father">404s.</span></p>
+      <p style="margin-top:8px" class="dim">
+        He says: "If you missed it once, the next loop comes around in roughly the same amount of time it takes to read a Palate essay. Use it well."
+      </p>
+    </MarginNote>
+  </div>
+</section>
+
+<SiteFooter />
+
+</SiteLayout>
