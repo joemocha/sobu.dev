@@ -414,6 +414,14 @@
 .prose figure img {
   margin: 0;
 }
+
+/* Defensive width caps so wide content can't break mobile layout */
+.prose { overflow-wrap: anywhere; word-break: break-word; }
+.prose pre,
+.prose table,
+.prose iframe,
+.prose video { max-width: 100%; }
+.prose pre { overflow-x: auto; }
 .prose figcaption {
   font-family: var(--mono);
   font-size: 12px;

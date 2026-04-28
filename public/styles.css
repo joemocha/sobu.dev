@@ -141,7 +141,7 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; overflow-x: clip; }
+html { scroll-behavior: smooth; overflow-x: hidden; overflow-x: clip; }
 
 body {
   background: var(--bg);
@@ -152,6 +152,7 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+  max-width: 100vw;
 }
 
 ::selection { background: var(--accent); color: var(--paper); }
@@ -907,7 +908,9 @@ section {
 /*  CONTACT                                                         */
 /* ============================================================== */
 .contact {
-  padding: 100px 0 120px;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 100px 48px 120px;
   display: grid;
   grid-template-columns: 120px 1fr;
   gap: 40px;
@@ -1040,12 +1043,13 @@ section {
   margin: 0 auto;
   padding: 0 48px;
   display: grid;
-  grid-template-columns: 120px 1fr auto;
+  grid-template-columns: 120px minmax(0, 1fr) auto;
   gap: 32px;
   align-items: center;
 }
+.harness-banner-inner > * { min-width: 0; }
 .harness-banner .prompt { color: var(--harness-accent); font-weight: 600; }
-.harness-banner .body { color: var(--harness-ink); }
+.harness-banner .body { color: var(--harness-ink); min-width: 0; overflow-wrap: anywhere; }
 .harness-banner .body .dim { color: var(--harness-dim); }
 .harness-banner .meta {
   color: var(--harness-dim);
@@ -1093,6 +1097,7 @@ section {
   .harness-margin, .margin-note { display: none !important; }
   .topbar-inner { padding: 12px 24px; }
   .wrap { padding: 0 24px; }
+  .contact { padding-left: 24px; padding-right: 24px; }
   .section-head, .hats, .contact, .work-grid, .writing-grid, .case { grid-template-columns: 1fr; gap: 20px; }
   .section-num { display: none; }
   .hat { grid-template-columns: 60px 1fr; }
@@ -1305,7 +1310,7 @@ section {
   .essay-date { font-size: 10px; }
 
   /* Contact */
-  .contact { padding: 56px 0 72px; gap: 12px; }
+  .contact { padding: 56px 16px 72px; gap: 12px; }
   .contact-headline { font-size: clamp(36px, 9vw, 56px); margin-bottom: 28px; }
   .contact-headline a {
     padding: 4px 0;
