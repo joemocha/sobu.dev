@@ -49,9 +49,6 @@ export function seriesFor(slug: string): SeriesInfo {
 }
 
 export function articleHref(slug: string): string {
-  // Harness Pt 1 keeps its bespoke route at /article.html; everything else
-  // lives under /articles/<slug>.html.
-  if (slug === 'i-thought-i-was-building-a-simple') return '/article.html';
   return `/articles/${slug}.html`;
 }
 

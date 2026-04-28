@@ -21,7 +21,6 @@ function rehypeParagraphIds() {
 }
 
 // File-format build so URLs stay verbatim with the previous static site:
-//   src/pages/article.astro          -> /article.html
 //   src/pages/articles/[slug].astro  -> /articles/<slug>.html
 export default defineConfig({
   site: 'https://sobu.dev',
@@ -36,5 +35,10 @@ export default defineConfig({
   },
 
   trailingSlash: 'never',
-  adapter: cloudflare({ imageService: 'compile' })
+  adapter: cloudflare({ imageService: 'compile' }),
+
+  redirects: {
+    '/article': '/articles/i-thought-i-was-building-a-simple.html',
+    '/article.html': '/articles/i-thought-i-was-building-a-simple.html',
+  },
 });

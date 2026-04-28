@@ -12,10 +12,7 @@ import { seriesFor, fmtDate, readTime } from '../../data/series.ts';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  // The bespoke Harness Pt 1 lives at /article.html; exclude it from this route.
-  return posts
-    .filter((p) => p.id !== 'i-thought-i-was-building-a-simple')
-    .map((p) => ({ params: { slug: p.id }, props: { post: p } }));
+  return posts.map((p) => ({ params: { slug: p.id }, props: { post: p } }));
 }
 
 const { post } = Astro.props;
