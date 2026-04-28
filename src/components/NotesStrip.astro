@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import { KIND_LABELS, noteHref, fmtNoteDateShort, hostnameOf } from '../data/notes.ts';
+
+const all = (await getCollection('notes')).sort((a, b) =>
+  a.data.date < b.data.date ? 1 : -1
+);
+const latest = all.slice(0, 5);
+
+function teaserOf(note: (typeof latest)[number]): string {
+  const d = note.data;
+  switch (d.kind) {
+    case 'status':
+      return (note.body ?? '').replace(/\s+/g, ' ').trim().slice(0, 110);
+    case 'quote':
+      return `"${d.quote}" — ${d.source}`;
+    case 'link':
+      return d.title ?? hostnameOf(d.original);
+    case 'til':
+      return d.title;
+    case 'aside':
+      return d.title ?? (note.body ?? '').replace(/\s+/g, ' ').trim().slice(0, 110);
+  }
+}
+---
+<section id="notes-strip">
+  <div class="wrap">
+    <div class="section-head notes-head">
+      <div class="section-num">§ 04 — Notes</div>
+      <h2 class="section-title">What I'm <em>thinking</em>, in short.</h2>
+    </div>
+    <div class="notes-strip-grid">
+      <div></div>
+      <div>
+        <div class="notes-strip-list">
+          {latest.map((n) => (
+            <a class="strip-row" href={noteHref(n.id)}>
+              <div class="strip-date">{fmtNoteDateShort(n.data.date)}</div>
+              <div class={`strip-kind kind-${n.data.kind}`}>{KIND_LABELS[n.data.kind]}</div>
+              <div class="strip-teaser">{teaserOf(n)}</div>
+              <div class="strip-dot">·</div>
+            </a>
+          ))}
+        </div>
+        <a class="notes-strip-more" href="/notes.html">See all notes →</a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,10 @@
+---
+kind: til
+date: "2026-04-27"
+title: "Astro's glob loader is lazy until you call getCollection"
+tags: ["astro", "content-collections"]
+---
+
+The `glob()` loader Astro ships with content collections doesn't read disk at config-load time — it defers until the first `getCollection()` call. Means you can declare a hundred collections without paying for the ones a page never uses.
+
+Discovered while wiring a second collection alongside `blog`. The build stayed cheap; the new collection only got walked on the page that actually rendered it.

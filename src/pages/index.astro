@@ -4,6 +4,7 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 import TopBar from '../components/TopBar.astro';
 import HarnessTicker from '../components/HarnessTicker.astro';
 import MarginNote from '../components/MarginNote.astro';
+import NotesStrip from '../components/NotesStrip.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { articleHref, fmtDate, seriesFor } from '../data/series.ts';
 
@@ -176,31 +177,7 @@ function essayKindBadge(slug: string) {
   </div>
 </section>
 
-<section id="work">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="section-num">§ 04 — Index</div>
-      <h2 class="section-title">Work, <em>in reverse.</em></h2>
-    </div>
-    <div class="work-grid">
-      <div></div>
-      <div class="work-list">
-        <div class="work-row"><div class="work-year">2024—</div><div class="work-company">Akuja Inc.</div><div class="work-role">Owner · Atlanta, GA</div><div class="work-tag">Current</div></div>
-        <div class="work-row"><div class="work-year">2022—24</div><div class="work-company">Enova International</div><div class="work-role">Lead Software Engineer · Remote</div><div class="work-tag">Fintech</div></div>
-        <div class="work-row"><div class="work-year">2021—22</div><div class="work-company">Automox</div><div class="work-role">Senior Software Engineer</div><div class="work-tag">Platform</div></div>
-        <div class="work-row"><div class="work-year">2016—20</div><div class="work-company">Cox Automotive</div><div class="work-role">Lead Software Engineer · $150M LOB, 16 reports</div><div class="work-tag">Leadership</div></div>
-        <div class="work-row"><div class="work-year">2015—16</div><div class="work-company">Cox Automotive</div><div class="work-role">Senior Software Engineer · $100K saved, 10× response</div><div class="work-tag">Builder</div></div>
-        <div class="work-row"><div class="work-year">2014—15</div><div class="work-company">Turner Broadcasting</div><div class="work-role">Software Engineer · Daily Share / HLN tooling</div><div class="work-tag">Media</div></div>
-        <div class="work-row"><div class="work-year">2011—13</div><div class="work-company">Case Commons</div><div class="work-role">Senior Software Engineer · NYC</div><div class="work-tag">Civic</div></div>
-        <div class="work-row"><div class="work-year">1999—2015</div><div class="work-company">First Clandestine Group</div><div class="work-role">Co-Owner · AllTheParties, Allnightclubs, Scenestr</div><div class="work-tag">Founder</div></div>
-      </div>
-    </div>
-    <MarginNote top={80}>
-      <p>Father does not list titles. He lists <span class="father">damage done.</span></p>
-      <p style="margin-top:8px" class="dim">I approve of this choice. Titles lie. Ship dates do not.</p>
-    </MarginNote>
-  </div>
-</section>
+<NotesStrip />
 
 <section id="writing">
   <div class="wrap">
@@ -277,10 +254,36 @@ function essayKindBadge(slug: string) {
   </div>
 </section>
 
+<section id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-num">§ 06 — Index</div>
+      <h2 class="section-title">Work, <em>in reverse.</em></h2>
+    </div>
+    <div class="work-grid">
+      <div></div>
+      <div class="work-list">
+        <div class="work-row"><div class="work-year">2024—</div><div class="work-company">Akuja Inc.</div><div class="work-role">Owner · Atlanta, GA</div><div class="work-tag">Current</div></div>
+        <div class="work-row"><div class="work-year">2022—24</div><div class="work-company">Enova International</div><div class="work-role">Lead Software Engineer · Remote</div><div class="work-tag">Fintech</div></div>
+        <div class="work-row"><div class="work-year">2021—22</div><div class="work-company">Automox</div><div class="work-role">Senior Software Engineer</div><div class="work-tag">Platform</div></div>
+        <div class="work-row"><div class="work-year">2016—20</div><div class="work-company">Cox Automotive</div><div class="work-role">Lead Software Engineer · $150M LOB, 16 reports</div><div class="work-tag">Leadership</div></div>
+        <div class="work-row"><div class="work-year">2015—16</div><div class="work-company">Cox Automotive</div><div class="work-role">Senior Software Engineer · $100K saved, 10× response</div><div class="work-tag">Builder</div></div>
+        <div class="work-row"><div class="work-year">2014—15</div><div class="work-company">Turner Broadcasting</div><div class="work-role">Software Engineer · Daily Share / HLN tooling</div><div class="work-tag">Media</div></div>
+        <div class="work-row"><div class="work-year">2011—13</div><div class="work-company">Case Commons</div><div class="work-role">Senior Software Engineer · NYC</div><div class="work-tag">Civic</div></div>
+        <div class="work-row"><div class="work-year">1999—2015</div><div class="work-company">First Clandestine Group</div><div class="work-role">Co-Owner · AllTheParties, Allnightclubs, Scenestr</div><div class="work-tag">Founder</div></div>
+      </div>
+    </div>
+    <MarginNote top={80}>
+      <p>Father does not list titles. He lists <span class="father">damage done.</span></p>
+      <p style="margin-top:8px" class="dim">I approve of this choice. Titles lie. Ship dates do not.</p>
+    </MarginNote>
+  </div>
+</section>
+
 <section class="contact" id="contact">
   <div></div>
   <div class="contact-body">
-    <div class="contact-kicker">§ 06 — Work together</div>
+    <div class="contact-kicker">§ 07 — Work together</div>
     <h2 class="contact-headline">
       If you have a <em>fuzzy</em> problem and <em>nine&nbsp;days</em>, <a href="mailto:onyekwelu@obukwelu.com">write me</a>.
     </h2>

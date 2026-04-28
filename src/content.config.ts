@@ -14,10 +14,49 @@ const blog = defineCollection({
     date: z.string(),
     summary: z.string(),
     original: z.string().url().optional(),
-    tags: z.array(z.string()).optional(),
     marginalia: z.record(z.string(), marginaliaItem).optional(),
     footnotes: z.record(z.string(), z.string()).optional(),
   }),
 });
 
-export const collections = { blog };
+const tagsArr = z.array(z.string()).optional();
+
+const notes = defineCollection({
+  loader: glob({ pattern: '**/*.mdx', base: './src/content/notes' }),
+  schema: z.discriminatedUnion('kind', [
+    z.object({
+      kind: z.literal('til'),
+      date: z.string(),
+      title: z.string(),
+      tags: tagsArr,
+    }),
+    z.object({
+      kind: z.literal('aside'),
+      date: z.string(),
+      title: z.string().optional(),
+      tags: tagsArr,
+    }),
+    z.object({
+      kind: z.literal('link'),
+      date: z.string(),
+      original: z.string().url(),
+      title: z.string().optional(),
+      tags: tagsArr,
+    }),
+    z.object({
+      kind: z.literal('status'),
+      date: z.string(),
+      tags: tagsArr,
+    }),
+    z.object({
+      kind: z.literal('quote'),
+      date: z.string(),
+      quote: z.string(),
+      source: z.string(),
+      source_url: z.string().url().optional(),
+      tags: tagsArr,
+    }),
+  ]),
+});
+
+export const collections = { blog, notes };

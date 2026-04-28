@@ -1,0 +1,9 @@
+---
+kind: aside
+date: "2026-04-26"
+title: "Discriminated unions are an authoring signal"
+---
+
+Designing the notes schema, I kept reaching for "make every field optional and add a `refine()` for the rules." Then I remembered the marginalia schema already uses a discriminated union, and switched.
+
+The shift wasn't about types — it was about authoring. With a flat optional schema, the editor lets you type `kind: link` and forget the URL. With a union, the build fails the moment you do that. The schema becomes a checklist you can't ignore. That's the actual win — not the type narrowing in the renderer, but the constraint at write time.

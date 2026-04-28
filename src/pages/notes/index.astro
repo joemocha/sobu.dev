@@ -1,0 +1,94 @@
+---
+import { getCollection, render } from 'astro:content';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import TopBar from '../../components/TopBar.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import { fmtDate } from '../../data/series.ts';
+import { KIND_LABELS, noteHref, hostnameOf } from '../../data/notes.ts';
+
+const notes = (await getCollection('notes')).sort((a, b) =>
+  a.data.date < b.data.date ? 1 : -1
+);
+
+const rendered = await Promise.all(
+  notes.map(async (n) => {
+    const { Content } = await render(n);
+    return { n, Content };
+  })
+);
+---
+<SiteLayout title="Notes — sobu.dev" description="Short notes from Samuel Obukwelu — TILs, links, status updates, quotes, off-cuts.">
+
+<TopBar />
+
+<section class="notes-archive" id="top">
+  <div class="wrap">
+    <div class="notes-archive-head">
+      <div class="notes-archive-kicker">Notes · sobu.dev</div>
+      <h1 class="notes-archive-title">What I'm <em>thinking</em>, in short.</h1>
+      <p class="notes-archive-dek">
+        Off-cuts, TILs, links, quotes, status. Short by definition. The essays live <a href="/#writing">here</a>.
+      </p>
+    </div>
+
+    <div class="notes-feed">
+      {rendered.map(({ n, Content }) => {
+        const d = n.data;
+        return (
+          <article class={`note-item kind-${d.kind}`} id={n.id}>
+            <header class="note-item-head">
+              <a class="note-item-date" href={noteHref(n.id)}>
+                <time>{fmtDate(d.date)}</time>
+              </a>
+              <span class={`note-item-kind kind-${d.kind}`}>{KIND_LABELS[d.kind]}</span>
+            </header>
+
+            {d.kind === 'til' && <h2 class="note-item-title"><a href={noteHref(n.id)}>{d.title}</a></h2>}
+            {d.kind === 'aside' && d.title && <h2 class="note-item-title"><a href={noteHref(n.id)}>{d.title}</a></h2>}
+
+            {d.kind === 'link' && (
+              <div class="note-item-link-head">
+                <div class="note-item-link-source">{hostnameOf(d.original)}</div>
+                {d.title && <h2 class="note-item-title"><a href={noteHref(n.id)}>{d.title}</a></h2>}
+                <a href={d.original} target="_blank" rel="noopener" class="note-item-link-original">
+                  ↗ {d.original}
+                </a>
+              </div>
+            )}
+
+            {d.kind === 'quote' && (
+              <blockquote class="note-item-quote">
+                <p>{d.quote}</p>
+                <footer class="note-item-quote-attr">
+                  —{' '}
+                  {d.source_url ? (
+                    <a href={d.source_url} target="_blank" rel="noopener">{d.source}</a>
+                  ) : (
+                    <span>{d.source}</span>
+                  )}
+                </footer>
+              </blockquote>
+            )}
+
+            <div class="note-item-body prose">
+              <Content />
+            </div>
+
+            <footer class="note-item-foot">
+              {d.tags && d.tags.length > 0 && (
+                <div class="note-item-tags">
+                  {d.tags.map((t) => <span class="note-item-tag">#{t}</span>)}
+                </div>
+              )}
+              <a class="note-item-permalink" href={noteHref(n.id)}>permalink ·</a>
+            </footer>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<SiteFooter />
+
+</SiteLayout>
