@@ -536,9 +536,9 @@ section {
   gap: 40px;
   margin-bottom: 48px;
   padding-bottom: 24px;
-  border-bottom: 1px solid rgba(255,255,255,0.15);
+  border-bottom: 1px solid color-mix(in srgb, var(--paper) 18%, transparent);
 }
-.wins-head .section-num { color: rgba(255,255,255,0.5); }
+.wins-head .section-num { color: color-mix(in srgb, var(--paper) 55%, transparent); }
 .wins-head .section-title { color: var(--paper); }
 .wins-grid {
   display: grid;
@@ -550,7 +550,7 @@ section {
   font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.5);
+  color: color-mix(in srgb, var(--paper) 55%, transparent);
   padding-top: 12px;
 }
 .win {
@@ -572,7 +572,7 @@ section {
   font-family: var(--serif-body);
   font-size: 16px;
   line-height: 1.45;
-  color: rgba(255,255,255,0.78);
+  color: color-mix(in srgb, var(--paper) 82%, transparent);
 }
 .win-year {
   margin-top: 10px;
@@ -580,7 +580,7 @@ section {
   font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.4);
+  color: color-mix(in srgb, var(--paper) 50%, transparent);
 }
 
 /* ============================================================== */
