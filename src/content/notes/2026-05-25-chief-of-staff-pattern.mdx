@@ -1,0 +1,18 @@
+---
+kind: aside
+date: "2026-05-25"
+title: "A Chief of Staff per domain"
+tags: ["agents", "cos", "cloudflare", "infrastructure"]
+---
+
+The work volume has crept up to where context-switching is the real cost. TaskFast, Fraction, home life. Holding all of it in one head means everything gets the same lukewarm half-attention.
+
+So I've been building a small fleet of Chief of Staff agents, one per domain. Each is its own agent profile with its own identity file, its own chat bot, its own memory peer, its own scheduled watchers. They don't share anything. A competitive secret in TaskFast's memory will never surface in a Fraction conversation, by construction.
+
+Above them sits Benson, my main agent, who does none of the domain work. His one job is to read across the fleet every morning and tell me what to look at first. Three minds, one sense of what matters.
+
+The interesting infra question is how signal actually gets to these agents. My local server accepts no inbound network connections. So Fireflies and GitHub webhooks land on a Cloudflare Worker instead. The Worker verifies the signature, dedupes against KV, persists the raw payload to D1, and enqueues the event id. The local server then long-polls that queue, pulls events, and feeds them to the right CoS.
+
+The trick is the queue. It buffers for days. If the server is asleep, offline, or I'm rebuilding it, nothing is lost. Polling APIs from the local server directly would silently lose anything that ages out of a source's window during downtime. The Worker-plus-Queue path makes the whole pipeline forgiving in the way I need it to be.
+
+What I like most is how cleanly the topology decomposes. Domain agents talk to me when I want depth. Benson talks to me when I want priority. Webhooks talk to Cloudflare. Cloudflare talks to my local server. My local server talks to nobody.
